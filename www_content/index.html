@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es" class="app">
+    <head>
+  
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+        <meta charset="utf-8" />
+        <meta name="theme-color" content="#25313e">
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta content="320" name="MobileOptimized">
+
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+        
+        <title>LibroApp</title>
+        
+        <link type="text/css" rel="stylesheet" href="css/materialize.css" media="screen,projection"/>
+        <link rel="stylesheet" href="css/material-design-iconic-font.min.css" media="screen,projection"/>
+        <link rel="stylesheet" type="text/css" href="css/index.css"/>
+
+    </head>
+    <body class="device-type">
+        <div class="navbar-fixed">
+            <ul id="nav-dropdown" class="dropdown-content"></ul>
+            
+            <nav class="nav-wrapper">
+                <div class="nav-wrapper main">
+                    <a class="brand-logo center page-title"></a>
+                    <ul>
+                        <li>
+                            <a href="#" data-target="navDrawer" class="sidenav-trigger">
+                                <i class="zmdi zmdi-menu"></i>
+                            </a>                
+                        </li>
+                        <li class="right">
+                            <a class="btn-search" onclick="app.search()">
+                                <i class="zmdi zmdi-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        
+        <ul id="navDrawer" class="sidenav fixed right" style="opacity:1">
+            <li>
+                <div class="user-view">
+                    <div class="background">
+                    <!-- <img src="images/office.jpg"> -->
+                    </div>
+                <a href="#user"><img class="circle" src=""></a>
+                <a href="#name"><span class="white-text name">John Doe</span></a>
+                <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+                </div>
+            </li>
+            
+            <li> 		
+                <a href=""> 	  		
+                    <i class="material-icons zmdi zmdi-view-toc"></i>			
+                    Capítulos
+                </a> 
+            </li>
+
+            <li> 		
+                <a href=""> 	  		
+                    <i class="material-icons"></i>
+                    Favoritos
+                </a> 
+            </li>
+            
+            <li class="separator"></li>
+            <li> 		
+                <a href=""> 	  		
+                    <i class="material-icons zmdi zmdi-comment-text-alt"></i>
+                    Notas
+                </a> 
+            </li>
+            <li class="separator"></li>
+
+            <li> 		
+                <a href=""> 	  		
+                    <i class="material-icons zmdi zmdi-settings"></i>
+                    Ajustes
+                </a> 
+            </li>
+        </ul> 
+
+
+        <div id="content">
+            <section class="vista empty">
+                <div class="vista-body container">
+
+                    <div class="book">
+                            <h1>Capítulo 1</h1>
+                            <h2>Principios básicos de la hemostasia</h2>
+                            <span class="auth">Pilar Medina Badenes, Silvia Navarro Rosales y Josune Orbe Lopategui</span>
+                    
+                            <h3>PUNTOS CLAVE</h3> 
+                            <ul>
+                                <li>
+                                    El proceso hemostático está regulado por activadores e inhibidores que mantienen la  uidez de la sangre y evitan su salida del compartimento vascular.
+                                </li>
+                                <li>
+                                    La hemostasia y la trombosis dependen de la pared vascular, las plaquetas y la cascada de la coagulación.
+                                </li
+                                >
+                                <li>
+                                    La cascada clásica de la coagulación sanguínea ha sido sustituida por un modelo celular que contempla las fases de iniciación, amplicación y propagación porque refleja con más precisión el papel de la hemostasia in vivo.
+                                </li>
+                                <li>
+                                    La coagulación está controlada por factores que promueven la formación del trombo (factores procoagulantes) o su inhibición (factores anticoagulantes).
+                                </li>
+                                <li>
+                                    La  brinolisis es el mecanismo de defensa que se encarga de la disolución de la  brina una vez que ha cumplido su función.
+                                </li>
+                            </ul>
+                    
+                            <h3>ENDOTELIO VASCULAR</h3> 
+                            La vasculatura se de ne como la disposición de los vasos sanguíneos en el cuerpo o dentro de un órgano. De forma natural, posee una serie de mecanismos activos para mantener la coagulación en un estado de reposo, tales como la expresión de ectoADPasa (CD39), prostaciclina (PGI2) y óxido nítrico (NO), que bloquean la adhesión plaquetaria y la activación del endotelio sano (1), así como diferentes mecanismos naturales de anticoagulación que participan en el mantenimiento de la integridad de dicha vasculatura, algunos de los cuales se describirán más adelante. Además, hay que tener en cuenta que no es idéntica en todas las partes del cuerpo, y que puede modi carse en respuesta a cambios en el entorno extracelular, que alterarían localmente la capacidad del endotelio para mantener un estado de reposo (2). A pesar de que la vasculatura sana mantiene un estado de reposo, hay evidencias que con rman una activación mínima de los factores de la coagulación, denominada “ralentí”, y que puede desempeñar un papel en la preparación para una respuesta de coagulación rápida a una lesión (3). El factor tisular (FT) está implicado como jugador clave en este proceso. Encontramos niveles aumentados de FT en localizaciones tales como cerebro, pulmón y corazón, y niveles mínimos en localizaciones tales como músculo esquelético, ar ticulaciones, bazo e hígado (4). Además de estar distribuido en diferentes localizaciones, se expresa en las células del músculo liso vascular y en los pericitos que rodean a los vasos sanguíneos. Esta concentración de FT alrededor de la vasculatura se ha denominado “envoltura hemostática”. También hay evidencia cientí ca que sugiere que el FT puede estar presente en micropartículas circulantes. La naturaleza y la función de este FT circulante están siendo estudiadas por diferentes grupos de investigación, con unos resultados que sugieren que se encuentra en niveles bajos en pacientes sanos, y se acumula en trombos patológicos (5). Además, las células endoteliales in vivo no expresan FT, excepto posiblemente durante la invasión por células cancerosas. Dada la localización del FT, parece plausible que los procesos asociados con el ralentí no sean intravasculares, sino que puedan ocurrir en el espacio extravascular. Se conocen al menos dos mecanismos que pueden concentrar factores de coagulación plasmáticos alrededor de la vasculatura:
+                            <ol>
+                                <li>La entrada en el espacio extravascular de proteínas de la coagulación en función de su tamaño, de forma que pequeñas proteínas entran fácilmente mientras que grandes proteínas no parecen llegar a la extravasculatura (6). Es el caso del factor FVII, que, unido al FT, se mueve hacia el espacio extravascular, llegando hasta los vasos sanguíneos (7,8).</li>
+                                <li>Las proteínas capaces de unirse a la matriz extracelular. Como es el caso del FIX, que se une estrecha y especí camente al colágeno IV de la proteína de la matriz extracelular, quedando concentrado alrededor de los vasos sanguíneos.</li>
+                            </ol>
+                    
+                            <h3>COAGULACIÓN</h3> 
+                            La hemostasia es el conjunto de mecanismos que mantienen la sangre en estado  uido, para así garantizar la permeabilidad de los vasos y prevenir el sangrado ante una rotura. En primer lugar, se produce una vasoconstricción y la adhesión y agregación plaquetaria en la zona de la rotura (hemostasia primaria). Seguidamente, se desencadena la coagulación para formar y consolidar el coágulo de  brina, y  nalmente, la  brinolisis para eliminar el coágulo una vez ha realizado su función (hemostasia secundaria).Todos estos mecanismos están perfectamente sincronizados y la alteración de alguno de ellos puede conllevar una trombosis o una hemorragia.
+                            Las plaquetas son células anucleadas que se originan de la fragmentación del citoplasma de megacariocitos maduros. Su compleja organización estructural les permite responder a estímulos variados y así desempeñar su función en la hemostasia. Así, al producirse una lesión se exponen proteínas adhesivas como el colágeno, factor von Willebrand (FvW),  bronectina, laminina, vitronectina y trombospondina que favorecen la adhesión y activación plaquetaria sobre la matriz extracelular que ha quedado expuesta. Las plaquetas se unen a través del receptor Ib-V-IX, lo cual activa al receptor IIb-IIIa.
+                            Esta activación permite que se una a él  brinógeno y cree puentes entre dos o más plaquetas, formándose un agregado plaquetario.Tras la activación, las plaquetas sufren un cambio de forma y liberan el contenido de sus gránulos, que contienen sustancias proagregantes (ADP; tromboxano A2, TxA2; FvW;  brinógeno; trombospondina y  bronectina) y procoagulantes ( brinógeno, FV, factor 4 plaquetario y fosfatifdilserina). La liberación del ADP y TxA2 potencia la agregación plaquetaria para así formar el tapón hemostático primario.
+                            Además, con el daño endotelial se expone gran cantidad de FT al torrente circulatorio, que normalmente está encriptado en el endotelio. Este FT, junto con los fosfolípidos que exponen las plaquetas agregadas, concentra cargas negativas que activan la coagulación de forma casi simultánea a la hemostasia primaria. La cascada de la coagulación la forman diversas proteínas, casi todas enzimas, que circulan en forma inactiva (proenzimas), y que se activan unas a otras secuencialmente formando una cascada de reacciones enzimáticas en presencia de un cofactor no enzimático. Clásicamente, la coagulación sanguínea se puede activar por dos vías: la vía intrínseca (o fase de contacto), que se inicia por exposición del FXII a super cies cargadas negativamente, y la vía extrínseca, que es la principal vía de activación  siológica y se inicia por la exposición de FT al torrente circulatorio. Ambas vías convergen en la vía común con la generación de trombina que activa al  brinógeno para formar la malla de  brina que conforma el coágulo sanguíneo (o tapón hemostático secundario) que atrapa en él a las plaquetas, y es mucho más estable que el tapón primario anteriormente formado.
+                            La cascada clásica de la coagulación sanguínea ha sido sustituida por un modelo celular que contempla las fases de iniciación, ampli cación y propagación porque re eja con más precisión el papel de la hemostasia in vivo (Figura 1).
+                            La trombina es el único enzima de la coagulación capaz de convertir al  brinógeno en  brina, pero, además, ejerce otras muchas funciones dentro y fuera de la coagulación. Las primeras trazas de trombina son esenciales en el inicio de la coagulación, ya que activan receptores celulares del FV y FVIII y se activan a sí mismos. También activa a las plaquetas, así como al FXIII, el cual estabilizará al coágulo de  brina y al FXI. Todas ellas son reacciones de retroalimentación positivas. Sin embargo, la trombina también es capaz de iniciar una de las vías anticoagulantes más potentes: la vía de la proteína C, lo cual reduce la propia formación de trombina (retroalimentación negativa).
+                            La  brina estabilizada forma un entramado  brilar tridimensional en el que quedan atrapadas células sanguíneas, lo cual hace todavía más impermeable al coágulo. Además, las hebras de  brina se  jan muy bien a diferentes células, como las plaquetas,  broblastos, células musculares lisas y a proteínas adhesivas, lo cual asegura una  jación del coágulo que impide su embolización. La trombina también queda atrapada por elcoágulo y se mantiene activa, por lo que es muy difícil su inhibición por la antitrombina. De ahí que durante la disolución terapéutica de un coágulo (trombolisis) exista el peligro de que los segmentos de coágulo liberados puedan transportar trombina a otros vasos e iniciar un nuevo evento trombótico.
+                    
+                            <figure class="figura">
+                                <img src="figura1.png"/>
+                                <figcaption>Figura 1. Modelo celular de la coagulación.</figcaption>
+                            </figure>
+                    
+                            <h3>INHIBIDORES DE LA COAGULACIÓN</h3> 
+                            La propia naturaleza de la coagulación sanguínea exige mecanismos de control que eviten su propagación y extensión de un modo incontrolado por todo el árbol vascular. Se han descrito tres mecanismos principales de control de la coagulación:
+                            
+                            <ol>
+                                <li>El <i>flujo sanguíneo</i>, encargado de dispersar la mayor parte de los enzimas generados durante la cascada de la coagulación, limitando su propagación más allá del lugar del daño vascular.</li>
+                                <li>La necesidad de una super cie de membrana especí ca cargada negativamente, donde se ensamblen las diferentes proteínas de la coagulación a sus receptores anclados a ella o interaccionen con las proteínas que la componen.</li>
+                                <li>El mecanismo de la anticoagulación sanguínea, formado por sistemas de inhibidores especí cos de la coagulación, complementarios y encargados de inactivar a los diferentes enzimas y cofactores activados generados durante la coagulación. Están formados por dos grupos de inhibidores principales (Tabla I):
+                                    <ol>
+                                        <li>Inhibidores que pertenecen al grupo de las serpinas (SERin-Protease-INhibitor), caracterizadas por inhibir a enzimas proteasas de tipo serina, y cuyos componentes tienen una alta homología estructural y un mecanismo similar de acción (9,10).Tras su unión al enzima, se forma un complejo enzima-inhibidor en el que el inhibidor es irreversiblemente inactivado, y el enzima queda atrapado por él, aunque retiene completamente su actividad. La e ciencia de la inhibición del enzima por la serpina es relativamente baja, uniéndose diferentes cofactores para acelerar y favorecer la formación de complejos estables.Tal es el caso de la heparina, que es capaz de estimular a algunas de las serpinas para favorecer y acelerar la vía de formación de estos complejos.</li>
+                                        <li>Resto de inhibidores de la coagulación que actúan mediante otros mecanismos más complejos.</li>
+                                    </ol>
+                                    A continuación detallaremos el mecanismo de acción de los principales inhibidores de la coagulación, siendo el mecanismo de defensa más importante y efectivo en la regulación del proceso de la coagulación sanguínea el formado por la antitrombina (AT), el sistema de la proteína C (PC) y el inhibidor de la vía del FT (TFPI) (11,12), ya que niveles disminuidos o de ciencias totales de AT, PC y su cofactor proteína S dan lugar a graves cuadros trombóticos (13).
+                                </li>
+                            </ol>
+                    
+                            <figure class="tabla">
+                                <img src="tabla1.png"/>
+                                <figcaption>Tabla 1. Sistemas anticoagulantes naturales.</figcaption>
+                            </figure>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="throbber progress hide">
+            <div class="indeterminate"></div>
+        </div>
+
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+
+        <script type="text/javascript" src="js/materialize.js"></script>
+        <script type="text/javascript" src="data/data.js"></script>
+
+        <script type="text/javascript" src="js/index.js"></script>
+        
+    </body>
+</html>

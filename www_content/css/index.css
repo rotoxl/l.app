@@ -14,6 +14,7 @@ nav {
 
 nav .sidenav-trigger {
   margin: 0;
+  display: block !important;
 }
 
 .sidenav .user-view .background {
@@ -95,5 +96,34 @@ nav .sidenav-trigger {
 
 .book figure img {
   width: 100%;
+}
+
+.flexcontainer {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.flexcontainer.row {
+  flex-direction: row;
+}
+
+.flexcontainer.grid {
+  justify-content: center;
+  flex-flow: row wrap;
+  align-content: stretch;
+  align-items: center;
+}
+
+.flexcontainer div {
+  flex: 1;
+}
+
+.flexcontainer div.big {
+  flex: 2;
 }
 /*# sourceMappingURL=index.css.map */
