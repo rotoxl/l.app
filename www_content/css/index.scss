@@ -9,6 +9,24 @@ body {
 .zmdi{
     font-size: 24px;
 }
+.material-icons.circle{
+    width: 42px;
+    height: 42px;
+    overflow: hidden;
+    left: 15px;
+    display: inline-block;
+    vertical-align: middle;
+
+    font-size: 18px;
+    line-height: 42px;
+    color: #fff;
+    background-color: #999;
+    text-align: center;
+
+    i{
+        line-height: 42px;
+    }
+}
 
 /* Portrait layout (default) */
 .app {
@@ -108,10 +126,7 @@ nav {
 .flexcontainer{
     display: flex;
     flex-direction: column;
-    
-    position: absolute;
-    top:0; bottom:0;
-    left:0; right:0;
+    justify-content: space-around;
 
     &.row {
         flex-direction: row;
@@ -124,11 +139,125 @@ nav {
     }
 
     div { //contenido
-        flex:1; //flex or height
+        flex:1 0 0; //flex or height
         &.big{
-            flex:2;
+            flex:2 0 0;
         }
     }
 
+
+}
+
+body.VistaHome{overflow: hidden;}
+.VistaHome{
+
+    &.vista{
+        
+    }
+    nav.top{
+        background-color: transparent;
+
+        .sidenav-trigger{
+            display: none !important;
+        }
+    }
+    .vista-header{
+        // background-image:url(../img/vista-header.png);
+        // height: 100px;
+        // background-repeat: no-repeat;
+        // background-size: 100%;
+
+        img {
+            width: 100%; 
+            margin-top: -56px;
+        }
+    }
+    .vista-bottom{
+        max-height: 56px;
+        &.navbar-fixed nav{
+            position: fixed;
+            bottom:0;
+        }
+        ul{
+            
+        }
+    }
+    .home-menu{        
+        text-align: center;
+        min-width: 22%;
+        margin: 5px 15px;
+
+        span{
+            display: block;
+            color:#D8AAAE;
+        }
+        i.circle{
+            background-color:#D8AAAD;
+            
+            width:100px;
+            height:100px;
+            line-height: 100px;
+
+            .zmdi{
+                font-size: 44px;
+                line-height:100px;
+            }
+        }
+
+        &.doublesize{
+            i.circle{
+                width: 125px;
+                height: 125px;
+                margin-left: -12.5px;
+                line-height: 155px;
+                .zmdi{
+                    font-size: 55px;
+                }
+            }
+        }
+    }
+}
+
+.VistaIndice{
+    ul.secciones{
+        border:0;
+
+        li.seccion{
+            padding-left:10px; 
+            padding-right:10px;
+
+            .titulo-seccion{
+                color:#CF0A2C;
+                font-size: 1.5rem;
+                font-family: "Bodega Sans", "Helvetica Neue", sans-serif;
+                text-transform: uppercase;
+            }
+
+            .capitulos{
+                border:none;
+
+            }
+            &.collapsed {
+                .capitulos{
+                    display: none;
+                }
+            }
+        }
+        
+        li.capitulo{
+            padding-left:42px;
+
+            .capNumber{
+                display: block;
+            }
+            .title{
+                color:#C7A9AE;
+                font-size: 1.5rem;
+            }
+            .autores{
+                color:#9B9B9B;
+            }
+        }
+    }
 
 }

@@ -7,6 +7,24 @@
   font-size: 24px;
 }
 
+.material-icons.circle {
+  width: 42px;
+  height: 42px;
+  overflow: hidden;
+  left: 15px;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 18px;
+  line-height: 42px;
+  color: #fff;
+  background-color: #999;
+  text-align: center;
+}
+
+.material-icons.circle i {
+  line-height: 42px;
+}
+
 /* Portrait layout (default) */
 nav {
   background-color: #8C2333;
@@ -101,11 +119,7 @@ nav .sidenav-trigger {
 .flexcontainer {
   display: flex;
   flex-direction: column;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  justify-content: space-around;
 }
 
 .flexcontainer.row {
@@ -120,10 +134,111 @@ nav .sidenav-trigger {
 }
 
 .flexcontainer div {
-  flex: 1;
+  flex: 1 0 0;
 }
 
 .flexcontainer div.big {
-  flex: 2;
+  flex: 2 0 0;
+}
+
+body.VistaHome {
+  overflow: hidden;
+}
+
+.VistaHome nav.top {
+  background-color: transparent;
+}
+
+.VistaHome nav.top .sidenav-trigger {
+  display: none !important;
+}
+
+.VistaHome .vista-header img {
+  width: 100%;
+  margin-top: -56px;
+}
+
+.VistaHome .vista-bottom {
+  max-height: 56px;
+}
+
+.VistaHome .vista-bottom.navbar-fixed nav {
+  position: fixed;
+  bottom: 0;
+}
+
+.VistaHome .home-menu {
+  text-align: center;
+  min-width: 22%;
+  margin: 5px 15px;
+}
+
+.VistaHome .home-menu span {
+  display: block;
+  color: #D8AAAE;
+}
+
+.VistaHome .home-menu i.circle {
+  background-color: #D8AAAD;
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+}
+
+.VistaHome .home-menu i.circle .zmdi {
+  font-size: 44px;
+  line-height: 100px;
+}
+
+.VistaHome .home-menu.doublesize i.circle {
+  width: 125px;
+  height: 125px;
+  margin-left: -12.5px;
+  line-height: 155px;
+}
+
+.VistaHome .home-menu.doublesize i.circle .zmdi {
+  font-size: 55px;
+}
+
+.VistaIndice ul.secciones {
+  border: 0;
+}
+
+.VistaIndice ul.secciones li.seccion {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.VistaIndice ul.secciones li.seccion .titulo-seccion {
+  color: #CF0A2C;
+  font-size: 1.5rem;
+  font-family: "Bodega Sans", "Helvetica Neue", sans-serif;
+  text-transform: uppercase;
+}
+
+.VistaIndice ul.secciones li.seccion .capitulos {
+  border: none;
+}
+
+.VistaIndice ul.secciones li.seccion.collapsed .capitulos {
+  display: none;
+}
+
+.VistaIndice ul.secciones li.capitulo {
+  padding-left: 42px;
+}
+
+.VistaIndice ul.secciones li.capitulo .capNumber {
+  display: block;
+}
+
+.VistaIndice ul.secciones li.capitulo .title {
+  color: #C7A9AE;
+  font-size: 1.5rem;
+}
+
+.VistaIndice ul.secciones li.capitulo .autores {
+  color: #9B9B9B;
 }
 /*# sourceMappingURL=index.css.map */
