@@ -206,15 +206,16 @@ body.VistaHome {
 }
 
 .VistaIndice ul.secciones li.seccion {
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 0 10px;
 }
 
-.VistaIndice ul.secciones li.seccion .titulo-seccion {
+.VistaIndice ul.secciones li.seccion .titulo {
   color: #CF0A2C;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-family: "Bodega Sans", "Helvetica Neue", sans-serif;
   text-transform: uppercase;
+  padding: 1rem 0rem;
+  min-width: 100%;
 }
 
 .VistaIndice ul.secciones li.seccion .capitulos {
@@ -226,19 +227,113 @@ body.VistaHome {
 }
 
 .VistaIndice ul.secciones li.capitulo {
-  padding-left: 42px;
+  padding-left: 72px;
 }
 
 .VistaIndice ul.secciones li.capitulo .capNumber {
   display: block;
+  font-weight: 100;
+  font-size: smaller;
 }
 
 .VistaIndice ul.secciones li.capitulo .title {
   color: #C7A9AE;
   font-size: 1.5rem;
+  font-weight: 300;
 }
 
 .VistaIndice ul.secciones li.capitulo .autores {
   color: #9B9B9B;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.VistaIndice ul.secciones li.capitulo .secondary-content {
+  color: gray;
+  background-color: white;
+  box-shadow: none;
+  top: 2px;
+}
+
+.VistaIndice ul.secciones li.capitulo .secondary-content:hover {
+  background-color: white;
+}
+
+.VistaIndice ul.secciones li.capitulo .secondary-content i {
+  font-size: 1.8rem;
+  text-align: left;
+  margin-left: -3px;
+  line-height: 2.8rem;
+}
+
+.VistaIndice ul.secciones li.capitulo ul.apartados {
+  padding: 0px 10px;
+  border-top: 1px dotted silver;
+  margin: 10px 0;
+  border-bottom: 1px dotted silver;
+  background: #c0c0c036;
+}
+
+.VistaIndice ul.secciones li.capitulo ul.apartados li {
+  list-style-type: disc;
+  padding-left: 0rem;
+  margin-left: 1rem;
+}
+
+.VistaIndice ul.secciones li.capitulo.collapsed ul.apartados {
+  display: none;
+}
+
+.VistaIndice ul.secciones li.capitulo .star {
+  background-color: #999;
+  opacity: .4;
+}
+
+.VistaIndice ul.secciones li.capitulo.starred .star {
+  opacity: 1;
+}
+
+.VistaCapitulo .title {
+  font-size: 1.5rem;
+  line-height: 1rem;
+  float: left;
+  font-weight: 300;
+  padding-top: 10px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: visible;
+}
+
+.VistaCapitulo .subtitle {
+  font-size: 12px;
+  display: block;
+  line-height: 1rem;
+  float: left;
+  font-weight: 300;
+  padding-top: 10px;
+  width: 100%;
+  color: white;
+  opacity: .6;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.VistaCapitulo .navbar-fixed .nav-wrapper.secondary {
+  padding: 0 15px;
+}
+
+.VistaCapitulo .navbar-fixed.bottom {
+  position: absolute;
+  bottom: 0;
+}
+
+.VistaCapitulo .book {
+  padding: 0 10px 50px;
+}
+
+.VistaCapitulo .zmdi-star-outline.zmdi-star:before {
+  content: '\f27d';
 }
 /*# sourceMappingURL=index.css.map */

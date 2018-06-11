@@ -1,7 +1,15 @@
-var data=[
-    {//sección
-    cd:1,                               //cd -> código
-    ds:'El laboratorio de hemostasia',  //ds -> descripción
+var data={
+    secciones:[
+        {   //sección
+            cd:1,                               //cd -> código
+            ds:'El laboratorio de hemostasia',  //ds -> descripción
+            capitulos:[1,2,3,4],
+        },{//sección
+            cd:2, 
+            ds:'Patología de la hemostasia',
+            capitulos:[5,6,7]
+            }
+    ],
     capitulos:[
         {   //capítulo
             cd: 1,
@@ -60,12 +68,7 @@ var data=[
                     {cd:6, ds:'Integración de datos clínicos y de laboratorio', archivo:'data/cap04/apartado06.html'},
                     {cd:7, ds:'Conclusiones ',                                  archivo:'data/cap04/apartado07.html'},
             ]
-        }],
-    }, {//sección
-    cd:2, 
-    ds:'Patología de la hemostasia',
-    capitulos:[
-        {   //capítulo
+        },{ //capítulo
             cd:5,
             ds:'Hemofilia A y B',
             pdf:'data/cap05/capitulo.pdf',
@@ -119,5 +122,4 @@ var data=[
             ]
         },
     ]
-    }
-] 
+}
