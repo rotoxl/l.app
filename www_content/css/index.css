@@ -146,6 +146,7 @@ body.VistaHome {
 }
 
 .VistaHome nav.top {
+  display: none;
   background-color: transparent;
 }
 
@@ -153,9 +154,19 @@ body.VistaHome {
   display: none !important;
 }
 
+.VistaHome .vista-header {
+  background-image: url(../img/cabecera-hetromb-home-titulocabecera.png), url(../img/cabecera-hetromb-home-logos.png), url(../img/cabecera-hetromb-home-coordinadores.png), url(../img/cabecera-hetromb-home-fondologos.png), url(../img/cabecera-hetromb-home-fondo.png);
+  background-repeat: no-repeat;
+  background-size: 22rem, 12rem, 11rem, 100% 5.5rem, cover;
+  background-position: 1rem 3rem, 1rem 9.5rem, 94% 9rem, bottom, center;
+  height: 14rem;
+  margin-top: -60px;
+}
+
 .VistaHome .vista-header img {
-  width: 100%;
-  margin-top: -56px;
+  width: 120%;
+  margin-top: -70px;
+  margin-left: -20px;
 }
 
 .VistaHome .vista-bottom {
@@ -167,10 +178,16 @@ body.VistaHome {
   bottom: 0;
 }
 
+.VistaHome .vista-bottom ul .bottom-menu i {
+  font-size: 36px;
+}
+
 .VistaHome .home-menu {
   text-align: center;
   min-width: 22%;
   margin: 5px 15px;
+  width: 100px;
+  height: 100px;
 }
 
 .VistaHome .home-menu span {
@@ -179,7 +196,7 @@ body.VistaHome {
 }
 
 .VistaHome .home-menu i.circle {
-  background-color: #D8AAAD;
+  background-color: white;
   width: 100px;
   height: 100px;
   line-height: 100px;
@@ -199,6 +216,42 @@ body.VistaHome {
 
 .VistaHome .home-menu.doublesize i.circle .zmdi {
   font-size: 55px;
+}
+
+.VistaHome .home-menu i:before {
+  content: "";
+  padding-left: 100px;
+  padding-bottom: 100px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.VistaHome .home-menu.presentacion i:before {
+  background-image: url("../img/hetromb-home-presentacion.svg");
+}
+
+.VistaHome .home-menu.indice i:before {
+  background-image: url("../img/hetromb-home-indice.svg");
+}
+
+.VistaHome .home-menu.autores i:before {
+  background-image: url("../img/hetromb-home-autores.svg");
+}
+
+.VistaHome .home-menu.favoritos i:before {
+  background-image: url("../img/hetromb-home-favoritos.svg");
+}
+
+.VistaHome .home-menu.buscar i:before {
+  background-image: url("../img/hetromb-home-buscar.svg");
+}
+
+.VistaHome .home-menu.notas i:before {
+  background-image: url("../img/hetromb-home-notas.svg");
+}
+
+.VistaHome .home-menu.promueven i:before {
+  background-image: url("../img/hetromb-home-presentacion.svg");
 }
 
 .VistaIndice ul.secciones {

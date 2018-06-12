@@ -373,27 +373,27 @@ VistaHome.prototype.resize=function(){
 VistaHome.prototype.getBody=function(){
 	return [
 		creaObjProp('div', {className:'vista-header', hijos:[
-			creaObjProp('img', {src:'img/vista-header.png'})
+			creaObjProp('img', {src:'img/hetromb-home-fondo.png'})
 		]}),
 
 		creaObjProp('div', {className:'vista-body flexcontainer grid', hijos:[
-			this.createHomeMenu('', 'Presentación'),
-			this.createHomeMenu('skype', 'Índice',this.newVistaIndice, 'doublesize'),
-			this.createHomeMenu('', 'Autores'),
+			this.createHomeMenu('', 'Presentación', null, 				'presentacion'),
+			this.createHomeMenu('', 'Índice',       this.newVistaIndice,'indice'),
+			this.createHomeMenu('', 'Autores', null, 				 	'autores'),
 
-			this.createHomeMenu('', 'Favoritos'),
-			this.createHomeMenu('', 'Buscar'),
-			this.createHomeMenu('', 'Notas'),
+			this.createHomeMenu('', 'Favoritos', null, 				 	'favoritos'),
+			this.createHomeMenu('', 'Buscar', null, 				 	'buscar'),
+			this.createHomeMenu('', 'Notas', null, 				 		'notas'),
 
-			this.createHomeMenu('', 'Promueven'),			
+			this.createHomeMenu('', 'Promueven', null, 				 	'promueven'),
 		]}),
 
 		creaObjProp('div', {className:'vista-bottom navbar-fixed', hijos:[
 			creaObjProp('nav', {className:'nav-wrapper', hijos:[
 				creaObjProp('ul', {className:'right', hijos:[
-					this.createBottomBarMenu('info-outline'),
-					this.createBottomBarMenu('comment'),
-					this.createBottomBarMenu('share'),
+					this.createBottomBarMenu('info-outline icon-btn-legal'),
+					this.createBottomBarMenu('comment icon-btn-comentar'),
+					this.createBottomBarMenu('share icon-btn-compartir'),
 				]})
 			]})
 		]}),
@@ -401,12 +401,12 @@ VistaHome.prototype.getBody=function(){
 }
 VistaHome.prototype.createHomeMenu=function(icono, texto, fnOnClick, extraCLS){
 	var self=this
-	return creaObjProp('div', {onclick:fnOnClick, mi_circle:icono, className:'home-menu'+(extraCLS?' '+extraCLS: ''), hijos:[
-		creaObjProp('span', {texto:texto}),
+	return creaObjProp('div', {onclick:fnOnClick, mi:icono, className:'home-menu'+(extraCLS?' '+extraCLS: ''), hijos:[
+		// creaObjProp('span', {texto:texto}),
 	]})
 }
-VistaHome.prototype.createBottomBarMenu=function(icono, texto, extraClassName){
-	return creaObjProp('li', {className:'bottom-menu '+extraClassName, hijos:[
+VistaHome.prototype.createBottomBarMenu=function(icono, texto, extraCLS){
+	return creaObjProp('li', {className:'bottom-menu'+(extraCLS?' '+extraCLS: ''), hijos:[
 		creaObjProp('a', {mi:icono}),
 		
 	]})
