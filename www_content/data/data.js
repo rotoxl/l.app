@@ -16,7 +16,7 @@ var data={
             ds: 'Principios básicos de la hemostasia',
             pdf: 'data/cap01/capitulo.pdf',
             bibliografia: 'data/cap01/bibliografia.html',
-            autores:'Pilar Medina Badenes, Silvia Navarro Rosales y Josune Orbe Lopategui', 
+            autores:'P. Medina, S. Navarro y J. Orbe', 
             apartados: [
                     {cd:1, ds:'Puntos clave',                   archivo:'data/cap01/apartado01.html'},
                     {cd:2, ds:'Endotelio vascular',             archivo:'data/cap01/apartado02.html'},
@@ -30,7 +30,7 @@ var data={
             ds: 'Pruebas de laboratorio de hemostasia',
             pdf: 'data/cap02/capitulo.pdf',
             bibliografia: 'data/cap02/bibliografia.html',
-            autores:'Pilar Medina Badenes, Silvia Navarro Rosales y Josune Orbe Lopategui', 
+            autores:'P. Medina, S. Navarro y J. Orbe', 
             apartados: [
                     {cd:1, ds:'Puntos clave',                                                                        archivo:'data/cap02/apartado01.html'},
                     {cd:2, ds:'Recogida, procesado y almacenamiento de muestras antes de las pruebas diagnósticas ', archivo:'data/cap02/apartado02.html'},
@@ -43,7 +43,7 @@ var data={
             ds: 'Diagnóstico molecular en la hemostasia',
             pdf: 'data/cap03/capitulo.pdf',
             bibliografia: 'data/cap03/bibliografia.html',
-            autores:'Pilar Medina Badenes',
+            autores:'P. Medina',
             apartados:[
                     {cd:1, ds:'Puntos clave',                archivo:'data/cap03/apartado01.html'},
                     {cd:2, ds:'Introducción',                archivo:'data/cap03/apartado02.html'},
@@ -58,7 +58,7 @@ var data={
             ds:'Evaluación del paciente con diátesis hemorrágica',
             pdf:'data/cap04/capitulo.pdf',
             bibliografia: 'data/cap04/bibliografia.html',
-            autores:'Javier Corral de la Calle',
+            autores:'J. Corral',
             apartados:[
                     {cd:1, ds:'Puntos clave',                                   archivo:'data/cap04/apartado01.html'},
                     {cd:2, ds:'Historia hemorrágica',                           archivo:'data/cap04/apartado02.html'},
@@ -73,7 +73,7 @@ var data={
             ds:'Hemofilia A y B',
             pdf:'data/cap05/capitulo.pdf',
             bibliografia: 'data/cap05/bibliografia.html',
-            autores:'José Antonio Páramo Fernández',
+            autores:'J.A. Páramo',
             apartados:[
                     {cd:1, ds:'Puntos clave',                  archivo:'data/cap05/apartado01.html'},
                     {cd:2, ds:'Introducción',                  archivo:'data/cap05/apartado02.html'},
@@ -90,7 +90,7 @@ var data={
             ds:'Enfermedad de von Willebrand',
             pdf:'data/cap06/capitulo.pdf',
             bibliografia: 'data/cap06/bibliografia.html',
-            autores:'Javier Corral de la Calle',
+            autores:'J. Corral',
             apartados:[
                     {cd:1, ds:'Puntos clave',                                                                       archivo:'data/cap06/apartado01.html'},
                     {cd:2, ds:'Recogida, procesado y almacenamiento de muestras antes de las pruebas diagnósticas', archivo:'data/cap06/apartado02.html'},
@@ -103,7 +103,7 @@ var data={
             ds:'Otras enfermedades hereditarias de la hemostasia',
             pdf:'data/cap07/capitulo.pdf',
             bibliografia: 'data/cap07/bibliografia.html',
-            autores:'José Antonio Páramo Fernández',
+            autores:'J.A. Páramo',
             apartados:[
                     {cd:1, ds:'Puntos clave',              archivo:'data/cap07/apartado01.html'},
                     {cd:2, ds:'Introducción ',             archivo:'data/cap07/apartado02.html'},
@@ -121,5 +121,71 @@ var data={
                     {cd:14, ds:'Conclusiones',             archivo:'data/cap07/apartado14.html'},
             ]
         },
+    ], 
+    autores:[
+        {
+            cd:1,
+            ds:'Álvarez Román, María Teresa',
+            centros:['Servicio de Hematología y Hemoterapia. Hospital Universitario La Paz.'],
+            ciudad:'Madrid', 
+            capitulos:[1, 2]
+        },{
+            cd:2,
+            ds:'Bastida Bermejo, José María',
+            centros:['Unidad de Trombosis y Hemostasia. Servicio de Hematología. Hospital Universitario de Salamanca.', 'Instituto Biosanitario de Salamanca (IBSAL). Universidad de Salamanca (USAL). ',],
+            ciudad:'Salamanca',
+            capitulos:[3, 4]
+        },{
+            cd:3,
+            ds:'Batlle Fonrodona, Javier',
+            centros:['Servicio de Hematología y Hemoterapia. Complexo Hospitalario Universitario de A Coruña.', 'Instituto de Investigación Biomédica de A Coruña (INIBIC). ',],
+            ciudad:'A Coruña',
+            capitulos:[1, 3]
+        },{
+            cd:4,
+            ds:'Berrueco Moreno, Rubén',
+            centros:['Servicio de Hematología y Oncología Pediátricas. Hospital Sant Joan de Déu.',],
+            ciudad:' Esplugues de Llobregat, Barcelona',
+            capitulos:[2, 4]
+        },{
+            cd:5,
+            ds:'Buixeda Pérez, Montserrat',
+            centros:['Servicio de Obstetricia. Hospital Universitario Virgen del Rocío. ',],
+            ciudad:'Sevilla',
+            capitulos:[1, 4]
+        },{
+            cd:6,
+            ds:'Carrasco Expósito, Marina',
+            centros:['Unidad de Hemostasia. Servicio de Hematología. Hospital de Sant Pau. ',],
+            ciudad:'Barcelona',
+            capitulos:[2]
+        },{
+            cd:7,
+            ds:'Corral de la Calle, Javier',
+            centros:['Servicio de Hematología y Oncología Médica. Hospital Universitario Morales Meseguer.', 'Centro Regional de Hemodonación. IMIB-Universidad de Murcia. ',],
+            ciudad:'Murcia. CIBERER',
+            capitulos:[3]
+        },{
+            cd:8,
+            ds:'Domènech Santasusana, Pere',
+            centros:['Unidad deTrombosis y Hemostasia Hospital Universitari de Bellvitge. L’Hospitalet de Llobregat.',],
+            ciudad:'Barcelona',
+            capitulos:[3,4]
+        },{
+            cd:8,
+            ds:'Ferrer Marín, Francisca',
+            centros:['Hospital Universitario Morales-Meseguer.', 'Centro Regional de Hemodonación IMIB-Arrixaca.', 'Centro de Investigación Biomédica en Red de Enfermedades Raras (CIBERER).', 'Universidad Católica San Antonio.',],
+            ciudad:'Murcia',
+            capitulos:[1]
+        },{
+            cd:9,
+            ds:'García Frade, Luis Javier',
+            centros:['Servicio de Hematología. Hospital Universitario Río Hortega.',],
+            ciudad:'Valladolid',
+            capitulos:[1,4],
+        }
     ]
+
 }
+
+

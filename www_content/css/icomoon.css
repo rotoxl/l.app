@@ -24,6 +24,47 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-btn-favoritos-color .path1:before {
+  content: "\e90a";
+  color: rgb(255, 255, 255);
+}
+.icon-btn-favoritos-color .path2:before {
+  content: "\e90b";
+  margin-left: -1.2861328125em;
+  color: rgb(208, 17, 43);
+}
+.icon-btn-favoritos-color .path3:before {
+  content: "\e90c";
+  margin-left: -1.2861328125em;
+  color: rgb(255, 255, 255);
+}
+.icon-btn-expandir:before {
+  content: "\e90d";
+}
+.icon-btn-contraer:before {
+  content: "\e90e";
+}
+.icon-btn-menu:before {
+  content: "\e90f";
+}
+.icon-btn-izq:before {
+  content: "\e910";
+}
+.icon-btn-der:before {
+  content: "\e911";
+}
+.icon-btn-favoritos-empty:before {
+  content: "\e912";
+}
+.icon-btn-indice:before {
+  content: "\e913";
+}
+.icon-btn-notas:before {
+  content: "\e914";
+}
+.icon-btn-pdf:before {
+  content: "\e915";
+}
 .icon-mn-autores:before {
   content: "\e900";
 }
@@ -35,6 +76,9 @@
 }
 .icon-mn-favoritos:before {
   content: "\e903";
+}
+.icon-favoritos-fill:before {
+  content: "\e909";
 }
 .icon-mn-notas:before {
   content: "\e904";

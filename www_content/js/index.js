@@ -217,10 +217,40 @@ function save(s,v){
 		console.log('No se ha podido guardar el test')
 	}
 }
+var formato={}
+formato.numRomano=function(num){
+	var ret=''
+	if (num==1)
+		ret= 'I'
+	else if (num==2)
+		ret= 'II'
+	else if (num==3)
+		ret= 'III'
+	else if (num==4)
+		ret= 'IV'
+	else if (num==5)
+		ret= 'V'
+	else if (num==6)
+		ret= 'VI'
+	else if (num==7)
+		ret= 'VII'
+	else if (num==8)
+		ret= 'VIII'
+	else if (num==9)
+		ret= 'IX'
+	else if (num==10)
+		ret= 'X'
+	
+	return ret+'. '
+}
 //--------------------------------------------------------------------------------
 function Application(){
 	this.vistaActiva=null
-	this.state={data:data}
+	this.state={
+		data:data,
+		notas:get('notas') || {}, 
+		favoritos:get('favoritos') || [],
+	}
 }
 Application.prototype.onDeviceReady=function() {
 	this.receivedEvent('deviceready')
@@ -239,12 +269,16 @@ Application.prototype.initialize=function() {
 
 		var xcap=app.state.data.capitulos[temp[0]-1]
 		Vista.prototype.newVistaCapitulo(xcap, temp[1])
+	} else if (hash=='VistaAutores'){
+		Vista.prototype.newVistaAutores()
 	}
 
 
 	jQuery('.sidenav-trigger').click(function(){
 		Vista.prototype.newVistaHome()
 	})
+
+	jQuery('.modal').modal()
 }
 Application.prototype.receivedEvent=function(event){
 	app.initialize()
@@ -257,9 +291,9 @@ Application.prototype.trackView=function(){
 }
 Application.prototype.trackEvent=function(){
 }
-Application.prototype.ponThrobber=function(){
+Application.prototype.showThrobber=function(){
 }
-Application.prototype.quitaThrobber=function(){
+Application.prototype.removeThrobber=function(){
 }
 var app=new Application()
 //--------------------------------------------------------------------------------
@@ -275,11 +309,11 @@ function Vista(){
 	window.history.pushState({vista:this.id}, this.id, '#'+this.id)
 	this.loaded=false
 }
-Vista.prototype.tipos=['VistaHome', 'VistaIndice', 'VistaCapitulo', 'VistaFavoritos', 'VistaNotas', 'VistaAjustes']
+Vista.prototype.tipos=['VistaHome', 'VistaIndice', 'VistaCapitulo', 'VistaFavoritos', 'VistaNotas', 'VistaAutores']
 Vista.prototype.toDOM=function(desdeHistorial){
 	app.trackView(this.id)
 
-	app.ponThrobber()
+	app.showThrobber()
 	
 	var xd=jQuery('#content')
 
@@ -348,6 +382,15 @@ Vista.prototype.newVistaHome=function(){
 		v.toDOM()
 	}
 }
+Vista.prototype.newVistaAutores=function(){
+	if (app.vistaAutores){
+		app.vistaAutores.toDOM()
+	}
+	else {
+		var v=new VistaAutores()
+		v.toDOM()
+	}
+}
 Vista.prototype.newVistaCapitulo=function(capitulo, apartado){
 	if (app.vistaCapitulo){
 		app.vistaCapitulo.toDOM()
@@ -378,8 +421,8 @@ VistaHome.prototype.getBody=function(){
 
 		creaObjProp('div', {className:'vista-body flexcontainer grid', hijos:[
 			this.createHomeMenu('', 'Presentación', null, 				'presentacion'),
-			this.createHomeMenu('', 'Índice',       this.newVistaIndice,'indice'),
-			this.createHomeMenu('', 'Autores', null, 				 	'autores'),
+			this.createHomeMenu('', 'Índice',       this.newVistaIndice, 'indice'),
+			this.createHomeMenu('', 'Autores',  	this.newVistaAutores, 'autores'),
 
 			this.createHomeMenu('', 'Favoritos', null, 				 	'favoritos'),
 			this.createHomeMenu('', 'Buscar', null, 				 	'buscar'),
@@ -466,6 +509,13 @@ VistaIndice.prototype.clickCapitulo=function(event, dom){
 	var capitulo=this.getCapituloForDom(dom)
 	this.newVistaCapitulo(capitulo)
 }
+VistaIndice.prototype.clickApartado=function(event, dom){
+	event.stopPropagation()
+
+	var capitulo=this.getCapituloForDom(dom)
+	var apartado=this.getApartadoForDom(dom)
+	this.newVistaCapitulo(capitulo, apartado.cd)
+}
 VistaIndice.prototype.clickExpandButton=function(event, dom){
 	event.stopPropagation()
 
@@ -476,17 +526,25 @@ VistaIndice.prototype.clickStarButton=function(event, dom){
 	event.stopPropagation()
 
 	var xdom=jQuery(dom)
-	xdom.closest('.collection-item.capitulo').toggleClass('starred')
+	xdom.closest('.collection-item.apartado .star').toggleClass('starred')
 }
 VistaIndice.prototype.getCapituloForDom=function(dom){
 	var xdom=jQuery(dom)
 	var numCapitulo=xdom.closest('.collection-item.capitulo').data('cd')
 	return app.state.data.capitulos[numCapitulo-1]
 }
+VistaIndice.prototype.getApartadoForDom=function(dom){
+	var xdom=jQuery(dom)
+	
+	var numCapitulo=xdom.closest('.collection-item.capitulo').data('cd')
+	var numApartado=xdom.closest('.collection-item.apartado').data('cd')
+
+	return app.state.data.capitulos[numCapitulo-1].apartados[numApartado-1]
+}
 VistaIndice.prototype.creaDomSeccion=function(num, data){
 	var self=this
 	return creaObjProp('li', {'data-cd':data.cd, className:'seccion collection-item collapsed', onclick:function(){self.clickSeccion(event, this)}, hijos:[
-		creaObjProp('span', {className:'titulo waves-effect', texto:num+'. '+data.ds}),
+		creaObjProp('span', {className:'titulo waves-effect', texto:formato.numRomano(1+Number(num) )+data.ds}),
 		creaObjProp('ul', {className:'collection capitulos', hijos:[]}),
 	]})
 }
@@ -496,18 +554,25 @@ VistaIndice.prototype.creaDomCapitulo=function(num, data){
 	var l=[]
 	for (var i in data.apartados){
 		var apartado=data.apartados[i]
-		l.push(creaObjProp('li', {texto:apartado.ds}))
+		l.push(creaObjProp('li', {
+			'data-cd':Number(i)+1,
+			className:'collection-item apartado avatar valign-wrapper', 
+			onclick:function(){self.clickApartado(event, this)}, 
+			hijos:[
+				creaObjProp('i', {className:'material-icons circle star waves-effect waves-circle', mi:'zmdi icon-mn-favoritos', onclick:function(){self.clickStarButton(event, this)},}),
+				creaObjProp('i', {className:'secondary-content', mi:'chevron-right'}),
+				creaT(apartado.ds)
+			]
+		}))
 	}
 
-	return creaObjProp('li', {'data-cd':data.cd, className:'collection-item capitulo avatar collapsed', onclick:function(){self.clickCapitulo(event, this)}, hijos:[
-		creaObjProp('i', {className:'material-icons circle star waves-effect waves-circle', mi:'star', onclick:function(){self.clickStarButton(event, this)},}),
+	return creaObjProp('li', {'data-cd':data.cd, className:'collection-item capitulo collapsed', onclick:function(){self.clickCapitulo(event, this)}, hijos:[
+		creaObjProp('a', {className:'waves-effect waves-circle btn secondary-content', mi:'caret-down', onclick:function(){self.clickExpandButton(event, this)}, }),
 			creaObjProp('span', {className:'capNumber', texto:'Capítulo '+data.cd}),
 			creaObjProp('span', {className:'title', texto:data.ds}),
-
-			creaObjProp('ul', {className:'apartados', hijos:l}),
-			creaObjProp('p', {className:'autores', texto:data.autores}),
 			
-			creaObjProp('a', {className:'waves-effect waves-circle btn secondary-content', mi:'caret-down', onclick:function(){self.clickExpandButton(event, this)}, })
+			creaObjProp('p', {className:'autores', texto:data.autores}),
+			creaObjProp('ul', {className:'apartados collection', hijos:l}),
 	]})
 }
 //--------------------------------------------------------------------------------
@@ -518,7 +583,6 @@ function VistaCapitulo(cap, apartado){
 
 	this.cap=cap
 	this.apartado=apartado
-	this.apartado=null
 
 	this.domTitle=null
 	this.domSubTitle=null
@@ -537,7 +601,7 @@ VistaCapitulo.prototype.getBody=function(){
 	this.domSubTitle=creaObjProp('span', {className:'subtitle'})
 
 	this.domStar=creaObjProp('li', {hijos:[
-		creaObjProp('a', {mi:'star-outline', onclick:self.starChapter})
+		creaObjProp('a', {mi:'zmdi icon-btn-favoritos-empty', onclick:self.starChapter})
 	]})
 
 	return [
@@ -553,24 +617,24 @@ VistaCapitulo.prototype.getBody=function(){
 				creaObjProp('nav', {className:'nav-wrapper', hijos:[
 					creaObjProp('ul', {className:'left', hijos:[
 						creaObjProp('li', {hijos:[
-							creaObjProp('a', {mi:'arrow-left', onclick:self.previousChapter})
+							creaObjProp('a', {mi:'zmdi icon-btn-izq', onclick:function(){self.previousChapter()} })
 						]}),
 						creaObjProp('li', {hijos:[
-							creaObjProp('a', {mi:'arrow-right', onclick:self.nextChapter})
+							creaObjProp('a', {mi:'zmdi icon-btn-der', onclick:function(){self.nextChapter()} })
 						]}),
 					]}),
 					creaObjProp('ul', {className:'right', hijos:[
 						creaObjProp('li', {hijos:[
-							creaObjProp('a', {mi:'accounts'})
+							creaObjProp('a', {mi:'zmdi icon-mn-autores', onclick:function(){self.showMyAuthor()}})
 						]}),
 						creaObjProp('li', {hijos:[
-							creaObjProp('a', {mi:'book'})
+							creaObjProp('a', {mi:'zmdi icon-btn-indice', onclick:function(){Vista.prototype.newVistaIndice() }})
 						]}),
 						creaObjProp('li', {hijos:[
-							creaObjProp('a', {mi:'collection-pdf'})
+							creaObjProp('a', {mi:'zmdi icon-btn-pdf', onclick:function(){self.showMyPDF()}})
 						]}),
 						creaObjProp('li', {hijos:[
-							creaObjProp('a', {mi:'comment'})
+							creaObjProp('a', {mi:'zmdi icon-btn-notas', onclick:function(){self.showMyNotes()}})
 						]}),
 						this.domStar,
 					]})
@@ -582,17 +646,33 @@ VistaCapitulo.prototype.getBody=function(){
 VistaCapitulo.prototype.tareasPostCarga=function(){
 	this.setCapitulo(this.cap, this.apartado)
 }
+VistaCapitulo.prototype.buscaIDSeccion=function(cap){
+	for (var i=0; i<app.state.data.secciones.length; i++){
+		var sec=app.state.data.secciones[i]
+		if (sec.capitulos.indexOf(cap)>-1){
+			return sec.cd
+		}
+	}
+}
 VistaCapitulo.prototype.setCapitulo=function(cap, apartado){
+	var self=this
+
 	this.cap=cap
 	this.apartado=apartado || 0
 
-	app.ponThrobber()
+	app.showThrobber()
 	jQuery(this.domTitle).text(this.cap.ds)
 	jQuery(this.domSubTitle).text(this.cap.autores)
 
+	jQuery('.brand-logo').text('SECCIÓN '+formato.numRomano( this.buscaIDSeccion(cap.cd) )+'Capítulo '+this.cap.cd)
+	
 	var data=this.cap.apartados[this.apartado]
-	jQuery(this.contenido).load( data.archivo, function() {
-		app.quitaThrobber()
+
+	jQuery(this.contenido).load( data.archivo, function(response, status, xhr) {
+		app.removeThrobber()
+		if (status==='error'){
+			jQuery(self.contenido).empty().append('<h3>Cap'+self.cap.cd+'-'+self.apartado+'</h3>')
+		}
 	})
 
 	window.history.replaceState({vista:this.id}, this.id, '#'+this.id+'/'+this.cap.cd+'-'+this.apartado)
@@ -600,7 +680,82 @@ VistaCapitulo.prototype.setCapitulo=function(cap, apartado){
 VistaCapitulo.prototype.starChapter=function(){
 	jQuery(this.domStar).find('i').toggleClass('zmdi-star')
 }
-VistaCapitulo.prototype.previousChapter=function(){}
-VistaCapitulo.prototype.nextChapter=function(){
+VistaCapitulo.prototype.previousChapter=function(){
+	if (0<this.apartado){
+		this.apartado=this.apartado-1
+		this.setCapitulo(this.cap, this.apartado)
+	} else if (0>=this.apartado) {
+		var prevChapterID=app.vistaActiva.cap.cd-1
+		var prevChapter=app.state.data.capitulos[ prevChapterID-1 ]
 
+		if (prevChapter){
+			this.setCapitulo(prevChapter, prevChapter.apartados.length-1)
+		} 
+	}
+}
+VistaCapitulo.prototype.nextChapter=function(){
+	if (this.cap.apartados.length-1>this.apartado){
+		this.apartado=this.apartado+1
+		this.setCapitulo(this.cap, this.apartado)
+	} else if (this.cap.apartados.length-1>=this.apartado){
+		var nextChapterID=app.vistaActiva.cap.cd
+		var nextChapter=app.state.data.capitulos[ nextChapterID ]
+
+		if (nextChapter){
+			this.setCapitulo(nextChapter, 0)
+		} 
+	}
+}
+VistaCapitulo.prototype.showMyNotes=function(){
+	var valor=app.state.notas[this.cap.cd]
+	if (valor!=null && valor!=''){
+		jQuery('.modal#myNotes #texto').val( valor )
+		jQuery('.modal#myNotes label').addClass('active')
+	}
+	jQuery('.modal#myNotes').modal('open')
+}
+VistaCapitulo.prototype.saveNotes=function(){
+	jQuery('.modal#myNotes').modal('close')
+	var valor=jQuery('.modal#myNotes #texto').val()
+	if (valor!=null){
+		app.state.notas[this.cap.cd]=valor
+		save('notas', app.state.notas)
+	}
+}
+//--------------------------------------------------------------------------------
+
+function VistaAutores(){
+	this.id='VistaAutores'
+	Vista.call(this)
+}
+VistaAutores.prototype=new Vista
+VistaAutores.prototype.getBody=function(){
+	app.showThrobber()
+
+	var hijos=[]
+	for (var i=0; i<app.state.data.autores.length; i++){
+		var autor=app.state.data.autores[i]
+
+		var textos=[]
+		for (var j=0; j<autor.centros.length; j++){
+			textos.push( creaT( autor.centros[j] ) )
+			textos.push( creaObjProp('BR'))
+		}
+		hijos.push(
+			creaObjProp('li', {'data-cd':i, className:'collection-item avatar autor', hijos:[
+				creaObjProp('i', {className:'material-icons circle star waves-effect waves-circle ', }),
+				creaObjProp('span', {className:'title', texto:autor.ds}),
+				creaObjProp('p', {hijos:textos}),
+			]})
+		)
+	}
+
+	return [
+		creaObjProp('div', {className:'vista-body', hijos:[
+			creaObjProp('ul', {className:'collection autores', hijos:hijos})
+		]})
+	]	
+}
+VistaAutores.prototype.tareasPostCarga=function(){
+	app.removeThrobber()
 }
