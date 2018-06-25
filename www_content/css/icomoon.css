@@ -24,20 +24,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-btn-favoritos-color .path1:before {
-  content: "\e90a";
-  color: rgb(255, 255, 255);
-}
-.icon-btn-favoritos-color .path2:before {
-  content: "\e90b";
-  margin-left: -1.2861328125em;
-  color: rgb(208, 17, 43);
-}
-.icon-btn-favoritos-color .path3:before {
-  content: "\e90c";
-  margin-left: -1.2861328125em;
-  color: rgb(255, 255, 255);
-}
+
 .icon-btn-expandir:before {
   content: "\e90d";
 }
@@ -55,6 +42,9 @@
 }
 .icon-btn-favoritos-empty:before {
   content: "\e912";
+}
+.icon-btn-corazon-fill:before {
+  content: "\e90a";
 }
 .icon-btn-indice:before {
   content: "\e913";

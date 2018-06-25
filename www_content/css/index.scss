@@ -15,6 +15,10 @@ body {
     font-family:"Helvetica-Neue-Light-Condensed";
     src: url("../fonts/HelveticaNeueLTStd-LtCn.otf") format("opentype");
 }
+@font-face{
+    font-family:"Bodega-Sans";
+    src: url("../fonts/BodegaSansLight.ttf") format("truetype");
+}
 
 .zmdi{
     font-size: 24px;
@@ -68,8 +72,12 @@ nav {
     }
 }
 
-.brand-logo{
+nav .brand-logo{
     display: none!important;
+
+    font-family: Helvetica-Neue-Light-Condensed;
+    font-size: 18px;
+    line-height: 65px;
 }
 
 textarea.materialize-textarea:focus:not([readonly]) + label {
@@ -171,12 +179,13 @@ textarea.materialize-textarea:focus:not([readonly]) {
 }
 
 body.VistaHome{overflow: hidden;}
-.VistaHome{
+.VistaHome, .VistaPresentacion{
 
     &.vista{
         position: fixed;
         overflow: hidden;
         top:0;
+        width: 100%;
     }
     nav.top{
         display: none;
@@ -229,6 +238,34 @@ body.VistaHome{overflow: hidden;}
                 font-size:36px;
             }
         }
+
+        #menu {
+            i {
+                float: right;
+                font-size: 21px;
+                margin-left: 8px;
+            }
+        }
+        .form-element{
+            margin-left: 1rem;
+            color:white;
+
+            *[type="checkbox"] + span:not(.lever){
+                line-height: 22px;
+            }
+            *[type="checkbox"].filled-in:checked + span:not(.lever):before{
+                border-right: 2px solid gray;
+                border-bottom: 2px solid gray;
+            }
+            *[type="checkbox"].filled-in:checked + span:not(.lever):after{
+                background-color: white;
+                border-color: white;
+            }
+            *[type="checkbox"].filled-in:not(:checked) + span:not(.lever):after{
+                border-color:white;
+            }
+        }
+
     }
     .home-menu{        
         text-align: center;
@@ -269,7 +306,7 @@ body.VistaHome{overflow: hidden;}
             content:"";
             
             padding-left: 130px;
-            padding-bottom: 130px;
+            padding-bottom: 110px;
 
             background-repeat: no-repeat;
             background-position: center;
@@ -307,13 +344,16 @@ body.VistaHome{overflow: hidden;}
         }
         &.promueven{
             i:before{
-                background-image: url('../img/hetromb-home-presentacion.svg');
+                background-image: url('../img/hetromb-home-promueven.svg');
             }
         }
     }
 }
 
 .VistaIndice{
+    nav .brand-logo{
+        display: inline-block !important;
+    }
     ul.secciones{
         border:0;
 
@@ -322,8 +362,8 @@ body.VistaHome{overflow: hidden;}
 
             .titulo{
                 color:#CF0A2C;
-                font-size: 1.4rem;
-                font-family: "Bodega Sans", "Helvetica Neue", sans-serif;
+                font-size: 2.5rem;
+                font-family: "Bodega-Sans", "Helvetica Neue", sans-serif;
                 text-transform: uppercase;
                 padding: 1rem 0rem;
                 min-width: 100%;
@@ -346,20 +386,38 @@ body.VistaHome{overflow: hidden;}
 
             .capNumber{
                 display: block;
-                font-weight: 100;
-                font-size: smaller;
+                line-height: 1rem;
+                font-weight: 300;
+                width: 100%;
+                opacity: .6;
+                color: black;
+                font-size: 1.2rem;
+                font-family: "Helvetica-Neue-Light-Condensed";
+                margin-top: 8px;
+                margin-bottom: -4px;
             }
             .title{
-                color: #b9423d;
-                font-size: 1.5rem;
+                font-size: 1.6rem;
+                line-height: 1.6rem;
                 font-weight: 300;
+                padding-top: 14px;
+                color: #bc4b46;
+                font-family: "Helvetica-Neue-Condensed";
+                display: inline-block;
+
+                white-space: nowrap; text-overflow: ellipsis; overflow: hidden;
+                max-width: 90%;
             }
             .autores{
-                color:#9B9B9B;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-                overflow: hidden;
-                margin-top:.5rem;
+                display: block;
+                line-height: 1.3rem;
+                font-weight: 300;
+                width: 100%;
+                opacity: .6;
+                color: black;
+                font-size: 1.2rem;
+                font-family: "Helvetica-Neue-Light-Condensed";
+                margin-top: 8px;
             }
 
             > .secondary-content{
@@ -406,6 +464,9 @@ body.VistaHome{overflow: hidden;}
                     padding-left: 62px;
                     padding-right: 2rem;
 
+                    font-family: "Helvetica-Neue-Condensed";
+                    color: gray;
+                    
                     > i.star{
                         left:5px;
                     }
@@ -443,10 +504,7 @@ body.VistaHome{overflow: hidden;}
 }
 
 .VistaCapitulo{
-    .brand-logo{
-        font-family: Helvetica-Neue-Light-Condensed;
-        font-size: 18px;
-        line-height: 65px;
+    nav .brand-logo{
         display: inline-block !important;
     }
     .title{
@@ -510,6 +568,89 @@ body.VistaHome{overflow: hidden;}
             p{
                 color:gray;
             }
+            &.hidden{
+                display: none;
+            }
         }
     }
+}
+
+.VistaPDF{
+    iframe{
+        height: 100%;
+        width: 100%;
+        position: absolute;
+    }
+}
+
+.VistaPromueven{
+    nav .brand-logo{
+        display: inline-block !important;
+    }
+    .vista-body{
+        position: fixed;
+        overflow: hidden;
+        width: 100%; 
+        height:100%;
+    }
+    ul{
+        border:0;
+    }
+    .title{
+        display: block;
+    }
+    img{
+        max-width: 9rem;
+        float: right!important;
+        margin-right: 30%!important;
+        text-align: center;
+    }
+
+    .secondary-content{
+        color:silver;
+        margin-top: 1rem;
+    }
+}
+
+.modal{
+    &#myNotes{
+        textarea{
+            min-height: 6rem;
+        }
+    }
+}
+
+i.letter{
+    
+    padding: 1rem;
+    background-size: cover;
+    background-color: white !important;
+
+    &.letterA{background-image: url("../img/letters/A.svg");}
+    &.letterB{background-image: url("../img/letters/B.svg");}
+    &.letterC{background-image: url("../img/letters/C.svg");}
+    &.letterD{background-image: url("../img/letters/D.svg");}
+    &.letterE{background-image: url("../img/letters/E.svg");}
+    &.letterF{background-image: url("../img/letters/F.svg");}
+    &.letterG{background-image: url("../img/letters/G.svg");}
+    &.letterH{background-image: url("../img/letters/H.svg");}
+    &.letterI{background-image: url("../img/letters/I.svg");}
+    &.letterJ{background-image: url("../img/letters/J.svg");}
+    &.letterK{background-image: url("../img/letters/K.svg");}
+    &.letterL{background-image: url("../img/letters/L.svg");}
+    &.letterM{background-image: url("../img/letters/M.svg");}
+    &.letterN{background-image: url("../img/letters/N.svg");}
+//    .letterÑ{background-image: url("../img/letters/Ñ.svg");}
+    &.letterO{background-image: url("../img/letters/O.svg");}
+    &.letterP{background-image: url("../img/letters/P.svg");}
+    &.letterQ{background-image: url("../img/letters/Q.svg");}
+    &.letterR{background-image: url("../img/letters/R.svg");}
+    &.letterS{background-image: url("../img/letters/S.svg");}
+    &.letterT{background-image: url("../img/letters/T.svg");}
+    &.letterU{background-image: url("../img/letters/U.svg");}
+    &.letterV{background-image: url("../img/letters/V.svg");}
+    &.letterW{background-image: url("../img/letters/W.svg");}
+    &.letterX{background-image: url("../img/letters/X.svg");}
+    &.letterY{background-image: url("../img/letters/Y.svg");}
+    &.letterZ{background-image: url("../img/letters/Z.svg");}
 }

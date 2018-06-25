@@ -13,6 +13,11 @@
   src: url("../fonts/HelveticaNeueLTStd-LtCn.otf") format("opentype");
 }
 
+@font-face {
+  font-family: "Bodega-Sans";
+  src: url("../fonts/BodegaSansLight.ttf") format("truetype");
+}
+
 .zmdi {
   font-size: 24px;
 }
@@ -60,8 +65,11 @@ nav .sidenav-trigger {
   border-top: 1px solid #d3d3d36b;
 }
 
-.brand-logo {
+nav .brand-logo {
   display: none !important;
+  font-family: Helvetica-Neue-Light-Condensed;
+  font-size: 18px;
+  line-height: 65px;
 }
 
 textarea.materialize-textarea:focus:not([readonly]) + label {
@@ -169,22 +177,23 @@ body.VistaHome {
   overflow: hidden;
 }
 
-.VistaHome.vista {
+.VistaHome.vista, .VistaPresentacion.vista {
   position: fixed;
   overflow: hidden;
   top: 0;
+  width: 100%;
 }
 
-.VistaHome nav.top {
+.VistaHome nav.top, .VistaPresentacion nav.top {
   display: none;
   background-color: transparent;
 }
 
-.VistaHome nav.top .sidenav-trigger {
+.VistaHome nav.top .sidenav-trigger, .VistaPresentacion nav.top .sidenav-trigger {
   display: none !important;
 }
 
-.VistaHome .vista-header {
+.VistaHome .vista-header, .VistaPresentacion .vista-header {
   background-image: url(../img/cabecera-hetromb-home-titulocabecera.png), url(../img/cabecera-hetromb-home-logos.png), url(../img/cabecera-hetromb-home-coordinadores.png), url(../img/cabecera-hetromb-home-fondologos.png), url(../img/cabecera-hetromb-home-fondo.png);
   background-repeat: no-repeat;
   background-size: 22rem, 12rem, 11rem, 100% 5.5rem, cover;
@@ -194,102 +203,135 @@ body.VistaHome {
   margin-top: -1px;
 }
 
-.VistaHome .vista-header img {
+.VistaHome .vista-header img, .VistaPresentacion .vista-header img {
   width: 120%;
   margin-top: -70px;
   margin-left: -20px;
 }
 
-.VistaHome .vista-body {
+.VistaHome .vista-body, .VistaPresentacion .vista-body {
   height: calc( 100% - 56px - 192px);
   overflow-x: hidden;
 }
 
-.VistaHome .vista-bottom {
+.VistaHome .vista-bottom, .VistaPresentacion .vista-bottom {
   max-height: 56px;
 }
 
-.VistaHome .vista-bottom.navbar-fixed {
+.VistaHome .vista-bottom.navbar-fixed, .VistaPresentacion .vista-bottom.navbar-fixed {
   position: fixed;
 }
 
-.VistaHome .vista-bottom.navbar-fixed nav {
+.VistaHome .vista-bottom.navbar-fixed nav, .VistaPresentacion .vista-bottom.navbar-fixed nav {
   position: fixed;
   bottom: 0;
 }
 
-.VistaHome .vista-bottom ul .bottom-menu i {
+.VistaHome .vista-bottom ul .bottom-menu i, .VistaPresentacion .vista-bottom ul .bottom-menu i {
   font-size: 36px;
 }
 
-.VistaHome .home-menu {
+.VistaHome .vista-bottom #menu i, .VistaPresentacion .vista-bottom #menu i {
+  float: right;
+  font-size: 21px;
+  margin-left: 8px;
+}
+
+.VistaHome .vista-bottom .form-element, .VistaPresentacion .vista-bottom .form-element {
+  margin-left: 1rem;
+  color: white;
+}
+
+.VistaHome .vista-bottom .form-element *[type="checkbox"] + span:not(.lever), .VistaPresentacion .vista-bottom .form-element *[type="checkbox"] + span:not(.lever) {
+  line-height: 22px;
+}
+
+.VistaHome .vista-bottom .form-element *[type="checkbox"].filled-in:checked + span:not(.lever):before, .VistaPresentacion .vista-bottom .form-element *[type="checkbox"].filled-in:checked + span:not(.lever):before {
+  border-right: 2px solid gray;
+  border-bottom: 2px solid gray;
+}
+
+.VistaHome .vista-bottom .form-element *[type="checkbox"].filled-in:checked + span:not(.lever):after, .VistaPresentacion .vista-bottom .form-element *[type="checkbox"].filled-in:checked + span:not(.lever):after {
+  background-color: white;
+  border-color: white;
+}
+
+.VistaHome .vista-bottom .form-element *[type="checkbox"].filled-in:not(:checked) + span:not(.lever):after, .VistaPresentacion .vista-bottom .form-element *[type="checkbox"].filled-in:not(:checked) + span:not(.lever):after {
+  border-color: white;
+}
+
+.VistaHome .home-menu, .VistaPresentacion .home-menu {
   text-align: center;
   min-width: 32%;
   height: 130px;
 }
 
-.VistaHome .home-menu span {
+.VistaHome .home-menu span, .VistaPresentacion .home-menu span {
   display: block;
   color: #D8AAAE;
 }
 
-.VistaHome .home-menu i.circle {
+.VistaHome .home-menu i.circle, .VistaPresentacion .home-menu i.circle {
   background-color: white;
   width: 100px;
   height: 100px;
   line-height: 100px;
 }
 
-.VistaHome .home-menu i.circle .zmdi {
+.VistaHome .home-menu i.circle .zmdi, .VistaPresentacion .home-menu i.circle .zmdi {
   font-size: 44px;
   line-height: 100px;
 }
 
-.VistaHome .home-menu.doublesize i.circle {
+.VistaHome .home-menu.doublesize i.circle, .VistaPresentacion .home-menu.doublesize i.circle {
   width: 125px;
   height: 125px;
   margin-left: -12.5px;
   line-height: 155px;
 }
 
-.VistaHome .home-menu.doublesize i.circle .zmdi {
+.VistaHome .home-menu.doublesize i.circle .zmdi, .VistaPresentacion .home-menu.doublesize i.circle .zmdi {
   font-size: 55px;
 }
 
-.VistaHome .home-menu i:before {
+.VistaHome .home-menu i:before, .VistaPresentacion .home-menu i:before {
   content: "";
   padding-left: 130px;
-  padding-bottom: 130px;
+  padding-bottom: 110px;
   background-repeat: no-repeat;
   background-position: center;
 }
 
-.VistaHome .home-menu.presentacion i:before {
+.VistaHome .home-menu.presentacion i:before, .VistaPresentacion .home-menu.presentacion i:before {
   background-image: url("../img/hetromb-home-presentacion.svg");
 }
 
-.VistaHome .home-menu.indice i:before {
+.VistaHome .home-menu.indice i:before, .VistaPresentacion .home-menu.indice i:before {
   background-image: url("../img/hetromb-home-indice.svg");
 }
 
-.VistaHome .home-menu.autores i:before {
+.VistaHome .home-menu.autores i:before, .VistaPresentacion .home-menu.autores i:before {
   background-image: url("../img/hetromb-home-autores.svg");
 }
 
-.VistaHome .home-menu.favoritos i:before {
+.VistaHome .home-menu.favoritos i:before, .VistaPresentacion .home-menu.favoritos i:before {
   background-image: url("../img/hetromb-home-favoritos.svg");
 }
 
-.VistaHome .home-menu.buscar i:before {
+.VistaHome .home-menu.buscar i:before, .VistaPresentacion .home-menu.buscar i:before {
   background-image: url("../img/hetromb-home-buscar.svg");
 }
 
-.VistaHome .home-menu.notas i:before {
+.VistaHome .home-menu.notas i:before, .VistaPresentacion .home-menu.notas i:before {
   background-image: url("../img/hetromb-home-notas.svg");
 }
 
-.VistaHome .home-menu.promueven i:before {
-  background-image: url("../img/hetromb-home-presentacion.svg");
+.VistaHome .home-menu.promueven i:before, .VistaPresentacion .home-menu.promueven i:before {
+  background-image: url("../img/hetromb-home-promueven.svg");
+}
+
+.VistaIndice nav .brand-logo {
+  display: inline-block !important;
 }
 
 .VistaIndice ul.secciones {
@@ -302,8 +344,8 @@ body.VistaHome {
 
 .VistaIndice ul.secciones li.seccion .titulo {
   color: #CF0A2C;
-  font-size: 1.4rem;
-  font-family: "Bodega Sans", "Helvetica Neue", sans-serif;
+  font-size: 2.5rem;
+  font-family: "Bodega-Sans", "Helvetica Neue", sans-serif;
   text-transform: uppercase;
   padding: 1rem 0rem;
   min-width: 100%;
@@ -323,22 +365,41 @@ body.VistaHome {
 
 .VistaIndice ul.secciones li.capitulo .capNumber {
   display: block;
-  font-weight: 100;
-  font-size: smaller;
+  line-height: 1rem;
+  font-weight: 300;
+  width: 100%;
+  opacity: .6;
+  color: black;
+  font-size: 1.2rem;
+  font-family: "Helvetica-Neue-Light-Condensed";
+  margin-top: 8px;
+  margin-bottom: -4px;
 }
 
 .VistaIndice ul.secciones li.capitulo .title {
-  color: #b9423d;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
+  line-height: 1.6rem;
   font-weight: 300;
-}
-
-.VistaIndice ul.secciones li.capitulo .autores {
-  color: #9B9B9B;
+  padding-top: 14px;
+  color: #bc4b46;
+  font-family: "Helvetica-Neue-Condensed";
+  display: inline-block;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  margin-top: .5rem;
+  max-width: 90%;
+}
+
+.VistaIndice ul.secciones li.capitulo .autores {
+  display: block;
+  line-height: 1.3rem;
+  font-weight: 300;
+  width: 100%;
+  opacity: .6;
+  color: black;
+  font-size: 1.2rem;
+  font-family: "Helvetica-Neue-Light-Condensed";
+  margin-top: 8px;
 }
 
 .VistaIndice ul.secciones li.capitulo > .secondary-content {
@@ -373,6 +434,8 @@ body.VistaHome {
   font-size: large;
   padding-left: 62px;
   padding-right: 2rem;
+  font-family: "Helvetica-Neue-Condensed";
+  color: gray;
 }
 
 .VistaIndice ul.secciones li.capitulo ul.apartados li.apartado > i.star {
@@ -402,10 +465,7 @@ body.VistaHome {
   color: #b9423d;
 }
 
-.VistaCapitulo .brand-logo {
-  font-family: Helvetica-Neue-Light-Condensed;
-  font-size: 18px;
-  line-height: 65px;
+.VistaCapitulo nav .brand-logo {
   display: inline-block !important;
 }
 
@@ -462,5 +522,160 @@ body.VistaHome {
 
 .VistaAutores ul.autores .autor p {
   color: gray;
+}
+
+.VistaAutores ul.autores .autor.hidden {
+  display: none;
+}
+
+.VistaPDF iframe {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.VistaPromueven nav .brand-logo {
+  display: inline-block !important;
+}
+
+.VistaPromueven .vista-body {
+  position: fixed;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.VistaPromueven ul {
+  border: 0;
+}
+
+.VistaPromueven .title {
+  display: block;
+}
+
+.VistaPromueven img {
+  max-width: 9rem;
+  float: right !important;
+  margin-right: 30% !important;
+  text-align: center;
+}
+
+.VistaPromueven .secondary-content {
+  color: silver;
+  margin-top: 1rem;
+}
+
+.modal#myNotes textarea {
+  min-height: 6rem;
+}
+
+i.letter {
+  padding: 1rem;
+  background-size: cover;
+  background-color: white !important;
+}
+
+i.letter.letterA {
+  background-image: url("../img/letters/A.svg");
+}
+
+i.letter.letterB {
+  background-image: url("../img/letters/B.svg");
+}
+
+i.letter.letterC {
+  background-image: url("../img/letters/C.svg");
+}
+
+i.letter.letterD {
+  background-image: url("../img/letters/D.svg");
+}
+
+i.letter.letterE {
+  background-image: url("../img/letters/E.svg");
+}
+
+i.letter.letterF {
+  background-image: url("../img/letters/F.svg");
+}
+
+i.letter.letterG {
+  background-image: url("../img/letters/G.svg");
+}
+
+i.letter.letterH {
+  background-image: url("../img/letters/H.svg");
+}
+
+i.letter.letterI {
+  background-image: url("../img/letters/I.svg");
+}
+
+i.letter.letterJ {
+  background-image: url("../img/letters/J.svg");
+}
+
+i.letter.letterK {
+  background-image: url("../img/letters/K.svg");
+}
+
+i.letter.letterL {
+  background-image: url("../img/letters/L.svg");
+}
+
+i.letter.letterM {
+  background-image: url("../img/letters/M.svg");
+}
+
+i.letter.letterN {
+  background-image: url("../img/letters/N.svg");
+}
+
+i.letter.letterO {
+  background-image: url("../img/letters/O.svg");
+}
+
+i.letter.letterP {
+  background-image: url("../img/letters/P.svg");
+}
+
+i.letter.letterQ {
+  background-image: url("../img/letters/Q.svg");
+}
+
+i.letter.letterR {
+  background-image: url("../img/letters/R.svg");
+}
+
+i.letter.letterS {
+  background-image: url("../img/letters/S.svg");
+}
+
+i.letter.letterT {
+  background-image: url("../img/letters/T.svg");
+}
+
+i.letter.letterU {
+  background-image: url("../img/letters/U.svg");
+}
+
+i.letter.letterV {
+  background-image: url("../img/letters/V.svg");
+}
+
+i.letter.letterW {
+  background-image: url("../img/letters/W.svg");
+}
+
+i.letter.letterX {
+  background-image: url("../img/letters/X.svg");
+}
+
+i.letter.letterY {
+  background-image: url("../img/letters/Y.svg");
+}
+
+i.letter.letterZ {
+  background-image: url("../img/letters/Z.svg");
 }
 /*# sourceMappingURL=index.css.map */

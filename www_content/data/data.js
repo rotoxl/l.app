@@ -8,15 +8,19 @@ var data={
             cd:2, 
             ds:'Patología de la hemostasia',
             capitulos:[5,6,7]
-            }
+        }
     ],
     capitulos:[
         {   //capítulo
             cd: 1,
+            etiquetaNumCapitulo:'1. ',
+
             ds: 'Principios básicos de la hemostasia',
             pdf: 'data/cap01/capitulo.pdf',
             bibliografia: 'data/cap01/bibliografia.html',
-            autores:'P. Medina, S. Navarro y J. Orbe', 
+
+            autores:[1,2,3],
+
             apartados: [
                     {cd:1, ds:'Puntos clave',                   archivo:'data/cap01/apartado01.html'},
                     {cd:2, ds:'Endotelio vascular',             archivo:'data/cap01/apartado02.html'},
@@ -24,13 +28,17 @@ var data={
                     {cd:4, ds:'Inhibidores de la coagulación',  archivo:'data/cap01/apartado04.html'},
                     {cd:5, ds:'Fibrinolisis ',                  archivo:'data/cap01/apartado05.html'},
                     {cd:6, ds:'Inhibidores de la  brinolisis',  archivo:'data/cap01/apartado06.html'},
+
+                    //-> el último apartado siempre es la bibliografía
             ]
         },{ //capítulo
             cd: 2,
+            etiquetaNumCapitulo:'2. ',
+
             ds: 'Pruebas de laboratorio de hemostasia',
             pdf: 'data/cap02/capitulo.pdf',
             bibliografia: 'data/cap02/bibliografia.html',
-            autores:'P. Medina, S. Navarro y J. Orbe', 
+            autores:[2,3], 
             apartados: [
                     {cd:1, ds:'Puntos clave',                                                                        archivo:'data/cap02/apartado01.html'},
                     {cd:2, ds:'Recogida, procesado y almacenamiento de muestras antes de las pruebas diagnósticas ', archivo:'data/cap02/apartado02.html'},
@@ -40,10 +48,12 @@ var data={
             ]
         },{ //capítulo
             cd:3,
+            etiquetaNumCapitulo:'3. ',
+            
             ds: 'Diagnóstico molecular en la hemostasia',
             pdf: 'data/cap03/capitulo.pdf',
             bibliografia: 'data/cap03/bibliografia.html',
-            autores:'P. Medina',
+            autores:[4],
             apartados:[
                     {cd:1, ds:'Puntos clave',                archivo:'data/cap03/apartado01.html'},
                     {cd:2, ds:'Introducción',                archivo:'data/cap03/apartado02.html'},
@@ -55,10 +65,12 @@ var data={
             ]
         },{ //capítulo
             cd:4,
+            etiquetaNumCapitulo:'4. ',
+            
             ds:'Evaluación del paciente con diátesis hemorrágica',
             pdf:'data/cap04/capitulo.pdf',
             bibliografia: 'data/cap04/bibliografia.html',
-            autores:'J. Corral',
+            autores:[8],
             apartados:[
                     {cd:1, ds:'Puntos clave',                                   archivo:'data/cap04/apartado01.html'},
                     {cd:2, ds:'Historia hemorrágica',                           archivo:'data/cap04/apartado02.html'},
@@ -70,10 +82,12 @@ var data={
             ]
         },{ //capítulo
             cd:5,
+            etiquetaNumCapitulo:'1. ',
+            
             ds:'Hemofilia A y B',
             pdf:'data/cap05/capitulo.pdf',
             bibliografia: 'data/cap05/bibliografia.html',
-            autores:'J.A. Páramo',
+            autores:[3],
             apartados:[
                     {cd:1, ds:'Puntos clave',                  archivo:'data/cap05/apartado01.html'},
                     {cd:2, ds:'Introducción',                  archivo:'data/cap05/apartado02.html'},
@@ -87,10 +101,12 @@ var data={
             ]
         },{ //capítulo
             cd:6,
+            etiquetaNumCapitulo:'2. ',
+            
             ds:'Enfermedad de von Willebrand',
             pdf:'data/cap06/capitulo.pdf',
             bibliografia: 'data/cap06/bibliografia.html',
-            autores:'J. Corral',
+            autores:[5, 9],
             apartados:[
                     {cd:1, ds:'Puntos clave',                                                                       archivo:'data/cap06/apartado01.html'},
                     {cd:2, ds:'Recogida, procesado y almacenamiento de muestras antes de las pruebas diagnósticas', archivo:'data/cap06/apartado02.html'},
@@ -100,10 +116,12 @@ var data={
             ]
         },{ //capítulo
             cd:7,
+            etiquetaNumCapitulo:'3. ',
+            
             ds:'Otras enfermedades hereditarias de la hemostasia',
             pdf:'data/cap07/capitulo.pdf',
             bibliografia: 'data/cap07/bibliografia.html',
-            autores:'J.A. Páramo',
+            autores:[6, 7],
             apartados:[
                     {cd:1, ds:'Puntos clave',              archivo:'data/cap07/apartado01.html'},
                     {cd:2, ds:'Introducción ',             archivo:'data/cap07/apartado02.html'},
@@ -125,66 +143,117 @@ var data={
     autores:[
         {
             cd:1,
-            ds:'Álvarez Román, María Teresa',
+            dsApeNombre:'Álvarez Román, María Teresa',//ds
+            dsIniciales:'M.T. Alvarez',
+            dsNombreApe:'María Teresa Alvarez Roman', //dsBreve
+
             centros:['Servicio de Hematología y Hemoterapia. Hospital Universitario La Paz.'],
             ciudad:'Madrid', 
             capitulos:[1, 2]
         },{
             cd:2,
-            ds:'Bastida Bermejo, José María',
+            dsApeNombre:'Bastida Bermejo, José María',
+            dsIniciales:'J. M. Bastida',
+            dsNombreApe:'José María Bastida Bermejo',
+
             centros:['Unidad de Trombosis y Hemostasia. Servicio de Hematología. Hospital Universitario de Salamanca.', 'Instituto Biosanitario de Salamanca (IBSAL). Universidad de Salamanca (USAL). ',],
             ciudad:'Salamanca',
             capitulos:[3, 4]
         },{
             cd:3,
-            ds:'Batlle Fonrodona, Javier',
+            dsApeNombre:'Batlle Fonrodona, Javier',
+            dsIniciales:'J. Batlle',
+            dsNombreApe:'Javier Batlle Fonrodona',
+
             centros:['Servicio de Hematología y Hemoterapia. Complexo Hospitalario Universitario de A Coruña.', 'Instituto de Investigación Biomédica de A Coruña (INIBIC). ',],
             ciudad:'A Coruña',
             capitulos:[1, 3]
         },{
             cd:4,
-            ds:'Berrueco Moreno, Rubén',
+            dsApeNombre:'Berrueco Moreno, Rubén',
+            dsIniciales:'R. Berrueco',
+            dsNombreApe:'Rubén Berrueco Moreno',
+
             centros:['Servicio de Hematología y Oncología Pediátricas. Hospital Sant Joan de Déu.',],
             ciudad:' Esplugues de Llobregat, Barcelona',
             capitulos:[2, 4]
         },{
             cd:5,
-            ds:'Buixeda Pérez, Montserrat',
+            dsApeNombre:'Buixeda Pérez, Montserrat',
+            dsIniciales:'M. Buixeda',
+            dsNombreApe:'Montserrat Buixeda Pérez',
+
             centros:['Servicio de Obstetricia. Hospital Universitario Virgen del Rocío. ',],
             ciudad:'Sevilla',
             capitulos:[1, 4]
         },{
             cd:6,
-            ds:'Carrasco Expósito, Marina',
+            dsApeNombre:'Carrasco Expósito, Marina',
+            dsIniciales:'M. Carrasco',
+            dsNombreApe:'Marina Carrasco Expósito',
+
             centros:['Unidad de Hemostasia. Servicio de Hematología. Hospital de Sant Pau. ',],
             ciudad:'Barcelona',
             capitulos:[2]
         },{
             cd:7,
-            ds:'Corral de la Calle, Javier',
+            dsApeNombre:'Corral de la Calle, Javier',
+            dsIniciales:'J. Corral',
+            dsNombreApe:'Javier Corral de la Calle',
+
             centros:['Servicio de Hematología y Oncología Médica. Hospital Universitario Morales Meseguer.', 'Centro Regional de Hemodonación. IMIB-Universidad de Murcia. ',],
             ciudad:'Murcia. CIBERER',
             capitulos:[3]
         },{
             cd:8,
-            ds:'Domènech Santasusana, Pere',
+            dsApeNombre:'Domènech Santasusana, Pere',
+            dsIniciales:'P. Domènech',
+            dsNombreApe:'Pere Domènech Santasusana',
+
             centros:['Unidad deTrombosis y Hemostasia Hospital Universitari de Bellvitge. L’Hospitalet de Llobregat.',],
             ciudad:'Barcelona',
             capitulos:[3,4]
         },{
             cd:8,
-            ds:'Ferrer Marín, Francisca',
+            dsApeNombre:'Ferrer Marín, Francisca',
+            dsIniciales:'F. Ferrer',
+            dsNombreApe:'Francisca Ferrer Marín',
+
             centros:['Hospital Universitario Morales-Meseguer.', 'Centro Regional de Hemodonación IMIB-Arrixaca.', 'Centro de Investigación Biomédica en Red de Enfermedades Raras (CIBERER).', 'Universidad Católica San Antonio.',],
             ciudad:'Murcia',
             capitulos:[1]
         },{
             cd:9,
-            ds:'García Frade, Luis Javier',
+            dsApeNombre:'García Frade, Luis Javier',
+            dsIniciales:'L. J. García',
+            dsNombreApe:'Luis Javier García Frade',
+
             centros:['Servicio de Hematología. Hospital Universitario Río Hortega.',],
             ciudad:'Valladolid',
             capitulos:[1,4],
         }
-    ]
+    ],
+    promueven:[{
+        cd:1,
+        ds:'Auspiciado por',
+        img:'img/promueven-logo1.png',
+        url:'https://www.seth.es/',
+    }, {
+        cd:2,
+        ds:'Con la colaboración de',
+        img:'img/promueven-logo2.png',
+        url:'https://www.shire.es/',
+    }, {
+        cd:3,
+        ds:'Editado y publicado por',
+        img:'img/promueven-logo3.png',
+        url:'http://portal.grupoaran.com/',
+    }, {
+        cd:4,
+        ds:'Desarrollado por',
+        img:'img/promueven-logo4.png',
+        url:'http://www.imaidea.com/'
+    }]
 
 }
 
