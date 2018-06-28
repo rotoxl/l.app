@@ -1,10 +1,3 @@
-if (isPhone()){
-	document.addEventListener('deviceready', app.onDeviceReady, false);
-} else {
-	var self=this
-	$(document).ready(function(){app.onDeviceReady()} )
-}
-
 var _isPhone
 function isPhone(){
 	if (_isPhone==null){
@@ -317,6 +310,13 @@ Application.prototype.search=function(){
 }
 var app=new Application()
 //--------------------------------------------------------------------------------
+if (isPhone()){
+	document.addEventListener('deviceready', function(){app.onDeviceReady()}, false);
+} else {
+	var self=this
+	$(document).ready(function(){app.onDeviceReady()} )
+}
+//--------------------------------------------------------------------------------
 
 function Vista(){
 	this.domMenu=jQuery('#navigation_bar .btn-search')
@@ -515,6 +515,7 @@ Vista.prototype.newvistaValorar=function(){
 		   ios:'XX', //686440023
 		   android:'market://details?id=com.imaidea.aranediciones.hemostrombo'
 		   },
+		simpleMode:true,
 		openStoreInApp:false,
 		callbacks:{
 		   onButtonClicked:function(id){
@@ -530,15 +531,11 @@ Vista.prototype.newvistaValorar=function(){
 			rateButtonLabel:   	"Sí",
 		}
 	}
+	
+	AppRate.preferences.callbacks.onRateDialogShow = function(callback){ callback(1) }
+	// AppRate.preferences.useCustomRateDialog = true
 
-
-	if (force==null) force=false
-	if (force){
-		AppRate.preferences.callbacks.onRateDialogShow = function(callback){ callback(1) }
-		AppRate.preferences.useCustomRateDialog = true
-	}
-
-	AppRate.promptForRating(force)
+	AppRate.promptForRating(true)
 }
 
 //--------------------------------------------------------------------------------
