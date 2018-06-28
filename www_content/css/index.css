@@ -66,7 +66,6 @@ nav .sidenav-trigger {
 }
 
 nav .brand-logo {
-  display: none !important;
   font-family: Helvetica-Neue-Light-Condensed;
   font-size: 18px;
   line-height: 65px;
@@ -78,10 +77,12 @@ textarea.materialize-textarea:focus:not([readonly]) + label {
 
 textarea.materialize-textarea:focus:not([readonly]) {
   border-bottom: 1px solid #bd273d;
-  box-shadow: 0 1px 0 0 #bd273d;
+  -webkit-box-shadow: 0 1px 0 0 #bd273d;
+          box-shadow: 0 1px 0 0 #bd273d;
 }
 
 .book {
+  padding: 0 10px 50px;
   font-family: "FaktProSoft", "Helvetica Neue", helvetica, arial, sans-serif;
   font-size: 16px;
 }
@@ -149,28 +150,49 @@ textarea.materialize-textarea:focus:not([readonly]) {
 }
 
 .flexcontainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
 }
 
 .flexcontainer.row {
-  flex-direction: row;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
 }
 
 .flexcontainer.grid {
-  justify-content: center;
-  flex-flow: row wrap;
-  align-content: stretch;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -ms-flex-line-pack: stretch;
+      align-content: stretch;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .flexcontainer div {
-  flex: 1 0 0;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 0px;
+          flex: 1 0 0;
 }
 
 .flexcontainer div.big {
-  flex: 2 0 0;
+  -webkit-box-flex: 2;
+      -ms-flex: 2 0 0px;
+          flex: 2 0 0;
 }
 
 body.VistaHome {
@@ -330,10 +352,6 @@ body.VistaHome {
   background-image: url("../img/hetromb-home-promueven.svg");
 }
 
-.VistaIndice nav .brand-logo {
-  display: inline-block !important;
-}
-
 .VistaIndice ul.secciones {
   border: 0;
 }
@@ -405,7 +423,8 @@ body.VistaHome {
 .VistaIndice ul.secciones li.capitulo > .secondary-content {
   color: gray;
   background-color: white;
-  box-shadow: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
   top: -5px;
   right: 0;
 }
@@ -460,16 +479,25 @@ body.VistaHome {
   font-weight: bold;
 }
 
-.VistaIndice ul.secciones li.capitulo .star.starred i.zmdi:before {
+.VistaIndice ul.secciones li.capitulo .apartado.starred i.star .zmdi:before {
   content: "\e909";
   color: #b9423d;
 }
 
-.VistaCapitulo nav .brand-logo {
-  display: inline-block !important;
+.VistaIndice .vista-body.favsOnly li.capitulo, .VistaIndice .vista-body.favsOnly li.apartado {
+  display: none;
 }
 
-.VistaCapitulo .title {
+.VistaIndice .vista-body.favsOnly li.capitulo.starred, .VistaIndice .vista-body.favsOnly li.apartado.starred {
+  display: block;
+}
+
+.VistaCapitulo .navbar-fixed .nav-wrapper.secondary {
+  padding: 0 15px;
+  background-color: #eeeeee;
+}
+
+.VistaCapitulo .navbar-fixed .nav-wrapper.secondary .title {
   font-size: 1.6rem;
   line-height: 1rem;
   float: left;
@@ -482,7 +510,7 @@ body.VistaHome {
   font-family: "Helvetica-Neue-Condensed";
 }
 
-.VistaCapitulo .subtitle {
+.VistaCapitulo .navbar-fixed .nav-wrapper.secondary .subtitle {
   display: block;
   line-height: 1rem;
   float: left;
@@ -498,18 +526,9 @@ body.VistaHome {
   font-family: "Helvetica-Neue-Light-Condensed";
 }
 
-.VistaCapitulo .navbar-fixed .nav-wrapper.secondary {
-  padding: 0 15px;
-  background-color: #eeeeee;
-}
-
 .VistaCapitulo .navbar-fixed.bottom {
   position: absolute;
   bottom: 0;
-}
-
-.VistaCapitulo .book {
-  padding: 0 10px 50px;
 }
 
 .VistaCapitulo .zmdi-star-outline.zmdi-star:before {
@@ -526,6 +545,31 @@ body.VistaHome {
 
 .VistaAutores ul.autores .autor.hidden {
   display: none;
+}
+
+.VistaAutores ul.collection.capitulos {
+  border: none;
+}
+
+.VistaAutores ul.collection.capitulos li {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.VistaAutores ul.collection.capitulos .title {
+  overflow: hidden;
+  max-width: 92%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+  color: #8c2333;
+}
+
+.VistaAutores ul.collection.capitulos .secondary-content {
+  color: silver;
+  position: relative;
+  top: 0px;
+  right: 0px;
 }
 
 .VistaPDF iframe {
@@ -565,8 +609,80 @@ body.VistaHome {
   margin-top: 1rem;
 }
 
-.modal#myNotes textarea {
+div.modal#myNotes textarea {
   min-height: 6rem;
+}
+
+div.modal#buscar {
+  position: fixed;
+  overflow: hidden;
+  left: 0;
+  top: 0 !important;
+  width: 100%;
+  max-height: 100%;
+  height: 100%;
+  background-color: rgba(68, 68, 68, 0.6);
+}
+
+div.modal#buscar .modal-content {
+  padding: 0 0 5px 0;
+  overflow: hidden;
+}
+
+div.modal#buscar nav {
+  position: fixed;
+  top: 0;
+  background-color: white;
+  z-index: 100;
+}
+
+div.modal#buscar nav .input-field label.active i {
+  color: black;
+}
+
+div.modal#buscar .label-icon {
+  color: black;
+}
+
+div.modal#buscar .label-icon.search {
+  position: absolute;
+  top: 0;
+  right: 0;
+  -webkit-transition: background-color .3s;
+  transition: background-color .3s;
+  font-size: 1rem;
+  font-style: normal;
+  color: black;
+  display: block;
+  background: white;
+  padding: 0 15px;
+  cursor: pointer;
+  border: 0;
+  -webkit-box-shadow: 0 0 0;
+          box-shadow: 0 0 0;
+  height: 4rem;
+  line-height: 4.3rem;
+}
+
+div.modal#buscar .search-results {
+  border: none;
+  padding-top: 4rem;
+  overflow: auto;
+  height: 100%;
+  position: absolute;
+}
+
+div.modal#buscar .search-result {
+  font-size: 14px;
+}
+
+div.modal#buscar .search-result .title {
+  color: #bd273d;
+}
+
+div.modal#buscar span.found {
+  font-weight: bold;
+  background: yellow;
 }
 
 i.letter {
@@ -677,5 +793,27 @@ i.letter.letterY {
 
 i.letter.letterZ {
   background-image: url("../img/letters/Z.svg");
+}
+
+.VistaLegal {
+  text-align: center;
+}
+
+.VistaLegal .book {
+  padding-top: 4rem;
+}
+
+.VistaLegal p {
+  padding: 0;
+  margin: 0;
+}
+
+.VistaLegal figure {
+  max-width: 12rem;
+  margin: 0 auto 0 auto;
+}
+
+.VistaLegal figure img {
+  border: none !important;
 }
 /*# sourceMappingURL=index.css.map */

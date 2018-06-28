@@ -73,7 +73,7 @@ nav {
 }
 
 nav .brand-logo{
-    display: none!important;
+    // display: none!important;
 
     font-family: Helvetica-Neue-Light-Condensed;
     font-size: 18px;
@@ -89,6 +89,8 @@ textarea.materialize-textarea:focus:not([readonly]) {
 }
 
 .book{
+    padding: 0 10px 50px;
+    
     font-family: "FaktProSoft", "Helvetica Neue", helvetica, arial, sans-serif;
     font-size: 16px;
 
@@ -351,9 +353,9 @@ body.VistaHome{overflow: hidden;}
 }
 
 .VistaIndice{
-    nav .brand-logo{
-        display: inline-block !important;
-    }
+    // nav .brand-logo{
+    //     display: inline-block !important;
+    // }
     ul.secciones{
         border:0;
 
@@ -491,68 +493,76 @@ body.VistaHome{overflow: hidden;}
                     font-weight: bold;
                 }
             }
-            .star.starred{
-                i.zmdi:before{
-                    content: "\e909";
-                    color:#b9423d;
+            .apartado.starred{
+                i.star {
+                    .zmdi:before{
+                        content: "\e909";
+                        color:#b9423d;
+                    }
                 }
             }
 
+        }   
+    }
+    .vista-body.favsOnly{
+        li.capitulo, li.apartado{
+            display: none;
+        }
+        li.capitulo.starred, li.apartado.starred{
+            display: block;
         }
     }
-
 }
 
 .VistaCapitulo{
-    nav .brand-logo{
-        display: inline-block !important;
-    }
-    .title{
-        font-size: 1.6rem;
-        line-height: 1rem;
-        float: left;
-        font-weight: 300;
-        padding-top: 14px;
-        
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: visible;
-
-        color:#bc4b46;
-
-        font-family: "Helvetica-Neue-Condensed";
-    }
-    .subtitle{
-        display: block;
-        line-height: 1rem;
-        float: left;
-        font-weight: 300;
-        padding-top: 10px;
-
-        width: 100%;
-        opacity: .6;
-
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-
-        color: black;
-        font-size: 1.2rem;
-        font-family: "Helvetica-Neue-Light-Condensed";
-    }
+    // nav .brand-logo{
+    //     display: inline-block !important;
+    // }
+    
     .navbar-fixed{
         .nav-wrapper.secondary{
             padding:0 15px;
             background-color: #eeeeee;
+
+            .title{
+                font-size: 1.6rem;
+                line-height: 1rem;
+                float: left;
+                font-weight: 300;
+                padding-top: 14px;
+                
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: visible;
+        
+                color:#bc4b46;
+        
+                font-family: "Helvetica-Neue-Condensed";
+            }
+            .subtitle{
+                display: block;
+                line-height: 1rem;
+                float: left;
+                font-weight: 300;
+                padding-top: 10px;
+        
+                width: 100%;
+                opacity: .6;
+        
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+        
+                color: black;
+                font-size: 1.2rem;
+                font-family: "Helvetica-Neue-Light-Condensed";
+            }
         }
         &.bottom{
             position: absolute;
             bottom: 0;
         }
 
-    }
-    .book{
-        padding: 0 10px 50px;
     }
 
     .zmdi-star-outline.zmdi-star:before{
@@ -573,6 +583,31 @@ body.VistaHome{overflow: hidden;}
             }
         }
     }
+    ul.collection.capitulos{
+        border:none;
+
+        li{
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .title{
+            overflow: hidden;
+            max-width: 92%;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            display: inline-block;
+            color: #8c2333;
+        }
+
+        .secondary-content{
+            color:silver;
+            position: relative;
+            top: 0px;
+            right: 0px;
+        }
+    }
+
+   
 }
 
 .VistaPDF{
@@ -612,11 +647,81 @@ body.VistaHome{overflow: hidden;}
     }
 }
 
-.modal{
+div.modal{
     &#myNotes{
         textarea{
             min-height: 6rem;
         }
+    }
+
+    &#buscar{
+        position: fixed;
+        overflow: hidden;
+        left: 0;
+        top: 0!important;
+        width: 100%;
+        max-height: 100%;
+        height: 100%;
+
+        background-color: rgba(68, 68, 68, 0.6);
+
+        .modal-content{
+            padding: 0 0 5px 0;
+            overflow: hidden;
+        }
+        nav{
+            position: fixed;
+            top: 0;
+
+            background-color: white;
+            z-index: 100;
+
+            .input-field label.active i{
+                color:black;
+            }
+        }
+
+        .label-icon{
+            color:black;
+            
+            &.close{}
+            &.search{
+                position: absolute;
+                top: 0;
+                right: 0;
+                transition: background-color .3s;
+                font-size: 1rem;
+                font-style: normal;
+                color: black;
+                display: block;
+                background: white;
+                padding: 0 15px;
+                cursor: pointer;
+                border: 0;
+                box-shadow: 0 0 0;
+                height: 4rem;
+                line-height: 4.3rem;
+            }
+        }
+
+        .search-results{
+            border: none;
+            padding-top: 4rem;
+            overflow: auto;
+            height: 100%;
+            position: absolute;
+        }
+        .search-result{
+            font-size: 14px;
+
+            .title{color: #bd273d;}
+        }
+        span.found{
+            font-weight: bold;
+            background: yellow;
+        }
+
+
     }
 }
 
@@ -653,4 +758,26 @@ i.letter{
     &.letterX{background-image: url("../img/letters/X.svg");}
     &.letterY{background-image: url("../img/letters/Y.svg");}
     &.letterZ{background-image: url("../img/letters/Z.svg");}
+}
+
+.VistaLegal{
+    text-align: center;
+
+    .book{
+        padding-top: 4rem;
+    }
+
+    p {
+        padding:0;
+        margin:0;
+    }
+    figure{
+
+        img{
+            border:none !important;
+            
+        }
+        max-width: 12rem;
+        margin:0 auto 0 auto;
+    }
 }
