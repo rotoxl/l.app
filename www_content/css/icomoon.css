@@ -44,7 +44,8 @@
   content: "\e912";
 }
 .icon-btn-corazon-fill:before {
-  content: "\e90a";
+  /* content: "\e90a"; */
+  background: url(../img/corazon-color.svg);
 }
 .icon-btn-indice:before {
   content: "\e913";

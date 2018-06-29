@@ -502,10 +502,7 @@ Vista.prototype.newVistaLegal=function(){
 	}
 }
 Vista.prototype.newVistaCompartir=function(){
-	var t=`App Hemostasia y Trombosis, descarga gratuita
-
-	iOS: www.miurl.com
-	Android: www.miurl.com`
+	var t="App Hemostasia y Trombosis, descarga gratuita\n\n  https://bit.ly/hemostrombo"
 	window.plugins.socialsharing.share(t)
 }
 Vista.prototype.newvistaValorar=function(){
@@ -525,7 +522,7 @@ Vista.prototype.newvistaValorar=function(){
 		},
 		customLocale: {
 			title:   			"¿Quieres valorar esta App?",
-			message: 			"Si es así, hazlo. Solo te llevará unos segundos.",
+			message: 			"Solo te llevará unos segundos.",
 			cancelButtonLabel: 	"No, gracias",
 			laterButtonLabel:  	"Más tarde",
 			rateButtonLabel:   	"Sí",
@@ -741,6 +738,20 @@ VistaIndice.prototype.toggleShowAll=function(force){
 	}
 
 }
+VistaIndice.prototype.actualizarFavoritos=function(){
+	jQuery(this.domBody).find('li.capitulo.starred').removeClass('starred')
+	jQuery(this.domBody).find('li.apartado.starred').removeClass('starred')
+
+	for (var i in app.state.favoritos){
+		var datos=app.state.favoritos[i].split('/').map(function(a){return Number(a)})
+
+		var domCap=jQuery(this.domBody).find('li.capitulo[data-cd='+datos[0]+']')
+		var domAp=domCap.find('li.apartado[data-cd='+(datos[1]+1)+']')
+
+		domCap.addClass('starred')
+		domAp.addClass('starred')
+	}
+}
 //--------------------------------------------------------------------------------
 
 function VistaCapitulo(cap, apartado, searchString){
@@ -886,6 +897,9 @@ VistaCapitulo.prototype.starChapter=function(dom){
 			app.state.favoritos.splice(index, 1)
 	}
 	save('favoritos', app.state.favoritos)
+	
+	if (app.vistaIndice) 
+		app.vistaIndice.actualizarFavoritos()
 }
 VistaCapitulo.prototype.previousChapter=function(){
 	this.apartado=Number(this.apartado)
@@ -1031,24 +1045,16 @@ VistaAutores.prototype.setCapitulo=function(cap){
 }
 
 //--------------------------------------------------------------------------------
-
 function VistaPDF(cap){
 	this.id='VistaPDF'
-	
 	Vista.call(this)
 
 	this.cap=cap
 }
 VistaPDF.prototype=new Vista
-VistaPDF.prototype.getBody=function(){
+VistaPDF.prototype.toDOM=function(){
 	app.showThrobber()
-
-	this.iframe=creaObjProp('iframe', {})
-	return [
-		creaObjProp('div', {className:'vista-body', hijos:[
-			this.iframe
-		]})
-	]
+	app.tareasPostCarga()
 }
 VistaPDF.prototype.tareasPostCarga=function(){
 	this.setCapitulo(this.cap)
@@ -1056,13 +1062,32 @@ VistaPDF.prototype.tareasPostCarga=function(){
 }
 VistaPDF.prototype.setCapitulo=function(cap){
 	this.cap=cap
-	var pdf=this.cap.pdf
+	this.viewPDF(this.cap.pdf)
+}
+VistaPDF.prototype.viewPDF=function(ruta){
+	//https://www.raymondcamden.com/2016/06/26/linking-to-pdfs-in-cordova-apps
+	
+	if (cordova.platformId=='android'){
+		var path=cordova.file.applicationDirectory+'www/lnk/'+ruta
 
-	// var pdf='http://localhost:8888/imaidea/data/cap01/capitulo.pdf'
-	// this.iframe.src='http://docs.google.com/gview?url='+pdf+'&embedded=true'
+		console.log('File ', path, ' >>')
+		window.resolveLocalFileSystemURL(path, function(fileEntry) {
+			window.resolveLocalFileSystemURL(cordova.file.externalDataDirectory, function(dirEntry) {
+				fileEntry.copyTo(dirEntry, 'file.pdf', function(newFileEntry) {
 
-
-	//src="http://example.com/mypdf.pdf&embedded=true" style="width:718px; height:700px;" frameborder="0"></iframe>
+					console.log('>> Copied to ', newFileEntry.nativeURL)
+					cordova.plugins.fileOpener2.open(newFileEntry.nativeURL, 'application/pdf', { 
+						error : function(e) { 
+							console.log('Error status: ' + e.status + ' - Error message: ' + e.message)
+						},
+						success : function () {
+							console.log('file opened successfully')				
+						}
+					})
+				})
+			})
+		})
+	}
 }
 
 //--------------------------------------------------------------------------------
