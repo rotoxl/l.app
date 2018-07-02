@@ -86,7 +86,7 @@
               
                 <nav>
                     <div class="nav-wrapper main">
-                        <form>
+                        <form onsubmit="app.vistaBuscar.doSearch(); return false">
                             <div class="input-field">
                               <input id="searchQuery" type="search" required="" placeholder="¿Qué quieres buscar?">
                               <label class="label-icon close" onclick="app.vistaBuscar.closeSearch()">
