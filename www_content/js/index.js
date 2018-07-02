@@ -280,6 +280,8 @@ Application.prototype.initialize=function() {
 		Vista.prototype.newVistaPromueven()
 	} else if (hash=='VistaLegal'){
 		Vista.prototype.newVistaLegal()
+	} else if (hash=='VistaNotas'){
+		Vista.prototype.newVistaNotas()
 	} 
 
 	jQuery('.sidenav-trigger').click(function(){
@@ -402,6 +404,31 @@ Vista.prototype.concatAutores=function(listaAutores, etiqueta){
 		}
 	}
 	return ret
+}
+Vista.prototype.showMyNotes=function(){
+	var valor=app.state.notas[this.cap.cd]
+	jQuery('.modal#myNotes #texto').val( valor )
+	jQuery('.modal#myNotes label').toggleClass('active', valor!=null && valor!='')
+
+	jQuery('.modal#myNotes').modal('open')
+}
+Vista.prototype.saveNotes=function(){
+	jQuery('.modal#myNotes').modal('close')
+	var valor=jQuery('.modal#myNotes #texto').val()
+	if (valor!=null){
+		app.state.notas[this.cap.cd]=valor
+		save('notas', app.state.notas)
+	}
+	if (app.vistaActiva==app.vistaNotas)
+		app.vistaNotas.refresh()
+}
+Vista.prototype.createAdmon=function(className, texto){
+	return creaObjProp('div', {className:'admonition '+className, hijos:[
+		creaObjProp('div', {className:'row img'}),
+		creaObjProp('div', {className:'row txt', hijos:[
+			creaT(texto)
+		]})	
+	]})
 }
 /////////
 Vista.prototype.newVistaIndice=function(){
@@ -534,7 +561,16 @@ Vista.prototype.newvistaValorar=function(){
 
 	AppRate.promptForRating(true)
 }
-
+Vista.prototype.newVistaNotas=function(){
+	if (app.vistaNotas){
+		app.vistaNotas.toDOM()
+		app.vistaNotas.refresh()
+	}
+	else {
+		var v=new VistaNotas()
+		v.toDOM()
+	}
+}
 //--------------------------------------------------------------------------------
 function VistaHome(){
 	this.id='VistaHome'
@@ -558,7 +594,7 @@ VistaHome.prototype.getBody=function(){
 
 			this.createHomeMenu('', 'Favoritos', 	this.newVistaFavoritos, 	'favoritos'),
 			this.createHomeMenu('', 'Buscar',  		this.newVistaBuscar, 		'buscar'),
-			this.createHomeMenu('', 'Notas', 		null, 				 		'notas'),
+			this.createHomeMenu('', 'Notas', 		this.newVistaNotas, 		'notas'),
 
 			this.createHomeMenu('', 'Promueven', this.newVistaPromueven,  		'promueven'),
 		]}),
@@ -735,6 +771,16 @@ VistaIndice.prototype.toggleShowAll=function(force){
 	this.domBody.toggleClass('favsOnly', !force)
 	if (!force){
 		jQuery('.brand-logo').text('Favoritos')
+
+		if (app.state.favoritos.length==0){
+			jQuery(this.domBody).find('ul.collection.secciones').css('display', 'none')
+			jQuery(this.domBody).append(
+				this.createAdmon('favs', 'No hay ningún favorito')
+			)
+		}
+	} else {
+		jQuery(this.domBody).find('ul.collection.secciones').css('display', 'block')
+		jQuery(this.domBody).find('.admonition').remove()
 	}
 
 }
@@ -939,27 +985,11 @@ VistaCapitulo.prototype.nextChapter=function(){
 		} 
 	}
 }
-VistaCapitulo.prototype.showMyNotes=function(){
-	var valor=app.state.notas[this.cap.cd]
-	if (valor!=null && valor!=''){
-		jQuery('.modal#myNotes #texto').val( valor )
-		jQuery('.modal#myNotes label').addClass('active')
-	}
-	jQuery('.modal#myNotes').modal('open')
-}
 VistaCapitulo.prototype.showMyAuthor=function(){
 	this.newVistaAutores(this.cap)
 }
 VistaCapitulo.prototype.showMyPDF=function(){
 	this.newVistaPDF(this.cap)
-}
-VistaCapitulo.prototype.saveNotes=function(){
-	jQuery('.modal#myNotes').modal('close')
-	var valor=jQuery('.modal#myNotes #texto').val()
-	if (valor!=null){
-		app.state.notas[this.cap.cd]=valor
-		save('notas', app.state.notas)
-	}
 }
 //--------------------------------------------------------------------------------
 
@@ -1054,7 +1084,6 @@ function VistaPDF(cap){
 VistaPDF.prototype=new Vista
 VistaPDF.prototype.toDOM=function(){
 	app.showThrobber()
-	app.tareasPostCarga()
 }
 VistaPDF.prototype.tareasPostCarga=function(){
 	this.setCapitulo(this.cap)
@@ -1076,7 +1105,7 @@ VistaPDF.prototype.viewPDF=function(ruta){
 				fileEntry.copyTo(dirEntry, 'file.pdf', function(newFileEntry) {
 
 					console.log('>> Copied to ', newFileEntry.nativeURL)
-					cordova.plugins.fileOpener2.open(newFileEntry.nativeURL, 'application/pdf', { 
+					cordova.plugins.fileOpener2.showOpenWithDialog(newFileEntry.nativeURL, 'application/pdf', { 
 						error : function(e) { 
 							console.log('Error status: ' + e.status + ' - Error message: ' + e.message)
 						},
@@ -1311,7 +1340,7 @@ VistaBuscar.prototype.navigateResult=function(cap_pos, ap){
 	var cap=app.state.data.capitulos[cap_pos]
 	
 	this.form.close()
-	Vista.prototype.newVistaCapitulo(cap, ap, this.searchString)
+	Vista.prototype.newVistaCapitulo(cap, ap-1, this.searchString)
 }
 //--------------------------------------------------------------------------------
 function VistaLegal(){
@@ -1336,13 +1365,73 @@ VistaLegal.prototype.getBody=function(){
 		]}),
 	]
 }
-// VistaLegal.prototype.tareasPostCarga=function(){
-// 	jQuery(this.contenido).load( this.url, function(response, status, xhr) {
-// 		app.removeThrobber()
-// 		if (status==='error'){
-// 			jQuery(self.contenido).empty().append('<h3>Error cargando presentación</h3>')
-// 		}
-// 	})
 
-// 	app.removeThrobber()
-// }
+//--------------------------------------------------------------------------------
+
+function VistaNotas(){
+	this.id='VistaNotas'
+	this.title='Notas'
+	Vista.call(this)
+}
+VistaNotas.prototype=new Vista
+VistaNotas.prototype.getBody=function(){
+	app.showThrobber()
+	
+	return [
+		creaObjProp('div', {className:'vista-body', hijos:[
+			creaObjProp('ul', {className:'collection notas'})
+		]}),
+
+	]
+}
+VistaNotas.prototype.refresh=function(){
+	var self=this
+
+	var hijos=[]
+	var ulNotas=this.domBody.find('ul.notas').empty()
+
+	for (var key in app.state.notas){
+		var nota=app.state.notas[key]
+
+		if (nota=='') continue
+		var cap=buscaFilas(app.state.data.capitulos, {cd:key})[0]
+
+		hijos.push( creaObjProp('li', {className:'collection-item avatar nota', hijos:[
+			creaObjProp('span', {className:'title', texto:cap.etiquetaNumCapitulo + cap.ds}),
+			creaObjProp('span', {className:'material-icons circle'}),
+			creaObjProp('p', {className:'txt nota', texto:nota}), 
+
+			creaObjProp('div', {className:'row acciones', hijos:[
+				creaObjProp('span', {className:'btn edit', mi:'edit', texto:'Editar', onclick:self.fnShowMyNotes(cap) }),
+				creaObjProp('span', {className:'btn navigate', mi:'chevron-right right', texto:'Navegar', onclick:self.fnNewVistaCapitulo(cap)}),
+			]})
+			
+		]}) )
+	}
+
+	if (hijos.length==0){
+		hijos=[
+			this.createAdmon('notes', 'No hay ninguna nota')
+		]
+	}
+
+
+	ulNotas.append(hijos)
+}
+VistaNotas.prototype.fnShowMyNotes=function(cap){
+	var self=this
+	return function(){
+		self.cap=cap
+		self.showMyNotes()
+	}
+}
+VistaNotas.prototype.fnNewVistaCapitulo=function(cap){
+	var self=this
+	return function(){
+		self.newVistaCapitulo(cap)
+	}
+}
+VistaNotas.prototype.tareasPostCarga=function(){
+	this.refresh()
+	app.removeThrobber()
+}

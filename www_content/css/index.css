@@ -195,6 +195,31 @@ textarea.materialize-textarea:focus:not([readonly]) {
           flex: 2 0 0;
 }
 
+.admonition.favs .row.img {
+  background-image: url("../img/empty-state.svg");
+}
+
+.admonition.notes .row.img {
+  background-image: url("../img/empty-state.svg");
+}
+
+.admonition .row.img {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  padding-top: 8rem;
+  margin-top: 9rem;
+}
+
+.admonition .row.txt {
+  font-size: 27px;
+  text-align: center;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  color: darkgray;
+  font-weight: 200;
+}
+
 body.VistaHome {
   overflow: hidden;
 }
@@ -531,6 +556,11 @@ body.VistaHome {
   bottom: 0;
 }
 
+.VistaCapitulo .navbar-fixed.bottom a {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 .VistaCapitulo .zmdi-star-outline.zmdi-star:before {
   content: '\f27d';
 }
@@ -815,5 +845,49 @@ i.letter.letterZ {
 
 .VistaLegal figure img {
   border: none !important;
+}
+
+.VistaNotas ul.collection.notas {
+  border: 0;
+}
+
+.VistaNotas ul.collection.notas .circle {
+  background-color: #8c2333;
+}
+
+.VistaNotas ul.collection.notas .title {
+  overflow: hidden;
+  max-width: 92%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+  color: gray;
+}
+
+.VistaNotas ul.collection.notas p.nota {
+  font-size: 16px;
+  color: black;
+  white-space: pre-line;
+}
+
+.VistaNotas ul.collection.notas .acciones {
+  margin-top: 1rem;
+  border-top: 1px solid #e0e0e0;
+  text-align: right;
+}
+
+.VistaNotas ul.collection.notas .acciones .btn {
+  background-color: white;
+  -webkit-box-shadow: 0 0 0;
+          box-shadow: 0 0 0;
+  color: #8c2333;
+}
+
+.VistaNotas ul.collection.notas .acciones .btn.edit {
+  line-height: 33px;
+}
+
+.VistaNotas ul.collection.notas .acciones .btn.edit i {
+  margin-right: 10px;
 }
 /*# sourceMappingURL=index.css.map */
