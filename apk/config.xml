@@ -19,10 +19,21 @@
     
     <platform name="android">
         <allow-intent href="market:*" />
+
+        <icon src="res/icon/android/icon-36-ldpi.png" platform="android" width="36" height="36" density="ldpi" />
+        <icon src="res/icon/android/icon-48-mdpi.png" platform="android" width="48" height="48" density="mdpi" />
+        <icon src="res/icon/android/icon-72-hdpi.png" platform="android" width="72" height="72" density="xdpi" />
+        <icon src="res/icon/android/icon-96-xhdpi.png" platform="android" width="96" height="96" density="xhdpi" />
     </platform>
+    
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
+
+        <icon src="res/icon/ios/icon-57.png" platform="ios" width="57" height="57"/>
+        <icon src="res/icon/ios/icon-72.png" platform="ios" width="72" height="72"/>
+        <icon src="res/icon/ios/icon-57-2x.png" platform="ios" width="114" height="114"/>
+        <icon src="res/icon/ios/icon-72-2x.png" platform="ios" width="144" height="144"/>
     </platform>
 
     <!--
@@ -32,19 +43,3 @@
 
     <preference name="StatusBarBackgroundColor" value="#8c2333" />
 </widget>
-
-
-<!--    
-dependencies {
-    compile fileTree(dir: 'libs', include: '*.jar')
-    // SUB-PROJECT DEPENDENCIES START
-//    debugCompile(project(path: "CordovaLib", configuration: "debug"))
-//    releaseCompile(project(path: "CordovaLib", configuration: "release"))
-
-// new dependency configurations.
-    implementation project(':CordovaLib')
-
-    compile "com.android.support:support-v4:24.1.1+"
-    // SUB-PROJECT DEPENDENCIES END
-}
- -->
