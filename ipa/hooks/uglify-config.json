@@ -1,0 +1,25 @@
+
+{
+    "recuerda": "HAY QUE CAMBIAR EL NÚMERO DE VERSIÓN EN CONFIG.XML Y EL DEBUGGABLE",
+
+    "alwaysRun": false,
+    "recursiveFolderSearch": false,
+    "foldersToProcess": [
+        "lnk/js",
+        "lnk/css",
+        "lnk" 
+    ],
+    "uglifyJsOptions": {
+        "compress": {
+            "drop_console": true
+        },
+        "mangle": { 
+            "toplevel": true 
+        },
+        "fromString": true
+    },
+    "cleanCssOptions": {
+        "noAdvanced": true,
+        "keepSpecialComments": 0
+    }
+}
