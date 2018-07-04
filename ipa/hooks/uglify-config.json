@@ -13,7 +13,7 @@
         "compress": {
             "drop_console": true
         },
-        "mangle": { 
+        "____mangle": { 
             "toplevel": true 
         },
         "fromString": true

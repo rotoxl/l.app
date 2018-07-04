@@ -33,6 +33,7 @@
 		26071233C8D247809B481BA0 /* SocialSharing.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CF39EEC658148FE93399B09 /* SocialSharing.m */; };
 		0B2D8B0BE5B24763A54262A1 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16911F6188214184BB24AC57 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		7469D77D3CCE4FCC8E66EB11 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBF433B6CB0C416CB2B27D49 /* MessageUI.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		DD8B11CC48264FBC9C4C15F2 /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = B84AF24A1EC7419892026CE7 /* CDVDevice.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +103,8 @@
 		BF0345E881E24AA1813BB185 /* SocialSharing.h */ = {isa = PBXFileReference; name = "SocialSharing.h"; path = "cordova-plugin-x-socialsharing/SocialSharing.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 		16911F6188214184BB24AC57 /* Social.framework */ = {isa = PBXFileReference; name = "Social.framework"; path = "System/Library/Frameworks/Social.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		BBF433B6CB0C416CB2B27D49 /* MessageUI.framework */ = {isa = PBXFileReference; name = "MessageUI.framework"; path = "System/Library/Frameworks/MessageUI.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		B84AF24A1EC7419892026CE7 /* CDVDevice.m */ = {isa = PBXFileReference; name = "CDVDevice.m"; path = "cordova-plugin-device/CDVDevice.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		61935FA4E78C4F5B9DC46DA7 /* CDVDevice.h */ = {isa = PBXFileReference; name = "CDVDevice.h"; path = "cordova-plugin-device/CDVDevice.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,6 +241,8 @@
 				6CF39EEC658148FE93399B09 /* SocialSharing.m */,
 				A555BC5D18744097BF619515 /* NSString+SSURLEncoding.h */,
 				BF0345E881E24AA1813BB185 /* SocialSharing.h */,
+				B84AF24A1EC7419892026CE7 /* CDVDevice.m */,
+				61935FA4E78C4F5B9DC46DA7 /* CDVDevice.h */,
 			);
 			name = Plugins;
 			path = "Hemostasia y trombosis. Manual práctico/Plugins";
@@ -363,6 +368,7 @@
 				541DCC5E461C44A6B016AAB0 /* CDVStatusBar.m in Sources */,
 				6E425F4E6B1F4E71A2ED0B86 /* NSString+SSURLEncoding.m in Sources */,
 				26071233C8D247809B481BA0 /* SocialSharing.m in Sources */,
+				DD8B11CC48264FBC9C4C15F2 /* CDVDevice.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,7 +389,6 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
@@ -407,7 +412,6 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = YES;
