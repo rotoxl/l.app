@@ -3,6 +3,23 @@
   /* make transparent link selection, adjust last value opacity 0 to 1.0 */
 }
 
+body.ios #content .vista {
+  background-color: #8c2333;
+  padding-top: env(safe-area-inset-top);
+  /* iOS 11.0 */
+  padding-bottom: env(safe-area-inset-bottom);
+  /* iOS 11.2 */
+}
+
+body.ios .vista-body {
+  background-color: white;
+}
+
+body.ios .vista-bottom .navbar-fixed {
+  -webkit-box-shadow: 0 0 0;
+          box-shadow: 0 0 0;
+}
+
 @font-face {
   font-family: "Helvetica-Neue-Condensed";
   src: url("../fonts/HelveticaNeueLTStd-Cn.otf") format("opentype");
@@ -85,6 +102,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
   padding: 0 10px 50px;
   font-family: "FaktProSoft", "Helvetica Neue", helvetica, arial, sans-serif;
   font-size: 16px;
+  overflow-x: hidden;
 }
 
 .book h1, .book h2, .book h3, .book h4, .book h5, .book h6 {
@@ -106,7 +124,6 @@ textarea.materialize-textarea:focus:not([readonly]) {
 
 .book h2 {
   display: block;
-  font-size: 0.83em;
   -webkit-margin-before: 1.67em;
   -webkit-margin-after: 1.67em;
   -webkit-margin-start: 0px;
@@ -119,7 +136,6 @@ textarea.materialize-textarea:focus:not([readonly]) {
 
 .book h3 {
   display: block;
-  font-size: 0.67em;
   -webkit-margin-before: 2.33em;
   -webkit-margin-after: 2.33em;
   -webkit-margin-start: 0px;
@@ -129,6 +145,29 @@ textarea.materialize-textarea:focus:not([readonly]) {
   line-height: 110%;
   margin: 1.766667rem 0 .46rem 0;
   font-family: "Helvetica-Neue-Condensed";
+}
+
+.book h4 {
+  display: block;
+  -webkit-margin-before: 2.33em;
+  -webkit-margin-after: 2.33em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  font-weight: bold;
+  font-size: 1.3rem;
+  line-height: 110%;
+  margin: 1.766667rem 0 .46rem 0;
+  font-family: "Helvetica-Neue-Condensed";
+}
+
+.book a {
+  color: #bd273d;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-all;
+  -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+          hyphens: auto;
 }
 
 .book .auth {
@@ -224,6 +263,13 @@ body.VistaHome {
   overflow: hidden;
 }
 
+.VistaHome, .VistaPresentacion {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
 .VistaHome.vista, .VistaPresentacion.vista {
   position: fixed;
   overflow: hidden;
@@ -271,7 +317,6 @@ body.VistaHome {
 
 .VistaHome .vista-bottom.navbar-fixed nav, .VistaPresentacion .vista-bottom.navbar-fixed nav {
   position: fixed;
-  bottom: 0;
 }
 
 .VistaHome .vista-bottom ul .bottom-menu i, .VistaPresentacion .vista-bottom ul .bottom-menu i {
@@ -375,6 +420,13 @@ body.VistaHome {
 
 .VistaHome .home-menu.promueven i:before, .VistaPresentacion .home-menu.promueven i:before {
   background-image: url("../img/hetromb-home-promueven.svg");
+}
+
+.VistaIndice {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 .VistaIndice ul.secciones {
@@ -517,6 +569,13 @@ body.VistaHome {
   display: block;
 }
 
+.VistaCapitulo .navbar-fixed {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
 .VistaCapitulo .navbar-fixed .nav-wrapper.secondary {
   padding: 0 15px;
   background-color: #eeeeee;
@@ -529,10 +588,11 @@ body.VistaHome {
   font-weight: 300;
   padding-top: 14px;
   white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: visible;
   color: #bc4b46;
   font-family: "Helvetica-Neue-Condensed";
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .VistaCapitulo .navbar-fixed .nav-wrapper.secondary .subtitle {
@@ -563,6 +623,13 @@ body.VistaHome {
 
 .VistaCapitulo .zmdi-star-outline.zmdi-star:before {
   content: '\f27d';
+}
+
+.VistaAutores {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 .VistaAutores ul.autores {
@@ -602,10 +669,18 @@ body.VistaHome {
   right: 0px;
 }
 
-.VistaPDF iframe {
-  height: 100%;
-  width: 100%;
-  position: absolute;
+.VistaPDF {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.VistaPromueven {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 .VistaPromueven nav .brand-logo {
@@ -700,6 +775,7 @@ div.modal#buscar .search-results {
   overflow: auto;
   height: 100%;
   position: absolute;
+  max-width: 100%;
 }
 
 div.modal#buscar .search-result {

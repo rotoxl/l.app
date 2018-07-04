@@ -251,6 +251,10 @@ Application.prototype.onDeviceReady=function() {
 }
 Application.prototype.initialize=function() {
 	// $('.sidenav').sidenav()
+	var p=device.platform.toLowerCase()
+	jQuery('body')
+		.addClass( p )
+		.addClass( p+device.version.split('.')[0] )
 
 	var hash=(document.location.hash+'').substring(1)
 	if (hash==''){
@@ -268,7 +272,7 @@ Application.prototype.initialize=function() {
 		var capitulo_apartado=hash.split('/')[1]
 		var temp=capitulo_apartado.split('-')
 
-		var xcap=app.state.data.capitulos[temp[0]-1]
+		var xcap=Vista.prototype.getCapituloForID(temp[0])
 		Vista.prototype.newVistaCapitulo(xcap, temp[1])
 	} else if (hash=='VistaAutores'){
 		Vista.prototype.newVistaAutores()
@@ -430,6 +434,12 @@ Vista.prototype.createAdmon=function(className, texto){
 		]})	
 	]})
 }
+Vista.prototype.getCapituloForID=function(id){
+	return buscaFilas(app.state.data.capitulos, {cd:id})[0]
+}
+Vista.prototype.scrollTop=function(){
+	jQuery('html, body').animate({scrollTop: top}, 0)
+}
 /////////
 Vista.prototype.newVistaIndice=function(){
 	if (app.vistaIndice){
@@ -466,6 +476,7 @@ Vista.prototype.newVistaAutores=function(cap){
 	if (app.vistaAutores){
 		app.vistaAutores.setCapitulo(cap)
 		app.vistaAutores.toDOM()
+		app.vistaAutores.scrollTop()
 	}
 	else {
 		var v=new VistaAutores(cap)
@@ -485,7 +496,6 @@ Vista.prototype.newVistaCapitulo=function(capitulo, apartado, searchString){
 Vista.prototype.newVistaPDF=function(cap){
 	if (app.vistaPDF){
 		app.vistaPDF.setCapitulo(cap)
-		app.vistaPDF.toDOM()
 	}
 	else {
 		var v=new VistaPDF(cap)
@@ -658,7 +668,7 @@ VistaIndice.prototype.tareasPostCarga=function(){
 
 		for (var i in xsec.capitulos){
 			var cap=xsec.capitulos[i]
-			var xcap=app.state.data.capitulos[cap-1]
+			var xcap=this.getCapituloForID(cap)
 
 			d.append(
 				this.creaDomCapitulo(cap, xcap)
@@ -718,7 +728,7 @@ VistaIndice.prototype.clickStarButton=function(event, dom){
 VistaIndice.prototype.getCapituloForDom=function(dom){
 	var xdom=jQuery(dom)
 	var numCapitulo=xdom.closest('.collection-item.capitulo').data('cd')
-	return app.state.data.capitulos[numCapitulo-1]
+	return this.getCapituloForID(numCapitulo)
 }
 VistaIndice.prototype.getApartadoForDom=function(dom){
 	var xdom=jQuery(dom)
@@ -726,7 +736,8 @@ VistaIndice.prototype.getApartadoForDom=function(dom){
 	var numCapitulo=xdom.closest('.collection-item.capitulo').data('cd')
 	var numApartado=xdom.closest('.collection-item.apartado').data('cd')
 
-	return app.state.data.capitulos[numCapitulo-1].apartados[numApartado-1]
+	var cap=this.getCapituloForID(numCapitulo).apartados[numApartado-1]
+	return cap
 }
 VistaIndice.prototype.creaDomSeccion=function(num, data){
 	var self=this
@@ -913,6 +924,9 @@ VistaCapitulo.prototype.setCapitulo=function(cap, apartado, searchString){
 			jQuery(self.contenido).html(response)
 		else
 			jQuery(self.contenido).html(response)
+
+		self.scrollTop()
+		// jQuery('.book figure img').addClass('materialboxed')
 		
 	}).fail(
 		function(){
@@ -958,8 +972,9 @@ VistaCapitulo.prototype.previousChapter=function(){
 
 		this.setCapitulo(this.cap, this.apartado)
 	} else if (this.apartado<=0) {
-		var prevChapterID=app.vistaActiva.cap.cd-1
-		var prevChapter=app.state.data.capitulos[ prevChapterID-1 ]
+		var idx=getIndiceFila(app.state.data.capitulos, {cd:this.cap.cd})
+		var prevChapterID=idx-1
+		var prevChapter=app.state.data.capitulos[ prevChapterID ]
 
 		if (prevChapter){
 			this.setCapitulo(prevChapter, prevChapter.apartados.length-1)
@@ -977,7 +992,8 @@ VistaCapitulo.prototype.nextChapter=function(){
 
 		this.setCapitulo(this.cap, this.apartado)
 	} else if (this.cap.apartados.length-1>=this.apartado){
-		var nextChapterID=app.vistaActiva.cap.cd
+		var idx=getIndiceFila(app.state.data.capitulos, {cd:this.cap.cd})
+		var nextChapterID=idx+1
 		var nextChapter=app.state.data.capitulos[ nextChapterID ]
 
 		if (nextChapter){
@@ -1026,7 +1042,7 @@ VistaAutores.prototype.getBody=function(){
 			)
 		}
 
-		var inicial=autor.dsApeNombre.slice(0,1)
+		var inicial=this.quitaAcentos(autor.dsApeNombre)
 		hijos.push(
 			creaObjProp('li', {'data-cd':i, className:'collection-item avatar autor', hijos:[
 				creaObjProp('i', {className:'material-icons circle star waves-effect waves-circle letter letter'+inicial, }),
@@ -1073,6 +1089,23 @@ VistaAutores.prototype.setCapitulo=function(cap){
 		}
 	}
 }
+VistaAutores.prototype.quitaAcentos=function(nombre){
+	var letra=nombre.slice(0,1)
+	var letters={
+		"ä": "a", "ö": "o", "ü": "u",
+		"Ä": "A", "Ö": "O", "Ü": "U",
+		"á": "a", "à": "a", "â": "a",
+		"é": "e", "è": "e", "ê": "e",
+		"ú": "u", "ù": "u", "û": "u",
+		"ó": "o", "ò": "o", "ô": "o",
+		"Á": "A", "À": "A", "Â": "A",
+		"É": "E", "È": "E", "Ê": "E",
+		"Ú": "U", "Ù": "U", "Û": "U",
+		"Ó": "O", "Ò": "O", "Ô": "O",
+		}
+	var reemplazo=letters[letra]
+	return (reemplazo || letra).toUpperCase()
+}
 
 //--------------------------------------------------------------------------------
 function VistaPDF(cap){
@@ -1084,6 +1117,7 @@ function VistaPDF(cap){
 VistaPDF.prototype=new Vista
 VistaPDF.prototype.toDOM=function(){
 	app.showThrobber()
+	this.tareasPostCarga()
 }
 VistaPDF.prototype.tareasPostCarga=function(){
 	this.setCapitulo(this.cap)
@@ -1231,7 +1265,7 @@ VistaPromueven.prototype.getBody=function(){
 	]
 }
 VistaPromueven.prototype.clickLink=function(url){
-	console.log(url)
+	window.open(url, '_system')
 }
 VistaPromueven.prototype.fnclickLink=function(url){
 	var self=this

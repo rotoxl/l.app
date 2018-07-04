@@ -4,7 +4,26 @@ $mainbackground: #8C2333;
     -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
 }
 body {
-    
+    &.ios{
+        #content .vista{
+            background-color: #8c2333;
+            padding-top: env(safe-area-inset-top); /* iOS 11.0 */
+            padding-bottom: env(safe-area-inset-bottom);      /* iOS 11.2 */
+
+            
+        }
+
+        .vista-body{
+            background-color: white;
+        }
+
+        .vista-bottom{
+            .navbar-fixed { 
+                box-shadow:0 0 0;
+
+            }            
+        }
+    }
 }
 
 @font-face{
@@ -94,6 +113,8 @@ textarea.materialize-textarea:focus:not([readonly]) {
     font-family: "FaktProSoft", "Helvetica Neue", helvetica, arial, sans-serif;
     font-size: 16px;
 
+    overflow-x: hidden;
+
     h1, h2, h3, h4, h5, h6{
         color:#bd273d;
         font-weight: 400;
@@ -112,7 +133,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
     }
     h2{
         display: block;
-        font-size: 0.83em;
+        
         -webkit-margin-before: 1.67em;
         -webkit-margin-after: 1.67em;
         -webkit-margin-start: 0px;
@@ -125,7 +146,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
     }
     h3{    
         display: block;
-        font-size: 0.67em;
+        
         -webkit-margin-before: 2.33em;
         -webkit-margin-after: 2.33em;
         -webkit-margin-start: 0px;
@@ -136,7 +157,29 @@ textarea.materialize-textarea:focus:not([readonly]) {
         margin: 1.766667rem 0 .46rem 0;
         font-family: "Helvetica-Neue-Condensed";
     }
+    h4{    
+        display: block;
+        
+        -webkit-margin-before: 2.33em;
+        -webkit-margin-after: 2.33em;
+        -webkit-margin-start: 0px;
+        -webkit-margin-end: 0px;
+        font-weight: bold;
+        font-size: 1.3rem;
+        line-height: 110%;
+        margin: 1.766667rem 0 .46rem 0;
+        font-family: "Helvetica-Neue-Condensed";
+    }
     
+    a{
+        color: #bd273d;
+
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        word-break: break-all;
+        hyphens: auto;
+    }
+
     .auth{
         color:#bd273d;
         margin-top: 0;
@@ -209,6 +252,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
 
 body.VistaHome{overflow: hidden;}
 .VistaHome, .VistaPresentacion{
+    user-select:none;
 
     &.vista{
         position: fixed;
@@ -259,7 +303,7 @@ body.VistaHome{overflow: hidden;}
             position: fixed;
             nav{
                 position: fixed;
-                bottom:0;
+                
             }
         }
         ul{
@@ -380,6 +424,7 @@ body.VistaHome{overflow: hidden;}
 }
 
 .VistaIndice{
+    user-select:none;
     // nav .brand-logo{
     //     display: inline-block !important;
     // }
@@ -547,6 +592,7 @@ body.VistaHome{overflow: hidden;}
     // }
     
     .navbar-fixed{
+        user-select:none;
         .nav-wrapper.secondary{
             padding:0 15px;
             background-color: #eeeeee;
@@ -559,12 +605,14 @@ body.VistaHome{overflow: hidden;}
                 padding-top: 14px;
                 
                 white-space: nowrap;
-                text-overflow: ellipsis;
-                overflow: visible;
-        
+                
                 color:#bc4b46;
         
                 font-family: "Helvetica-Neue-Condensed";
+
+                max-width: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
             .subtitle{
                 display: block;
@@ -602,6 +650,7 @@ body.VistaHome{overflow: hidden;}
 }
 
 .VistaAutores{
+    user-select:none;
     ul.autores{
         border:none;
 
@@ -642,14 +691,11 @@ body.VistaHome{overflow: hidden;}
 }
 
 .VistaPDF{
-    iframe{
-        height: 100%;
-        width: 100%;
-        position: absolute;
-    }
+    user-select:none;
 }
 
 .VistaPromueven{
+    user-select:none;
     nav .brand-logo{
         display: inline-block !important;
     }
@@ -741,6 +787,7 @@ div.modal{
             overflow: auto;
             height: 100%;
             position: absolute;
+            max-width: 100%;
         }
         .search-result{
             font-size: 14px;
