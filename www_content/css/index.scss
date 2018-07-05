@@ -10,18 +10,14 @@ body {
             padding-top: env(safe-area-inset-top); /* iOS 11.0 */
             padding-bottom: env(safe-area-inset-bottom);      /* iOS 11.2 */
 
-            
         }
 
         .vista-body{
             background-color: white;
         }
 
-        .vista-bottom{
-            .navbar-fixed { 
-                box-shadow:0 0 0;
-
-            }            
+        .navbar-fixed .nav-wrapper{
+            box-shadow:0 0 0;
         }
     }
 }

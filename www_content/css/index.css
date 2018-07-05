@@ -15,7 +15,7 @@ body.ios .vista-body {
   background-color: white;
 }
 
-body.ios .vista-bottom .navbar-fixed {
+body.ios .navbar-fixed .nav-wrapper {
   -webkit-box-shadow: 0 0 0;
           box-shadow: 0 0 0;
 }
