@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.imaidea.aranediciones.hemostrombo" version="0.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Hemostrombo</name>
+    <description>
+        Hemostasia y trombosis. Manual práctico
+    </description>
+     <author email="developer@imaidea.com" href="http://www.imaidea.com/">
+        Imaidea Interactiva
+    </author>
+
+    <content src="index.html" />
+    <plugin name="cordova-plugin-whitelist" spec="1" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="mailto:*" />
+    
+   <platform name="android">
+        <allow-intent href="market:*" />
+
+        <icon src="res/icon/android/icon-36-ldpi.png" platform="android" width="36" height="36" density="ldpi" />
+        <icon src="res/icon/android/icon-48-mdpi.png" platform="android" width="48" height="48" density="mdpi" />
+        <icon src="res/icon/android/icon-72-hdpi.png" platform="android" width="72" height="72" density="hdpi" />
+        <icon src="res/icon/android/icon-96-xhdpi.png" platform="android" width="96" height="96" density="xhdpi" />
+        
+    </platform>
+    
+    <platform name="ios">
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+
+        <icon src="res/icon/ios/icon-57.png" platform="ios" width="57" height="57"/>
+        <icon src="res/icon/ios/icon-72.png" platform="ios" width="72" height="72"/>
+        <icon src="res/icon/ios/icon-57-2x.png" platform="ios" width="114" height="114"/>
+        <icon src="res/icon/ios/icon-72-2x.png" platform="ios" width="144" height="144"/>
+        
+        <splash src="res/screen/ios/Default@2x~universal~anyany.png" />
+    </platform>
+
+    <preference name="StatusBarBackgroundColor" value="#8c2333" />
+    <preference name="Orientation" value="portrait" />
+
+    <plugin name="cordova-plugin-apprate" spec="1.4.0" />
+    <plugin name="cordova-plugin-file" spec="4.3.3" />
+    <plugin name="cordova-plugin-file-opener2" spec="2.0.19" />
+    <plugin name="cordova-plugin-x-socialsharing" spec="5.4.1" />
+
+</widget>

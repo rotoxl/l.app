@@ -251,10 +251,10 @@ Application.prototype.onDeviceReady=function() {
 }
 Application.prototype.initialize=function() {
 	// $('.sidenav').sidenav()
-	var p=device.platform.toLowerCase()
+	var p=cordova.platformId
 	jQuery('body')
 		.addClass( p )
-		.addClass( p+device.version.split('.')[0] )
+		// .addClass( p+device.version.split('.')[0] )
 
 	var hash=(document.location.hash+'').substring(1)
 	if (hash==''){
@@ -553,7 +553,7 @@ Vista.prototype.newvistaValorar=function(){
 		openStoreInApp:false,
 		callbacks:{
 		   onButtonClicked:function(id){
-				if (q[id] == 'yes' && device.platform == 'iOS')
+				if (q[id] == 'yes' && cordova.platformId == 'ios')
 					cordova.plugins.market.open('tms-apps://itunes.apple.com/app/viewContentsUserReviews/id686440022?mt=8')
 			},
 		},
