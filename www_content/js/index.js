@@ -1176,7 +1176,11 @@ VistaPDF.prototype.viewPDF=function(ruta){
 	//https://www.raymondcamden.com/2016/06/26/linking-to-pdfs-in-cordova-apps
 	
 	if (cordova && cordova.platformId=='android'){
-		var path=cordova.file.applicationDirectory+'www/lnk/'+ruta
+		var trozoRuta='www/lnk/'
+		if (device==null) {//compilado con PGB
+			trozoRuta='www/'
+		}
+		var path=cordova.file.applicationDirectory+trozoRuta+ruta
 
 		console.log('File ', path, ' >>')
 		window.resolveLocalFileSystemURL(path, function(fileEntry) {
