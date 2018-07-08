@@ -56,6 +56,11 @@ body {
         line-height: 42px;
     }
 }
+nav i, nav [class*="mdi-"] {
+    line-height: 56px;
+    font-size:28px;
+}
+
 
 /* Portrait layout (default) */
 .app {
@@ -176,6 +181,18 @@ textarea.materialize-textarea:focus:not([readonly]) {
         hyphens: auto;
     }
 
+    ul{
+        padding-left: 20px;
+
+        li::before {
+            content: "▪ ";
+            color: #bd273d;
+            margin-left: -1rem;
+            float: left;
+            font-size: 20px;
+            margin-top: -.3rem;
+        }
+    }
     .auth{
         color:#bd273d;
         margin-top: 0;
@@ -188,8 +205,12 @@ textarea.materialize-textarea:focus:not([readonly]) {
         }
         margin: 30px 0px;
         padding: 0.5rem;
-        img{
+        img {
             width:100%
+        }
+        figcaption {
+            color: gray;
+            font-size: small;
         }
     }
 }
@@ -299,7 +320,10 @@ body.VistaHome{overflow: hidden;}
             position: fixed;
             nav{
                 position: fixed;
-                
+             
+                // li.bottom-menu a i.zmdi{
+                //     line-height: 54px;
+                // }
             }
         }
         ul{
@@ -341,80 +365,37 @@ body.VistaHome{overflow: hidden;}
         min-width: 32%;
         height:130px;
 
+        background-repeat: no-repeat;
+        background-position: center center;
+
         span{
             display: block;
             color:#D8AAAE;
         }
-        i.circle{
-            background-color:white;
-            
-            width:100px;
-            height:100px;
-            line-height: 100px;
 
-            .zmdi{
-                font-size: 44px;
-                line-height:100px;
-            }
-        }
-
-        &.doublesize{
-            i.circle{
-                width: 125px;
-                height: 125px;
-                margin-left: -12.5px;
-                line-height: 155px;
-                .zmdi{
-                    font-size: 55px;
-                }
-            }
-            
-        }
-
-        i:before{
-            content:"";
-            
-            padding-left: 130px;
-            padding-bottom: 110px;
-
-            background-repeat: no-repeat;
-            background-position: 0 center;
+        &.doublesize{   
         }
 
         &.presentacion{
-            i:before{
-                background-image:url('../img/hetromb-home-presentacion.svg');
-            }
+            background-image:url('../img/hetromb-home-presentacion.svg');
         }
         &.indice{
-            i:before{
-                background-image: url('../img/hetromb-home-indice.svg');
-            }
+            background-image: url('../img/hetromb-home-indice.svg');
         }
         &.autores{
-            i:before{
-                background-image: url('../img/hetromb-home-autores.svg');
-            }
+            background-image: url('../img/hetromb-home-autores.svg');
         }
         &.favoritos{
-            i:before{
-                background-image: url('../img/hetromb-home-favoritos.svg');
-            }
+            background-image: url('../img/hetromb-home-favoritos.svg');
         }
         &.buscar{
-            i:before{
-                background-image: url('../img/hetromb-home-buscar.svg');
-            }
+            background-image: url('../img/hetromb-home-buscar.svg');
         }
         &.notas{
-            i:before{
-                background-image: url('../img/hetromb-home-notas.svg');
-            }
+            background-image: url('../img/hetromb-home-notas.svg');
         }
         &.promueven{
-            i:before{
-                background-image: url('../img/hetromb-home-promueven.svg');
-            }
+            background-image: url('../img/hetromb-home-promueven.svg');
         }
     }
 }
@@ -428,7 +409,7 @@ body.VistaHome{overflow: hidden;}
         border:0;
 
         li.seccion{
-            padding:0 10px;
+            padding:5px 10px;
 
             .titulo{
                 color:#CF0A2C;
@@ -459,12 +440,12 @@ body.VistaHome{overflow: hidden;}
                 line-height: 1rem;
                 font-weight: 300;
                 width: 100%;
-                opacity: .6;
+                opacity: 1;
                 color: black;
                 font-size: 1.2rem;
                 font-family: "Helvetica-Neue-Light-Condensed";
                 margin-top: 8px;
-                margin-bottom: -4px;
+                margin-bottom: 0;
             }
             .title{
                 font-size: 1.6rem;
@@ -485,9 +466,11 @@ body.VistaHome{overflow: hidden;}
                 width: 100%;
                 opacity: .6;
                 color: black;
-                font-size: 1.2rem;
+                font-size: 1.15rem;
                 font-family: "Helvetica-Neue-Light-Condensed";
-                margin-top: 8px;
+                
+                margin-top: 0;
+                margin-bottom: 0;
             }
 
             > .secondary-content{
@@ -649,10 +632,13 @@ body.VistaHome{overflow: hidden;}
     user-select:none;
     ul.autores{
         border:none;
+        margin-bottom: 0;
 
         .autor{
+            padding-bottom: 0;
             p{
                 color:gray;
+                font-style: oblique;
             }
             &.hidden{
                 display: none;
@@ -661,6 +647,7 @@ body.VistaHome{overflow: hidden;}
     }
     ul.collection.capitulos{
         border:none;
+        margin-bottom: 0;
 
         li{
             padding-left: 0;
@@ -670,7 +657,7 @@ body.VistaHome{overflow: hidden;}
             overflow: hidden;
             max-width: 92%;
             text-overflow: ellipsis;
-            white-space: nowrap;
+            white-space: normal;
             display: inline-block;
             color: #8c2333;
         }

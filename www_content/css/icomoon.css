@@ -40,14 +40,20 @@
 .icon-btn-der:before {
   content: "\e911";
 }
-.icon-btn-favoritos-empty:before {
+.icon-btn-none:before {
   content: "\e912";
+}
+.icon-btn-favoritos-empty:before {
+  content: "\e90b";
 }
 .icon-btn-corazon-fill:before {
   /* content: "\e90a"; */
   background: url(../img/corazon-color.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position-y: 1px;
 }
-.icon-btn-indice:before {
+.icon-btn-bibliografia:before {
   content: "\e913";
 }
 .icon-btn-notas:before {

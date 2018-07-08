@@ -251,7 +251,7 @@ Application.prototype.onDeviceReady=function() {
 }
 Application.prototype.initialize=function() {
 	// $('.sidenav').sidenav()
-	var p=cordova.platformId
+	var p=isPhone()?cordova.platformId:'android'
 	jQuery('body')
 		.addClass( p )
 		// .addClass( p+device.version.split('.')[0] )
@@ -289,7 +289,7 @@ Application.prototype.initialize=function() {
 	} 
 
 	jQuery('.sidenav-trigger').click(function(){
-		Vista.prototype.newVistaHome()
+		Vista.prototype.clickSideNav()
 	})
 
 	app.state.favoritos=get('favoritos') || []
@@ -359,6 +359,7 @@ Vista.prototype.toDOM=function(desdeHistorial){
 	if (this.loaded){
 		console.info('#'+this.id+' - reciclada')
 		xd.find('.vista.'+this.id).show()
+		this.setIconXAtMenu(false)
 		
 	} else {
 		console.info('#'+this.id+' - NUEVA')
@@ -374,9 +375,6 @@ Vista.prototype.toDOM=function(desdeHistorial){
 
 		this.domCont
 			.append(tb)
-
-		this.tareasPostCarga()
-		
 	}
 
 	this.domCont
@@ -385,6 +383,7 @@ Vista.prototype.toDOM=function(desdeHistorial){
 
 	this.resize()
 
+	if (!this.loaded) this.tareasPostCarga()
 	this.loaded=true
 }
 Vista.prototype.tareasPostCarga=function(){}
@@ -441,6 +440,23 @@ Vista.prototype.scrollTop=function(){
 	jQuery('html, body').animate({scrollTop: top}, 0)
 }
 /////////
+Vista.prototype.setIconXAtMenu=function(activo){
+	var i=jQuery('.sidenav-trigger i')
+	if (activo)
+		i.addClass('zmdi-close').removeClass('icon-btn-menu')
+	else
+		i.addClass('icon-btn-menu').removeClass('zmdi-close')
+}
+Vista.prototype.clickSideNav=function(){
+	if (app.vistaAutores && app.vistaActiva==app.vistaAutores && app.vistaAutores.cap!=null){
+		var c=app.vistaCapitulo
+		this.newVistaCapitulo(c.cap, c.apartado, c.searchString)
+	} else if (app.vistaCapitulo && app.vistaActiva==app.vistaCapitulo) {
+		this.newVistaIndice()
+	} else {
+		this.newVistaHome()
+	}
+}
 Vista.prototype.newVistaIndice=function(){
 	if (app.vistaIndice){
 		app.vistaIndice.toDOM()
@@ -482,6 +498,7 @@ Vista.prototype.newVistaAutores=function(cap){
 		var v=new VistaAutores(cap)
 		v.toDOM()
 	}
+	if (cap) this.setIconXAtMenu(true)
 }
 Vista.prototype.newVistaCapitulo=function(capitulo, apartado, searchString){
 	if (app.vistaCapitulo){
@@ -622,7 +639,7 @@ VistaHome.prototype.getBody=function(){
 }
 VistaHome.prototype.createHomeMenu=function(icono, texto, fnOnClick, extraCLS){
 	var self=this
-	return creaObjProp('div', {onclick:fnOnClick, mi:icono, className:'home-menu'+(extraCLS?' '+extraCLS: ''), hijos:[
+	return creaObjProp('div', {onclick:fnOnClick, className:'home-menu'+(extraCLS?' '+extraCLS: ''), hijos:[
 		// creaObjProp('span', {texto:texto}),
 	]})
 }
@@ -631,6 +648,18 @@ VistaHome.prototype.createBottomBarMenu=function(icono, onclick){
 		creaObjProp('a', {mi:icono}),
 		
 	]})
+}
+VistaHome.prototype.tareasPostCarga=function(){
+	//ajustamos tamaño de iconos
+	var grid=app.vistaActiva.dom.find('.vista-body.grid')
+	var min=Math.min(grid.height(), grid.width())
+	var value=min/3
+
+	var hm=grid.find('.home-menu')
+	hm.css({width:value, height:value})
+
+	console.log({width:grid.width(), height:grid.height(), value:value})
+	// hm.find('i:before').css({paddingTop:value, paddingLeft:value})
 }
 //--------------------------------------------------------------------------------
 
@@ -675,9 +704,10 @@ VistaIndice.prototype.tareasPostCarga=function(){
 			)
 		}
 	}
+	jQuery(this.domBody).find('li.seccion[data-cd=1]').click()
 }
 VistaIndice.prototype.clickSeccion=function(event, dom){
-	event.stopPropagation()
+	if (event) event.stopPropagation()
 	
 	var xdom=jQuery(dom)
 	xdom.closest('.collection-item.seccion').toggleClass('collapsed')
@@ -769,7 +799,7 @@ VistaIndice.prototype.creaDomCapitulo=function(num, data){
 		}))
 	}
 
-	return creaObjProp('li', {'data-cd':data.cd, className:'collection-item capitulo collapsed'+(has_any_star?' starred':''), onclick:function(){self.clickCapitulo(event, this)}, hijos:[
+	return creaObjProp('li', {'data-cd':data.cd, className:'collection-item capitulo collapsed'+(has_any_star?' starred':''), onclick:function(){self.clickExpandButton(event, this)}, hijos:[
 		creaObjProp('a', {className:'waves-effect waves-circle btn secondary-content', mi:'caret-down', onclick:function(){self.clickExpandButton(event, this)}, }),
 			creaObjProp('span', {className:'capNumber', texto:'Capítulo '+data.etiquetaNumCapitulo}),
 			creaObjProp('span', {className:'title', texto:data.ds}),
@@ -872,7 +902,7 @@ VistaCapitulo.prototype.getBody=function(){
 							creaObjProp('a', {mi:'zmdi icon-mn-autores', onclick:function(){self.showMyAuthor()}})
 						]}),
 						creaObjProp('li', {hijos:[
-							creaObjProp('a', {mi:'zmdi icon-btn-indice', onclick:function(){Vista.prototype.newVistaIndice() }})
+							creaObjProp('a', {mi:'zmdi icon-btn-bibliografia', onclick:function(){self.gotoBibliography() }})
 						]}),
 						creaObjProp('li', {hijos:[
 							creaObjProp('a', {mi:'zmdi icon-btn-pdf', onclick:function(){self.showMyPDF()}})
@@ -978,7 +1008,9 @@ VistaCapitulo.prototype.previousChapter=function(){
 
 		if (prevChapter){
 			this.setCapitulo(prevChapter, prevChapter.apartados.length-1)
-		} 
+		} else if (prevChapterID==-1 && idx==0){
+			Vista.prototype.newVistaIndice()
+		}
 	}
 }
 VistaCapitulo.prototype.nextChapter=function(){
@@ -1000,6 +1032,10 @@ VistaCapitulo.prototype.nextChapter=function(){
 			this.setCapitulo(nextChapter, 0)
 		} 
 	}
+}
+VistaCapitulo.prototype.gotoBibliography=function(){
+	this.apartado=this.cap.apartados.length-1
+	this.setCapitulo(this.cap, this.apartado)
 }
 VistaCapitulo.prototype.showMyAuthor=function(){
 	this.newVistaAutores(this.cap)
@@ -1034,9 +1070,11 @@ VistaAutores.prototype.getBody=function(){
 		for (var j=0; j<capitulosDelAutor.length; j++){
 			var cap=capitulosDelAutor[j]
 
+			var sec=this.getSeccionDelCapitulo(cap).cd
+			var ds=formato.numRomano(sec)+cap.etiquetaNumCapitulo+' - '+cap.ds
 			capitulos.push(
 				creaObjProp('li', {className:'collection-item', onclick:this.fnClickCapitulo(cap), hijos:[
-					creaObjProp('span', {className:'title', texto:cap.ds}), 
+					creaObjProp('span', {className:'title', texto:ds}), 
 					creaObjProp('i', {className:'secondary-content', mi:'chevron-right'}),
 				]})
 			)
@@ -1075,6 +1113,13 @@ VistaAutores.prototype.getCapitulosDelAutor=function(autor){
 			ret.push(cap)
 	}
 	return ret
+}
+VistaAutores.prototype.getSeccionDelCapitulo=function(cap){
+	for (var i=0; i<app.state.data.secciones.length; i++){
+		var sec=app.state.data.secciones[i]
+		if (sec.capitulos.indexOf(cap.cd)>-1)
+			return sec
+	}
 }
 VistaAutores.prototype.setCapitulo=function(cap){
 	this.cap=cap
@@ -1130,7 +1175,7 @@ VistaPDF.prototype.setCapitulo=function(cap){
 VistaPDF.prototype.viewPDF=function(ruta){
 	//https://www.raymondcamden.com/2016/06/26/linking-to-pdfs-in-cordova-apps
 	
-	if (cordova.platformId=='android'){
+	if (cordova && cordova.platformId=='android'){
 		var path=cordova.file.applicationDirectory+'www/lnk/'+ruta
 
 		console.log('File ', path, ' >>')

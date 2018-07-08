@@ -1,3 +1,4 @@
+@charset "UTF-8";
 * {
   -webkit-tap-highlight-color: transparent;
   /* make transparent link selection, adjust last value opacity 0 to 1.0 */
@@ -55,6 +56,11 @@ body.ios .navbar-fixed .nav-wrapper {
 
 .material-icons.circle i {
   line-height: 42px;
+}
+
+nav i, nav [class*="mdi-"] {
+  line-height: 56px;
+  font-size: 28px;
 }
 
 /* Portrait layout (default) */
@@ -170,6 +176,19 @@ textarea.materialize-textarea:focus:not([readonly]) {
           hyphens: auto;
 }
 
+.book ul {
+  padding-left: 20px;
+}
+
+.book ul li::before {
+  content: "▪ ";
+  color: #bd273d;
+  margin-left: -1rem;
+  float: left;
+  font-size: 20px;
+  margin-top: -.3rem;
+}
+
 .book .auth {
   color: #bd273d;
   margin-top: 0;
@@ -186,6 +205,11 @@ textarea.materialize-textarea:focus:not([readonly]) {
 
 .book figure img {
   width: 100%;
+}
+
+.book figure figcaption {
+  color: gray;
+  font-size: small;
 }
 
 .flexcontainer {
@@ -356,6 +380,8 @@ body.VistaHome {
   text-align: center;
   min-width: 32%;
   height: 130px;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .VistaHome .home-menu span, .VistaPresentacion .home-menu span {
@@ -363,62 +389,31 @@ body.VistaHome {
   color: #D8AAAE;
 }
 
-.VistaHome .home-menu i.circle, .VistaPresentacion .home-menu i.circle {
-  background-color: white;
-  width: 100px;
-  height: 100px;
-  line-height: 100px;
-}
-
-.VistaHome .home-menu i.circle .zmdi, .VistaPresentacion .home-menu i.circle .zmdi {
-  font-size: 44px;
-  line-height: 100px;
-}
-
-.VistaHome .home-menu.doublesize i.circle, .VistaPresentacion .home-menu.doublesize i.circle {
-  width: 125px;
-  height: 125px;
-  margin-left: -12.5px;
-  line-height: 155px;
-}
-
-.VistaHome .home-menu.doublesize i.circle .zmdi, .VistaPresentacion .home-menu.doublesize i.circle .zmdi {
-  font-size: 55px;
-}
-
-.VistaHome .home-menu i:before, .VistaPresentacion .home-menu i:before {
-  content: "";
-  padding-left: 130px;
-  padding-bottom: 110px;
-  background-repeat: no-repeat;
-  background-position: 0 center;
-}
-
-.VistaHome .home-menu.presentacion i:before, .VistaPresentacion .home-menu.presentacion i:before {
+.VistaHome .home-menu.presentacion, .VistaPresentacion .home-menu.presentacion {
   background-image: url("../img/hetromb-home-presentacion.svg");
 }
 
-.VistaHome .home-menu.indice i:before, .VistaPresentacion .home-menu.indice i:before {
+.VistaHome .home-menu.indice, .VistaPresentacion .home-menu.indice {
   background-image: url("../img/hetromb-home-indice.svg");
 }
 
-.VistaHome .home-menu.autores i:before, .VistaPresentacion .home-menu.autores i:before {
+.VistaHome .home-menu.autores, .VistaPresentacion .home-menu.autores {
   background-image: url("../img/hetromb-home-autores.svg");
 }
 
-.VistaHome .home-menu.favoritos i:before, .VistaPresentacion .home-menu.favoritos i:before {
+.VistaHome .home-menu.favoritos, .VistaPresentacion .home-menu.favoritos {
   background-image: url("../img/hetromb-home-favoritos.svg");
 }
 
-.VistaHome .home-menu.buscar i:before, .VistaPresentacion .home-menu.buscar i:before {
+.VistaHome .home-menu.buscar, .VistaPresentacion .home-menu.buscar {
   background-image: url("../img/hetromb-home-buscar.svg");
 }
 
-.VistaHome .home-menu.notas i:before, .VistaPresentacion .home-menu.notas i:before {
+.VistaHome .home-menu.notas, .VistaPresentacion .home-menu.notas {
   background-image: url("../img/hetromb-home-notas.svg");
 }
 
-.VistaHome .home-menu.promueven i:before, .VistaPresentacion .home-menu.promueven i:before {
+.VistaHome .home-menu.promueven, .VistaPresentacion .home-menu.promueven {
   background-image: url("../img/hetromb-home-promueven.svg");
 }
 
@@ -434,7 +429,7 @@ body.VistaHome {
 }
 
 .VistaIndice ul.secciones li.seccion {
-  padding: 0 10px;
+  padding: 5px 10px;
 }
 
 .VistaIndice ul.secciones li.seccion .titulo {
@@ -463,12 +458,12 @@ body.VistaHome {
   line-height: 1rem;
   font-weight: 300;
   width: 100%;
-  opacity: .6;
+  opacity: 1;
   color: black;
   font-size: 1.2rem;
   font-family: "Helvetica-Neue-Light-Condensed";
   margin-top: 8px;
-  margin-bottom: -4px;
+  margin-bottom: 0;
 }
 
 .VistaIndice ul.secciones li.capitulo .title {
@@ -492,9 +487,10 @@ body.VistaHome {
   width: 100%;
   opacity: .6;
   color: black;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-family: "Helvetica-Neue-Light-Condensed";
-  margin-top: 8px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .VistaIndice ul.secciones li.capitulo > .secondary-content {
@@ -634,10 +630,16 @@ body.VistaHome {
 
 .VistaAutores ul.autores {
   border: none;
+  margin-bottom: 0;
+}
+
+.VistaAutores ul.autores .autor {
+  padding-bottom: 0;
 }
 
 .VistaAutores ul.autores .autor p {
   color: gray;
+  font-style: oblique;
 }
 
 .VistaAutores ul.autores .autor.hidden {
@@ -646,6 +648,7 @@ body.VistaHome {
 
 .VistaAutores ul.collection.capitulos {
   border: none;
+  margin-bottom: 0;
 }
 
 .VistaAutores ul.collection.capitulos li {
@@ -657,7 +660,7 @@ body.VistaHome {
   overflow: hidden;
   max-width: 92%;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
   display: inline-block;
   color: #8c2333;
 }
