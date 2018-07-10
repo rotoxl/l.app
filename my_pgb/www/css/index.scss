@@ -6,19 +6,37 @@ $mainbackground: #8C2333;
 body {
     &.ios{
         #content .vista{
-            background-color: #8c2333;
-            padding-top: env(safe-area-inset-top); /* iOS 11.0 */
-            padding-bottom: env(safe-area-inset-bottom);      /* iOS 11.2 */
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
 
+            // margin-top:8px;
         }
 
         .vista-body{
             background-color: white;
         }
 
-        .navbar-fixed .nav-wrapper{
-            box-shadow:0 0 0;
+        > .navbar-fixed {
+            background-color:$mainbackground;
+            
+            height:76px;
+            
+            .nav-wrapper{
+                height:76px;
+                padding-top:10px;
+                box-shadow: 0 0 0;
+            }
         }
+        .navbar-fixed.bottom {
+            .nav-wrapper{ 
+                
+            }
+        }
+
+        // .VistaCapitulo .navbar-fixed.bottom a {
+        //     padding-left: 8px; //botonera no cabe en iPhone5
+        //     padding-right: 8px;
+        // }
     }
 }
 
@@ -267,10 +285,18 @@ textarea.materialize-textarea:focus:not([readonly]) {
     }
 }
 
-body.VistaHome{overflow: hidden;}
+body.VistaHome{
+    overflow: hidden;
+}
+body.VistaHome, body.VistaPresentacion{
+    > .navbar-fixed{
+        opacity: 0;
+    }
+}
 .VistaHome, .VistaPresentacion{
     user-select:none;
 
+   
     &.vista{
         position: fixed;
         overflow: hidden;
@@ -418,6 +444,7 @@ body.VistaHome{overflow: hidden;}
                 text-transform: uppercase;
                 padding: 1rem 0rem;
                 min-width: 100%;
+                line-height: 2.5rem;
             }
 
             .capitulos{
@@ -617,7 +644,8 @@ body.VistaHome{overflow: hidden;}
             bottom: 0;
 
             a{
-                padding-left: 10px; padding-right: 10px;
+                padding-left: 8px; 
+                padding-right: 8px;
             }
         }
 
@@ -659,7 +687,7 @@ body.VistaHome{overflow: hidden;}
             text-overflow: ellipsis;
             white-space: normal;
             display: inline-block;
-            color: #8c2333;
+            color: $mainbackground;
         }
 
         .secondary-content{
@@ -848,7 +876,7 @@ i.letter{
         border:0;
 
         .circle{
-            background-color: #8c2333;
+            background-color: $mainbackground;
         }
 
         .title{
@@ -873,7 +901,7 @@ i.letter{
             .btn{
                 background-color: white;
                 box-shadow: 0 0 0;
-                color:#8c2333;
+                color:$mainbackground;
 
                 &.edit{
                     line-height: 33px;

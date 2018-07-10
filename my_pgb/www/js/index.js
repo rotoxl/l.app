@@ -251,7 +251,7 @@ Application.prototype.onDeviceReady=function() {
 }
 Application.prototype.initialize=function() {
 	// $('.sidenav').sidenav()
-	var p=isPhone()?cordova.platformId:'android'
+	var p=isPhone()?cordova.platformId:'ios'
 	jQuery('body')
 		.addClass( p )
 		// .addClass( p+device.version.split('.')[0] )
@@ -596,6 +596,43 @@ Vista.prototype.newVistaNotas=function(){
 	else {
 		var v=new VistaNotas()
 		v.toDOM()
+	}
+}
+Vista.prototype.openAttachment=function(url, format){
+	format=format || 'application/pdf'
+	
+	if (cordova.platformId=='ios'){
+		cordova.plugins.fileOpener2.open(
+			url,
+			format || 'application/pdf', { 
+				error : function(e) { 
+					console.log('Error status: ' + e.status + ' - Error message: ' + e.message)
+				},
+				success : function () {
+					console.log('file opened successfully')			
+				}
+			}
+		)
+	
+	} else {
+		console.log('File ', url, ' >>')
+		window.resolveLocalFileSystemURL(url, function(fileEntry) {
+			window.resolveLocalFileSystemURL(cordova.file.externalDataDirectory, function(dirEntry) {
+				fileEntry.copyTo(dirEntry, 'file.pdf', function(newFileEntry) {
+
+					console.log('>> Copied to ', newFileEntry.nativeURL)
+					cordova.plugins.fileOpener2.showOpenWithDialog(newFileEntry.nativeURL, format, { 
+						error : function(e) { 
+							console.log('Error status: ' + e.status + ' - Error message: ' + e.message)
+						},
+						success : function () {
+							console.log('file opened successfully')				
+						}
+					})
+				})
+			})
+		})
+
 	}
 }
 //--------------------------------------------------------------------------------
@@ -956,7 +993,7 @@ VistaCapitulo.prototype.setCapitulo=function(cap, apartado, searchString){
 			jQuery(self.contenido).html(response)
 
 		self.scrollTop()
-		// jQuery('.book figure img').addClass('materialboxed')
+		jQuery('.book figure img').click(function(){self.enlargeImage(this)})
 		
 	}).fail(
 		function(){
@@ -1043,6 +1080,14 @@ VistaCapitulo.prototype.showMyAuthor=function(){
 VistaCapitulo.prototype.showMyPDF=function(){
 	this.newVistaPDF(this.cap)
 }
+VistaCapitulo.prototype.enlargeImage=function(path){
+	// var trozoRuta='www/lnk/'
+	// if (device==null) {//compilado con PGB
+	// 	trozoRuta='www/'
+	// }
+
+	this.openAttachment(path.currentSrc, 'image/png')
+}
 //--------------------------------------------------------------------------------
 
 function VistaAutores(cap){
@@ -1082,7 +1127,7 @@ VistaAutores.prototype.getBody=function(){
 
 		var inicial=this.quitaAcentos(autor.dsApeNombre)
 		hijos.push(
-			creaObjProp('li', {'data-cd':i, className:'collection-item avatar autor', hijos:[
+			creaObjProp('li', {'data-cd':autor.cd, className:'collection-item avatar autor', hijos:[
 				creaObjProp('i', {className:'material-icons circle star waves-effect waves-circle letter letter'+inicial, }),
 				creaObjProp('span', {className:'title', texto:autor.dsApeNombre}),
 				creaObjProp('p', {hijos:textos}),
@@ -1130,7 +1175,8 @@ VistaAutores.prototype.setCapitulo=function(cap){
 		this.domBody.find('.collection-item.autor').addClass('hidden')
 
 		for (var i in this.cap.autores){
-			this.domBody.find('.collection-item.autor[data-cd='+i+']').removeClass('hidden')
+			var idautor=this.cap.autores[i]
+			this.domBody.find('.collection-item.autor[data-cd='+idautor+']').removeClass('hidden')
 		}
 	}
 }
@@ -1174,34 +1220,19 @@ VistaPDF.prototype.setCapitulo=function(cap){
 }
 VistaPDF.prototype.viewPDF=function(ruta){
 	//https://www.raymondcamden.com/2016/06/26/linking-to-pdfs-in-cordova-apps
+
+	var trozoRuta='www/lnk/'
+	if (device==null) {//compilado con PGB
+		trozoRuta='www/'
+	}
 	
-	if (cordova && cordova.platformId=='android'){
-		var trozoRuta='www/lnk/'
-		if (device==null) {//compilado con PGB
-			trozoRuta='www/'
-		}
+	if (cordova==null){
+	}
+	else {
 		var path=cordova.file.applicationDirectory+trozoRuta+ruta
-
-		console.log('File ', path, ' >>')
-		window.resolveLocalFileSystemURL(path, function(fileEntry) {
-			window.resolveLocalFileSystemURL(cordova.file.externalDataDirectory, function(dirEntry) {
-				fileEntry.copyTo(dirEntry, 'file.pdf', function(newFileEntry) {
-
-					console.log('>> Copied to ', newFileEntry.nativeURL)
-					cordova.plugins.fileOpener2.showOpenWithDialog(newFileEntry.nativeURL, 'application/pdf', { 
-						error : function(e) { 
-							console.log('Error status: ' + e.status + ' - Error message: ' + e.message)
-						},
-						success : function () {
-							console.log('file opened successfully')				
-						}
-					})
-				})
-			})
-		})
+		this.openAttachment(path)
 	}
 }
-
 //--------------------------------------------------------------------------------
 function VistaPresentacion(){
 	Vista.call(this)

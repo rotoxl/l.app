@@ -5,18 +5,22 @@
 }
 
 body.ios #content .vista {
-  background-color: #8c2333;
   padding-top: env(safe-area-inset-top);
-  /* iOS 11.0 */
   padding-bottom: env(safe-area-inset-bottom);
-  /* iOS 11.2 */
 }
 
 body.ios .vista-body {
   background-color: white;
 }
 
-body.ios .navbar-fixed .nav-wrapper {
+body.ios > .navbar-fixed {
+  background-color: #8C2333;
+  height: 76px;
+}
+
+body.ios > .navbar-fixed .nav-wrapper {
+  height: 76px;
+  padding-top: 10px;
   -webkit-box-shadow: 0 0 0;
           box-shadow: 0 0 0;
 }
@@ -287,6 +291,10 @@ body.VistaHome {
   overflow: hidden;
 }
 
+body.VistaHome > .navbar-fixed, body.VistaPresentacion > .navbar-fixed {
+  opacity: 0;
+}
+
 .VistaHome, .VistaPresentacion {
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -439,6 +447,7 @@ body.VistaHome {
   text-transform: uppercase;
   padding: 1rem 0rem;
   min-width: 100%;
+  line-height: 2.5rem;
 }
 
 .VistaIndice ul.secciones li.seccion .capitulos {
@@ -613,8 +622,8 @@ body.VistaHome {
 }
 
 .VistaCapitulo .navbar-fixed.bottom a {
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .VistaCapitulo .zmdi-star-outline.zmdi-star:before {
@@ -662,7 +671,7 @@ body.VistaHome {
   text-overflow: ellipsis;
   white-space: normal;
   display: inline-block;
-  color: #8c2333;
+  color: #8C2333;
 }
 
 .VistaAutores ul.collection.capitulos .secondary-content {
@@ -931,7 +940,7 @@ i.letter.letterZ {
 }
 
 .VistaNotas ul.collection.notas .circle {
-  background-color: #8c2333;
+  background-color: #8C2333;
 }
 
 .VistaNotas ul.collection.notas .title {
@@ -959,7 +968,7 @@ i.letter.letterZ {
   background-color: white;
   -webkit-box-shadow: 0 0 0;
           box-shadow: 0 0 0;
-  color: #8c2333;
+  color: #8C2333;
 }
 
 .VistaNotas ul.collection.notas .acciones .btn.edit {
