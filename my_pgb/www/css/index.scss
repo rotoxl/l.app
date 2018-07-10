@@ -1,9 +1,12 @@
 $mainbackground: #8C2333;
+$status: #521112;
 
 * {
     -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
 }
 body {
+    overflow-x: hidden;
+    
     &.ios{
         #content .vista{
             padding-top: env(safe-area-inset-top);
@@ -17,14 +20,30 @@ body {
         }
 
         > .navbar-fixed {
-            background-color:$mainbackground;
+            height:76px; //
+            background-color: #521112;
             
-            height:76px;
-            
+            .nav-fixed{
+                position: fixed;
+                left: 0;
+                right: 0;
+                top: 0;
+                height: 20px;
+                background: $status;
+            }
             .nav-wrapper{
-                height:76px;
-                padding-top:10px;
+                background-color: $mainbackground;
+                height:36px;//
+                line-height: 36px;//
+                margin-top:20px;
                 box-shadow: 0 0 0;
+
+                a.sidenav-trigger, a.btn-search, .brand-logo{
+                    line-height: 26px;
+                    height: 36px;
+
+                    i{line-height: 20px;}
+                }
             }
         }
         .navbar-fixed.bottom {
@@ -32,11 +51,59 @@ body {
                 
             }
         }
+        .modal#buscar{
+            nav{
+                height:76px;
+                .nav-wrapper{
+                    padding-top: 20px;
+                    background-color:$mainbackground;
 
-        // .VistaCapitulo .navbar-fixed.bottom a {
-        //     padding-left: 8px; //botonera no cabe en iPhone5
-        //     padding-right: 8px;
-        // }
+                }
+            }
+            .search-results{
+                padding-top: 5rem;
+            }
+        }
+
+    }
+}
+@media only screen and (min-width: 601px){
+    body.ios{
+    //     > .navbar-fixed {
+    //         .nav-wrapper{
+    //             height: 36px!important;
+    //             line-height: 36px;
+
+    //             a.sidenav-trigger, a.btn-search, .brand-logo{
+    //                 line-height: 26px;
+    //                 height: 36px;
+
+    //                 i{line-height: 20px;}
+    //             }
+    //         }
+    //     }
+        .navbar-fixed.bottom {
+            height:56px;
+            .nav-wrapper{
+                height:56px;
+                line-height: 56px;
+            }
+        }
+    }
+
+    figure{
+        margin-left: auto!important;
+        margin-right: auto!important;
+
+        &.tablet70{
+            max-width: 70%;
+        }
+        &.tablet50{
+            max-width: 50%;
+        }
+        &.tablet30{
+            max-width: 30%;
+        }
     }
 }
 
@@ -52,6 +119,13 @@ body {
     font-family:"Bodega-Sans";
     src: url("../fonts/BodegaSansLight.ttf") format("truetype");
 }
+@font-face{
+    font-family:"Calibri";
+    src: url("../fonts/Calibri.ttf") format("truetype");
+}
+
+
+
 
 .zmdi{
     font-size: 24px;
@@ -129,7 +203,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
 .book{
     padding: 0 10px 50px;
     
-    font-family: "FaktProSoft", "Helvetica Neue", helvetica, arial, sans-serif;
+    font-family: "symbol", "Calibri", "Helvetica Neue", helvetica, arial, sans-serif;
     font-size: 16px;
 
     overflow-x: hidden;
@@ -205,7 +279,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
         li::before {
             content: "▪ ";
             color: #bd273d;
-            margin-left: -1rem;
+            margin-left: -1.3rem;
             float: left;
             font-size: 20px;
             margin-top: -.3rem;
@@ -221,6 +295,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
                 border: 2px solid #bd273d;
             }
         }
+    
         margin: 30px 0px;
         padding: 0.5rem;
         img {
@@ -242,6 +317,10 @@ textarea.materialize-textarea:focus:not([readonly]) {
         flex-direction: row;
     }
     &.grid{
+        max-width: 40rem;
+        margin-left: auto;
+        margin-right: auto;
+
         justify-content: center;
         flex-flow: row wrap;
         align-content: stretch;
@@ -390,6 +469,8 @@ body.VistaHome, body.VistaPresentacion{
         text-align: center;
         min-width: 32%;
         height:130px;
+
+        max-height: 14rem;
 
         background-repeat: no-repeat;
         background-position: center center;
@@ -737,10 +818,29 @@ body.VistaHome, body.VistaPresentacion{
 
 div.modal{
     &#myNotes{
+
+        border: 5px solid #8C2333;
+        border-radius: 10px;
+
+        h4{
+            color: $mainbackground;
+            font-size: 1.5rem;
+        }
+
         textarea{
             min-height: 6rem;
         }
+        .modal-footer{
+            a{
+                color: $mainbackground;
+            }
+        }
+
+        &:focus{
+            outline: 0px;
+        }
     }
+
 
     &#buscar{
         position: fixed;
@@ -765,12 +865,15 @@ div.modal{
             z-index: 100;
 
             .input-field label.active i{
-                color:black;
+                color:$mainbackground;
             }
         }
 
+        form{
+            background-color: white;
+        }
         .label-icon{
-            color:black;
+            color:$mainbackground;
             
             &.close{}
             &.search{
@@ -780,7 +883,7 @@ div.modal{
                 transition: background-color .3s;
                 font-size: 1rem;
                 font-style: normal;
-                color: black;
+                color: $mainbackground;
                 display: block;
                 background: white;
                 padding: 0 15px;
@@ -799,11 +902,19 @@ div.modal{
             height: 100%;
             position: absolute;
             max-width: 100%;
+            width: 100%;
         }
         .search-result{
             font-size: 14px;
 
-            .title{color: #bd273d;}
+            .title{
+                color: #bd273d;
+                display: block;
+
+                &.level2{
+                    color:gray;
+                }
+            }
         }
         span.found{
             font-weight: bold;
@@ -884,9 +995,17 @@ i.letter{
             max-width: 92%;
             text-overflow: ellipsis;
             white-space: nowrap;
-            display: inline-block;
+            display: block;
             color:gray;
+
+            &.level1{
+                color: $mainbackground
+            }
+            &.level2{
+
+            }
         }
+
         p.nota{
             font-size: 16px; 
             color:black;

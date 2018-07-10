@@ -4,6 +4,10 @@
   /* make transparent link selection, adjust last value opacity 0 to 1.0 */
 }
 
+body {
+  overflow-x: hidden;
+}
+
 body.ios #content .vista {
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
@@ -14,15 +18,71 @@ body.ios .vista-body {
 }
 
 body.ios > .navbar-fixed {
-  background-color: #8C2333;
   height: 76px;
+  background-color: #521112;
+}
+
+body.ios > .navbar-fixed .nav-fixed {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 20px;
+  background: #521112;
 }
 
 body.ios > .navbar-fixed .nav-wrapper {
-  height: 76px;
-  padding-top: 10px;
+  background-color: #8C2333;
+  height: 36px;
+  line-height: 36px;
+  margin-top: 20px;
   -webkit-box-shadow: 0 0 0;
           box-shadow: 0 0 0;
+}
+
+body.ios > .navbar-fixed .nav-wrapper a.sidenav-trigger, body.ios > .navbar-fixed .nav-wrapper a.btn-search, body.ios > .navbar-fixed .nav-wrapper .brand-logo {
+  line-height: 26px;
+  height: 36px;
+}
+
+body.ios > .navbar-fixed .nav-wrapper a.sidenav-trigger i, body.ios > .navbar-fixed .nav-wrapper a.btn-search i, body.ios > .navbar-fixed .nav-wrapper .brand-logo i {
+  line-height: 20px;
+}
+
+body.ios .modal#buscar nav {
+  height: 76px;
+}
+
+body.ios .modal#buscar nav .nav-wrapper {
+  padding-top: 20px;
+  background-color: #8C2333;
+}
+
+body.ios .modal#buscar .search-results {
+  padding-top: 5rem;
+}
+
+@media only screen and (min-width: 601px) {
+  body.ios .navbar-fixed.bottom {
+    height: 56px;
+  }
+  body.ios .navbar-fixed.bottom .nav-wrapper {
+    height: 56px;
+    line-height: 56px;
+  }
+  figure {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  figure.tablet70 {
+    max-width: 70%;
+  }
+  figure.tablet50 {
+    max-width: 50%;
+  }
+  figure.tablet30 {
+    max-width: 30%;
+  }
 }
 
 @font-face {
@@ -38,6 +98,11 @@ body.ios > .navbar-fixed .nav-wrapper {
 @font-face {
   font-family: "Bodega-Sans";
   src: url("../fonts/BodegaSansLight.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Calibri";
+  src: url("../fonts/Calibri.ttf") format("truetype");
 }
 
 .zmdi {
@@ -110,7 +175,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
 
 .book {
   padding: 0 10px 50px;
-  font-family: "FaktProSoft", "Helvetica Neue", helvetica, arial, sans-serif;
+  font-family: "symbol", "Calibri", "Helvetica Neue", helvetica, arial, sans-serif;
   font-size: 16px;
   overflow-x: hidden;
 }
@@ -187,7 +252,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
 .book ul li::before {
   content: "▪ ";
   color: #bd273d;
-  margin-left: -1rem;
+  margin-left: -1.3rem;
   float: left;
   font-size: 20px;
   margin-top: -.3rem;
@@ -236,6 +301,9 @@ textarea.materialize-textarea:focus:not([readonly]) {
 }
 
 .flexcontainer.grid {
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -388,6 +456,7 @@ body.VistaHome > .navbar-fixed, body.VistaPresentacion > .navbar-fixed {
   text-align: center;
   min-width: 32%;
   height: 130px;
+  max-height: 14rem;
   background-repeat: no-repeat;
   background-position: center center;
 }
@@ -726,8 +795,26 @@ body.VistaHome > .navbar-fixed, body.VistaPresentacion > .navbar-fixed {
   margin-top: 1rem;
 }
 
+div.modal#myNotes {
+  border: 5px solid #8C2333;
+  border-radius: 10px;
+}
+
+div.modal#myNotes h4 {
+  color: #8C2333;
+  font-size: 1.5rem;
+}
+
 div.modal#myNotes textarea {
   min-height: 6rem;
+}
+
+div.modal#myNotes .modal-footer a {
+  color: #8C2333;
+}
+
+div.modal#myNotes:focus {
+  outline: 0px;
 }
 
 div.modal#buscar {
@@ -754,11 +841,15 @@ div.modal#buscar nav {
 }
 
 div.modal#buscar nav .input-field label.active i {
-  color: black;
+  color: #8C2333;
+}
+
+div.modal#buscar form {
+  background-color: white;
 }
 
 div.modal#buscar .label-icon {
-  color: black;
+  color: #8C2333;
 }
 
 div.modal#buscar .label-icon.search {
@@ -769,7 +860,7 @@ div.modal#buscar .label-icon.search {
   transition: background-color .3s;
   font-size: 1rem;
   font-style: normal;
-  color: black;
+  color: #8C2333;
   display: block;
   background: white;
   padding: 0 15px;
@@ -788,6 +879,7 @@ div.modal#buscar .search-results {
   height: 100%;
   position: absolute;
   max-width: 100%;
+  width: 100%;
 }
 
 div.modal#buscar .search-result {
@@ -796,6 +888,11 @@ div.modal#buscar .search-result {
 
 div.modal#buscar .search-result .title {
   color: #bd273d;
+  display: block;
+}
+
+div.modal#buscar .search-result .title.level2 {
+  color: gray;
 }
 
 div.modal#buscar span.found {
@@ -948,8 +1045,12 @@ i.letter.letterZ {
   max-width: 92%;
   text-overflow: ellipsis;
   white-space: nowrap;
-  display: inline-block;
+  display: block;
   color: gray;
+}
+
+.VistaNotas ul.collection.notas .title.level1 {
+  color: #8C2333;
 }
 
 .VistaNotas ul.collection.notas p.nota {

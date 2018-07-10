@@ -8,6 +8,15 @@ function isPhone(){
     }
 	return _isPhone
 }
+var _isPGB
+function isPGB(){
+	if (_isPGB==null){
+		var url=document.location.href.toString()
+		_isPGB=!(url.indexOf('/lnk/')>-1)
+	}
+	return _isPGB
+}
+
 function creaObjProp(tipo, dicPropiedades){
 	var subtipo
 	if (tipo.indexOf(':')>-1){
@@ -212,7 +221,7 @@ function save(s,v){
 	}
 }
 var formato={}
-formato.numRomano=function(num){
+formato.numRomano=function(num, sinpunto){
 	var ret=''
 	if (num==1)
 		ret= 'I'
@@ -235,7 +244,12 @@ formato.numRomano=function(num){
 	else if (num==10)
 		ret= 'X'
 	
-	return ret+'. '
+	if (sinpunto==undefined || sinpunto==false)
+		ret=ret+'. '
+	else if (sinpunto==true){
+	}
+
+	return ret
 }
 //--------------------------------------------------------------------------------
 function Application(){
@@ -343,6 +357,13 @@ Vista.prototype.toDOM=function(desdeHistorial){
 	app.showThrobber()
 	
 	jQuery('.brand-logo').text(this.title)
+
+	// if (cordova.platformId == 'android') {
+	// 	StatusBar.backgroundColorByHexString("#521112");
+	// } else {
+	// 	StatusBar.styleLightContent()
+	// }
+
 	var xd=jQuery('#content')
 
 	if (app) app.vistaActiva=this
@@ -409,7 +430,8 @@ Vista.prototype.concatAutores=function(listaAutores, etiqueta){
 	return ret
 }
 Vista.prototype.showMyNotes=function(){
-	var valor=app.state.notas[this.cap.cd]
+	var key=this.cap.cd + '/' + (this.apartado)
+	var valor=app.state.notas[key]
 	jQuery('.modal#myNotes #texto').val( valor )
 	jQuery('.modal#myNotes label').toggleClass('active', valor!=null && valor!='')
 
@@ -419,7 +441,9 @@ Vista.prototype.saveNotes=function(){
 	jQuery('.modal#myNotes').modal('close')
 	var valor=jQuery('.modal#myNotes #texto').val()
 	if (valor!=null){
-		app.state.notas[this.cap.cd]=valor
+		var key=this.cap.cd + '/' + (this.apartado)
+
+		app.state.notas[key]=valor
 		save('notas', app.state.notas)
 	}
 	if (app.vistaActiva==app.vistaNotas)
@@ -438,6 +462,13 @@ Vista.prototype.getCapituloForID=function(id){
 }
 Vista.prototype.scrollTop=function(){
 	jQuery('html, body').animate({scrollTop: top}, 0)
+}
+Vista.prototype.getSeccionDelCapitulo=function(cap){
+	for (var i=0; i<app.state.data.secciones.length; i++){
+		var sec=app.state.data.secciones[i]
+		if (sec.capitulos.indexOf(cap.cd)>-1)
+			return sec
+	}
 }
 /////////
 Vista.prototype.setIconXAtMenu=function(activo){
@@ -1081,11 +1112,6 @@ VistaCapitulo.prototype.showMyPDF=function(){
 	this.newVistaPDF(this.cap)
 }
 VistaCapitulo.prototype.enlargeImage=function(path){
-	// var trozoRuta='www/lnk/'
-	// if (device==null) {//compilado con PGB
-	// 	trozoRuta='www/'
-	// }
-
 	this.openAttachment(path.currentSrc, 'image/png')
 }
 //--------------------------------------------------------------------------------
@@ -1116,7 +1142,7 @@ VistaAutores.prototype.getBody=function(){
 			var cap=capitulosDelAutor[j]
 
 			var sec=this.getSeccionDelCapitulo(cap).cd
-			var ds=formato.numRomano(sec)+cap.etiquetaNumCapitulo+' - '+cap.ds
+			var ds=formato.numRomano(sec, true)+cap.etiquetaNumCapitulo+'. '+cap.ds
 			capitulos.push(
 				creaObjProp('li', {className:'collection-item', onclick:this.fnClickCapitulo(cap), hijos:[
 					creaObjProp('span', {className:'title', texto:ds}), 
@@ -1158,13 +1184,6 @@ VistaAutores.prototype.getCapitulosDelAutor=function(autor){
 			ret.push(cap)
 	}
 	return ret
-}
-VistaAutores.prototype.getSeccionDelCapitulo=function(cap){
-	for (var i=0; i<app.state.data.secciones.length; i++){
-		var sec=app.state.data.secciones[i]
-		if (sec.capitulos.indexOf(cap.cd)>-1)
-			return sec
-	}
 }
 VistaAutores.prototype.setCapitulo=function(cap){
 	this.cap=cap
@@ -1222,7 +1241,7 @@ VistaPDF.prototype.viewPDF=function(ruta){
 	//https://www.raymondcamden.com/2016/06/26/linking-to-pdfs-in-cordova-apps
 
 	var trozoRuta='www/lnk/'
-	if (device==null) {//compilado con PGB
+	if (isPGB()) {//compilado con PGB
 		trozoRuta='www/'
 	}
 	
@@ -1315,9 +1334,26 @@ VistaPresentacion.prototype.shouldShowAtStarUp=function(){
 function VistaPromueven(){
 	this.id='VistaPromueven'
 	this.title='Promueven'
+	this.url='data/promueven/promueven.html'
 	Vista.call(this)
 }
 VistaPromueven.prototype=new Vista
+VistaPromueven.prototype=new VistaPresentacion
+VistaPromueven.prototype.getBody=function(){
+	var self=this
+
+	app.showThrobber()
+	
+	this.contenido=creaObjProp('div', {className:'book'})
+	this.checkbox=creaObjProp('input', {type:'checkbox', className:'filled-in', checked:'checked'})
+
+	return [
+		creaObjProp('div', {className:'vista-body', hijos:[
+			this.contenido
+		]}),
+	]
+}
+/*
 VistaPromueven.prototype.getBody=function(){
 	var self=this
 
@@ -1356,6 +1392,8 @@ VistaPromueven.prototype.fnclickLink=function(url){
 VistaPromueven.prototype.tareasPostCarga=function(){
 	app.removeThrobber()
 }
+*/
+
 
 //--------------------------------------------------------------------------------
 function VistaBuscar(){
@@ -1365,7 +1403,16 @@ function VistaBuscar(){
 	this.ul=xform.find('ul')
 	this.txt=xform.find('input')
 	
-	this.form = M.Modal.init(xform[0], {dismissible:false})
+	this.form = M.Modal.init(xform[0], {dismissible:false, 
+		onOpenEnd:function(){
+			// if (cordova.platformId=='ios') 
+			// 	StatusBar.styleDefault()
+		}, 
+		onCloseStart:function(){
+			// if (cordova.platformId=='ios') 
+			// 	StatusBar.styleLightContent()
+		}
+	})
 	
 	Vista.call(this)
 }
@@ -1384,7 +1431,10 @@ VistaBuscar.prototype.generateIndex=function(){
 		var cap=app.state.data.capitulos[i]
 		for (var j=0; j<cap.apartados.length; j++){
 			var ap=cap.apartados[j]
-			this.listFiles.push({archivo:ap.archivo, cap_pos:i, ap:ap.cd, contenido:null, literal_posicion:cap.etiquetaNumCapitulo+(ap.cd+1)+' - '+ap.ds})
+			var sec=this.getSeccionDelCapitulo(cap)
+			var num=formato.numRomano(sec.cd)+cap.etiquetaNumCapitulo+'. '
+			
+			this.listFiles.push({archivo:ap.archivo, cap_pos:i, ap:ap.cd, contenido:null, literal_posicion:num+cap.ds, literal_ap:ap.cd+'. '+ap.ds})
 
 			this.readFile(this.listFiles.length-1)
 		}
@@ -1445,7 +1495,8 @@ VistaBuscar.prototype.addResult=function(fileEntry, snippet, result){
 	var self=this
 	this.ul.append(
 		creaObjProp('li', {className:'collection-item search-result', onclick:function(){self.navigateResult(fileEntry.cap_pos, fileEntry.ap)}, hijos:[
-			creaObjProp('span', {className:'title', texto:fileEntry.literal_posicion}),
+			creaObjProp('span', {className:'title level1', texto:fileEntry.literal_posicion}),
+			creaObjProp('span', {className:'title level2', texto:fileEntry.literal_ap}),
 			creaObjProp('p', {html:snippet}),			
 		]})
 	)
@@ -1505,19 +1556,25 @@ VistaNotas.prototype.refresh=function(){
 	var ulNotas=this.domBody.find('ul.notas').empty()
 
 	for (var key in app.state.notas){
+		var temp=key.split('/')
 		var nota=app.state.notas[key]
 
 		if (nota=='') continue
-		var cap=buscaFilas(app.state.data.capitulos, {cd:key})[0]
+		var cap=buscaFilas(app.state.data.capitulos, {cd:temp[0]})[0]
+		var ap=cap.apartados[temp[1]]
+		var sec=this.getSeccionDelCapitulo(cap)
+		
+		var num=formato.numRomano(sec.cd)+cap.etiquetaNumCapitulo+'. '
 
-		hijos.push( creaObjProp('li', {className:'collection-item avatar nota', hijos:[
-			creaObjProp('span', {className:'title', texto:cap.etiquetaNumCapitulo + cap.ds}),
-			creaObjProp('span', {className:'material-icons circle'}),
+		hijos.push( creaObjProp('li', {className:'collection-item nota', hijos:[
+			creaObjProp('span', {className:'title level1', texto:num + cap.ds}),
+			creaObjProp('span', {className:'title level2', texto:ap.cd +'. '+ ap.ds}),
+			// creaObjProp('span', {className:'material-icons circle'}),
 			creaObjProp('p', {className:'txt nota', texto:nota}), 
 
 			creaObjProp('div', {className:'row acciones', hijos:[
-				creaObjProp('span', {className:'btn edit', mi:'edit', texto:'Editar', onclick:self.fnShowMyNotes(cap) }),
-				creaObjProp('span', {className:'btn navigate', mi:'chevron-right right', texto:'Navegar', onclick:self.fnNewVistaCapitulo(cap)}),
+				creaObjProp('span', {className:'btn edit', mi:'edit', texto:'Editar nota', onclick:self.fnShowMyNotes(cap) }),
+				creaObjProp('span', {className:'btn navigate', mi:'chevron-right right', texto:'Ver apartado', onclick:self.fnNewVistaCapitulo(cap)}),
 			]})
 			
 		]}) )
@@ -1548,4 +1605,47 @@ VistaNotas.prototype.fnNewVistaCapitulo=function(cap){
 VistaNotas.prototype.tareasPostCarga=function(){
 	this.refresh()
 	app.removeThrobber()
+}
+
+
+//--------------------------------------------------------------------------------
+
+document.addEventListener('touchstart', handleTouchStart, false)      
+document.addEventListener('touchmove', handleTouchMove, false)
+
+var xDown = null
+var yDown = null
+
+function handleTouchStart(evt) {     
+    xDown = evt.touches[0].clientX
+    yDown = evt.touches[0].clientY
+}           
+
+function handleTouchMove(evt) {
+    if ( ! xDown || ! yDown ) {
+        return;
+	}
+	
+	if (app.vistaActiva!=app.vistaCapitulo){
+		console.log('Swipe dismissed')
+		return
+	}
+
+    var xUp = evt.touches[0].clientX
+    var yUp = evt.touches[0].clientY
+
+    var xDiff = xDown - xUp
+    var yDiff = yDown - yUp
+
+    if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
+		if ( xDiff > 0 ) {
+			app.vistaActiva.nextChapter()
+		} else {
+			app.vistaActiva.previousChapter()
+		}                
+    } else {
+    }
+    /* reset values */
+    xDown = null
+    yDown = null  
 }
