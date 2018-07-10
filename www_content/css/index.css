@@ -22,6 +22,15 @@ body.ios > .navbar-fixed {
   background-color: #521112;
 }
 
+body.ios > .navbar-fixed .nav-fixed {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 20px;
+  background: #521112;
+}
+
 body.ios > .navbar-fixed .nav-wrapper {
   background-color: #8C2333;
   height: 36px;
@@ -89,6 +98,11 @@ body.ios .modal#buscar .search-results {
 @font-face {
   font-family: "Bodega-Sans";
   src: url("../fonts/BodegaSansLight.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Calibri";
+  src: url("../fonts/Calibri.ttf") format("truetype");
 }
 
 .zmdi {
@@ -161,7 +175,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
 
 .book {
   padding: 0 10px 50px;
-  font-family: "symbol", "FaktProSoft", "Helvetica Neue", helvetica, arial, sans-serif;
+  font-family: "symbol", "Calibri", "Helvetica Neue", helvetica, arial, sans-serif;
   font-size: 16px;
   overflow-x: hidden;
 }
