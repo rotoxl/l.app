@@ -1,23 +1,100 @@
 $mainbackground: #8C2333;
+$status: #521112;
 
 * {
     -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
 }
 body {
+    overflow-x: hidden;
+    
     &.ios{
         #content .vista{
-            background-color: #8c2333;
-            padding-top: env(safe-area-inset-top); /* iOS 11.0 */
-            padding-bottom: env(safe-area-inset-bottom);      /* iOS 11.2 */
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
 
+            // margin-top:8px;
         }
 
         .vista-body{
             background-color: white;
         }
 
-        .navbar-fixed .nav-wrapper{
-            box-shadow:0 0 0;
+        > .navbar-fixed {
+            height:76px; //
+            background-color: #521112;
+            
+            .nav-wrapper{
+                background-color: $mainbackground;
+                height:36px;//
+                line-height: 36px;//
+                margin-top:20px;
+                box-shadow: 0 0 0;
+
+                a.sidenav-trigger, a.btn-search, .brand-logo{
+                    line-height: 26px;
+                    height: 36px;
+
+                    i{line-height: 20px;}
+                }
+            }
+        }
+        .navbar-fixed.bottom {
+            .nav-wrapper{ 
+                
+            }
+        }
+        .modal#buscar{
+            nav{
+                height:76px;
+                .nav-wrapper{
+                    padding-top: 20px;
+                    background-color:$mainbackground;
+
+                }
+            }
+            .search-results{
+                padding-top: 5rem;
+            }
+        }
+
+    }
+}
+@media only screen and (min-width: 601px){
+    body.ios{
+    //     > .navbar-fixed {
+    //         .nav-wrapper{
+    //             height: 36px!important;
+    //             line-height: 36px;
+
+    //             a.sidenav-trigger, a.btn-search, .brand-logo{
+    //                 line-height: 26px;
+    //                 height: 36px;
+
+    //                 i{line-height: 20px;}
+    //             }
+    //         }
+    //     }
+        .navbar-fixed.bottom {
+            height:56px;
+            .nav-wrapper{
+                height:56px;
+                line-height: 56px;
+            }
+        }
+    }
+
+    figure{
+        margin-left: auto!important;
+        margin-right: auto!important;
+
+        &.tablet70{
+            max-width: 70%;
+        }
+        &.tablet50{
+            max-width: 50%;
+        }
+        &.tablet30{
+            max-width: 30%;
         }
     }
 }
@@ -111,7 +188,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
 .book{
     padding: 0 10px 50px;
     
-    font-family: "FaktProSoft", "Helvetica Neue", helvetica, arial, sans-serif;
+    font-family: "symbol", "FaktProSoft", "Helvetica Neue", helvetica, arial, sans-serif;
     font-size: 16px;
 
     overflow-x: hidden;
@@ -187,7 +264,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
         li::before {
             content: "▪ ";
             color: #bd273d;
-            margin-left: -1rem;
+            margin-left: -1.3rem;
             float: left;
             font-size: 20px;
             margin-top: -.3rem;
@@ -203,6 +280,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
                 border: 2px solid #bd273d;
             }
         }
+    
         margin: 30px 0px;
         padding: 0.5rem;
         img {
@@ -224,6 +302,10 @@ textarea.materialize-textarea:focus:not([readonly]) {
         flex-direction: row;
     }
     &.grid{
+        max-width: 40rem;
+        margin-left: auto;
+        margin-right: auto;
+
         justify-content: center;
         flex-flow: row wrap;
         align-content: stretch;
@@ -267,10 +349,18 @@ textarea.materialize-textarea:focus:not([readonly]) {
     }
 }
 
-body.VistaHome{overflow: hidden;}
+body.VistaHome{
+    overflow: hidden;
+}
+body.VistaHome, body.VistaPresentacion{
+    > .navbar-fixed{
+        opacity: 0;
+    }
+}
 .VistaHome, .VistaPresentacion{
     user-select:none;
 
+   
     &.vista{
         position: fixed;
         overflow: hidden;
@@ -365,6 +455,8 @@ body.VistaHome{overflow: hidden;}
         min-width: 32%;
         height:130px;
 
+        max-height: 14rem;
+
         background-repeat: no-repeat;
         background-position: center center;
 
@@ -418,6 +510,7 @@ body.VistaHome{overflow: hidden;}
                 text-transform: uppercase;
                 padding: 1rem 0rem;
                 min-width: 100%;
+                line-height: 2.5rem;
             }
 
             .capitulos{
@@ -617,7 +710,8 @@ body.VistaHome{overflow: hidden;}
             bottom: 0;
 
             a{
-                padding-left: 10px; padding-right: 10px;
+                padding-left: 8px; 
+                padding-right: 8px;
             }
         }
 
@@ -659,7 +753,7 @@ body.VistaHome{overflow: hidden;}
             text-overflow: ellipsis;
             white-space: normal;
             display: inline-block;
-            color: #8c2333;
+            color: $mainbackground;
         }
 
         .secondary-content{
@@ -709,10 +803,29 @@ body.VistaHome{overflow: hidden;}
 
 div.modal{
     &#myNotes{
+
+        border: 5px solid #8C2333;
+        border-radius: 10px;
+
+        h4{
+            color: $mainbackground;
+            font-size: 1.5rem;
+        }
+
         textarea{
             min-height: 6rem;
         }
+        .modal-footer{
+            a{
+                color: $mainbackground;
+            }
+        }
+
+        &:focus{
+            outline: 0px;
+        }
     }
+
 
     &#buscar{
         position: fixed;
@@ -737,12 +850,15 @@ div.modal{
             z-index: 100;
 
             .input-field label.active i{
-                color:black;
+                color:$mainbackground;
             }
         }
 
+        form{
+            background-color: white;
+        }
         .label-icon{
-            color:black;
+            color:$mainbackground;
             
             &.close{}
             &.search{
@@ -752,7 +868,7 @@ div.modal{
                 transition: background-color .3s;
                 font-size: 1rem;
                 font-style: normal;
-                color: black;
+                color: $mainbackground;
                 display: block;
                 background: white;
                 padding: 0 15px;
@@ -771,11 +887,19 @@ div.modal{
             height: 100%;
             position: absolute;
             max-width: 100%;
+            width: 100%;
         }
         .search-result{
             font-size: 14px;
 
-            .title{color: #bd273d;}
+            .title{
+                color: #bd273d;
+                display: block;
+
+                &.level2{
+                    color:gray;
+                }
+            }
         }
         span.found{
             font-weight: bold;
@@ -848,7 +972,7 @@ i.letter{
         border:0;
 
         .circle{
-            background-color: #8c2333;
+            background-color: $mainbackground;
         }
 
         .title{
@@ -856,9 +980,17 @@ i.letter{
             max-width: 92%;
             text-overflow: ellipsis;
             white-space: nowrap;
-            display: inline-block;
+            display: block;
             color:gray;
+
+            &.level1{
+                color: $mainbackground
+            }
+            &.level2{
+
+            }
         }
+
         p.nota{
             font-size: 16px; 
             color:black;
@@ -873,7 +1005,7 @@ i.letter{
             .btn{
                 background-color: white;
                 box-shadow: 0 0 0;
-                color:#8c2333;
+                color:$mainbackground;
 
                 &.edit{
                     line-height: 33px;

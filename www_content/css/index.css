@@ -4,21 +4,76 @@
   /* make transparent link selection, adjust last value opacity 0 to 1.0 */
 }
 
+body {
+  overflow-x: hidden;
+}
+
 body.ios #content .vista {
-  background-color: #8c2333;
   padding-top: env(safe-area-inset-top);
-  /* iOS 11.0 */
   padding-bottom: env(safe-area-inset-bottom);
-  /* iOS 11.2 */
 }
 
 body.ios .vista-body {
   background-color: white;
 }
 
-body.ios .navbar-fixed .nav-wrapper {
+body.ios > .navbar-fixed {
+  height: 76px;
+  background-color: #521112;
+}
+
+body.ios > .navbar-fixed .nav-wrapper {
+  background-color: #8C2333;
+  height: 36px;
+  line-height: 36px;
+  margin-top: 20px;
   -webkit-box-shadow: 0 0 0;
           box-shadow: 0 0 0;
+}
+
+body.ios > .navbar-fixed .nav-wrapper a.sidenav-trigger, body.ios > .navbar-fixed .nav-wrapper a.btn-search, body.ios > .navbar-fixed .nav-wrapper .brand-logo {
+  line-height: 26px;
+  height: 36px;
+}
+
+body.ios > .navbar-fixed .nav-wrapper a.sidenav-trigger i, body.ios > .navbar-fixed .nav-wrapper a.btn-search i, body.ios > .navbar-fixed .nav-wrapper .brand-logo i {
+  line-height: 20px;
+}
+
+body.ios .modal#buscar nav {
+  height: 76px;
+}
+
+body.ios .modal#buscar nav .nav-wrapper {
+  padding-top: 20px;
+  background-color: #8C2333;
+}
+
+body.ios .modal#buscar .search-results {
+  padding-top: 5rem;
+}
+
+@media only screen and (min-width: 601px) {
+  body.ios .navbar-fixed.bottom {
+    height: 56px;
+  }
+  body.ios .navbar-fixed.bottom .nav-wrapper {
+    height: 56px;
+    line-height: 56px;
+  }
+  figure {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  figure.tablet70 {
+    max-width: 70%;
+  }
+  figure.tablet50 {
+    max-width: 50%;
+  }
+  figure.tablet30 {
+    max-width: 30%;
+  }
 }
 
 @font-face {
@@ -106,7 +161,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
 
 .book {
   padding: 0 10px 50px;
-  font-family: "FaktProSoft", "Helvetica Neue", helvetica, arial, sans-serif;
+  font-family: "symbol", "FaktProSoft", "Helvetica Neue", helvetica, arial, sans-serif;
   font-size: 16px;
   overflow-x: hidden;
 }
@@ -183,7 +238,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
 .book ul li::before {
   content: "▪ ";
   color: #bd273d;
-  margin-left: -1rem;
+  margin-left: -1.3rem;
   float: left;
   font-size: 20px;
   margin-top: -.3rem;
@@ -232,6 +287,9 @@ textarea.materialize-textarea:focus:not([readonly]) {
 }
 
 .flexcontainer.grid {
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -285,6 +343,10 @@ textarea.materialize-textarea:focus:not([readonly]) {
 
 body.VistaHome {
   overflow: hidden;
+}
+
+body.VistaHome > .navbar-fixed, body.VistaPresentacion > .navbar-fixed {
+  opacity: 0;
 }
 
 .VistaHome, .VistaPresentacion {
@@ -380,6 +442,7 @@ body.VistaHome {
   text-align: center;
   min-width: 32%;
   height: 130px;
+  max-height: 14rem;
   background-repeat: no-repeat;
   background-position: center center;
 }
@@ -439,6 +502,7 @@ body.VistaHome {
   text-transform: uppercase;
   padding: 1rem 0rem;
   min-width: 100%;
+  line-height: 2.5rem;
 }
 
 .VistaIndice ul.secciones li.seccion .capitulos {
@@ -613,8 +677,8 @@ body.VistaHome {
 }
 
 .VistaCapitulo .navbar-fixed.bottom a {
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .VistaCapitulo .zmdi-star-outline.zmdi-star:before {
@@ -662,7 +726,7 @@ body.VistaHome {
   text-overflow: ellipsis;
   white-space: normal;
   display: inline-block;
-  color: #8c2333;
+  color: #8C2333;
 }
 
 .VistaAutores ul.collection.capitulos .secondary-content {
@@ -717,8 +781,26 @@ body.VistaHome {
   margin-top: 1rem;
 }
 
+div.modal#myNotes {
+  border: 5px solid #8C2333;
+  border-radius: 10px;
+}
+
+div.modal#myNotes h4 {
+  color: #8C2333;
+  font-size: 1.5rem;
+}
+
 div.modal#myNotes textarea {
   min-height: 6rem;
+}
+
+div.modal#myNotes .modal-footer a {
+  color: #8C2333;
+}
+
+div.modal#myNotes:focus {
+  outline: 0px;
 }
 
 div.modal#buscar {
@@ -745,11 +827,15 @@ div.modal#buscar nav {
 }
 
 div.modal#buscar nav .input-field label.active i {
-  color: black;
+  color: #8C2333;
+}
+
+div.modal#buscar form {
+  background-color: white;
 }
 
 div.modal#buscar .label-icon {
-  color: black;
+  color: #8C2333;
 }
 
 div.modal#buscar .label-icon.search {
@@ -760,7 +846,7 @@ div.modal#buscar .label-icon.search {
   transition: background-color .3s;
   font-size: 1rem;
   font-style: normal;
-  color: black;
+  color: #8C2333;
   display: block;
   background: white;
   padding: 0 15px;
@@ -779,6 +865,7 @@ div.modal#buscar .search-results {
   height: 100%;
   position: absolute;
   max-width: 100%;
+  width: 100%;
 }
 
 div.modal#buscar .search-result {
@@ -787,6 +874,11 @@ div.modal#buscar .search-result {
 
 div.modal#buscar .search-result .title {
   color: #bd273d;
+  display: block;
+}
+
+div.modal#buscar .search-result .title.level2 {
+  color: gray;
 }
 
 div.modal#buscar span.found {
@@ -931,7 +1023,7 @@ i.letter.letterZ {
 }
 
 .VistaNotas ul.collection.notas .circle {
-  background-color: #8c2333;
+  background-color: #8C2333;
 }
 
 .VistaNotas ul.collection.notas .title {
@@ -939,8 +1031,12 @@ i.letter.letterZ {
   max-width: 92%;
   text-overflow: ellipsis;
   white-space: nowrap;
-  display: inline-block;
+  display: block;
   color: gray;
+}
+
+.VistaNotas ul.collection.notas .title.level1 {
+  color: #8C2333;
 }
 
 .VistaNotas ul.collection.notas p.nota {
@@ -959,7 +1055,7 @@ i.letter.letterZ {
   background-color: white;
   -webkit-box-shadow: 0 0 0;
           box-shadow: 0 0 0;
-  color: #8c2333;
+  color: #8C2333;
 }
 
 .VistaNotas ul.collection.notas .acciones .btn.edit {
