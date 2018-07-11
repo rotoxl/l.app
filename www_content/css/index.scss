@@ -9,8 +9,8 @@ body {
     
     &.ios{
         #content .vista{
-            padding-top: env(safe-area-inset-top);
-            padding-bottom: env(safe-area-inset-bottom);
+            // padding-top: env(safe-area-inset-top);
+            // padding-bottom: env(safe-area-inset-bottom);
 
             // margin-top:8px;
         }
@@ -308,34 +308,34 @@ textarea.materialize-textarea:focus:not([readonly]) {
     }
 }
 
-.flexcontainer{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+// .flexcontainer{
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-around;
 
-    &.row {
-        flex-direction: row;
-    }
-    &.grid{
-        max-width: 40rem;
-        margin-left: auto;
-        margin-right: auto;
+//     &.row {
+//         flex-direction: row;
+//     }
+//     &.grid{
+//         max-width: 40rem;
+//         margin-left: auto;
+//         margin-right: auto;
 
-        justify-content: center;
-        flex-flow: row wrap;
-        align-content: stretch;
-        align-items: center;     
-    }
+//         justify-content: center;
+//         flex-flow: row wrap;
+//         align-content: stretch;
+//         align-items: center;     
+//     }
 
-    div { //contenido
-        flex:1 0 0; //flex or height
-        &.big{
-            flex:2 0 0;
-        }
-    }
+//     div { //contenido
+//         flex:1 0 0; //flex or height
+//         &.big{
+//             flex:2 0 0;
+//         }
+//     }
 
 
-}
+// }
 
 .admonition{
     &.favs .row.img{
@@ -416,6 +416,7 @@ body.VistaHome, body.VistaPresentacion{
     .vista-body{
         height:calc( 100% - 56px - 192px);
         overflow-x: hidden;
+        margin-bottom:0;
     }
     .vista-bottom{
         max-height: 56px;
@@ -481,6 +482,10 @@ body.VistaHome, body.VistaPresentacion{
         }
 
         &.doublesize{   
+        }
+
+        &.col.s12{
+            width:100%!important;
         }
 
         &.presentacion{
@@ -793,7 +798,7 @@ body.VistaHome, body.VistaPresentacion{
     }
     .vista-body{
         position: fixed;
-        overflow: hidden;
+        overflow: auto;
         width: 100%; 
         height:100%;
     }
@@ -1021,12 +1026,15 @@ i.letter{
                 background-color: white;
                 box-shadow: 0 0 0;
                 color:$mainbackground;
+                letter-spacing: unset;
+                padding-right:0;
+                line-height: 33px;
 
-                &.edit{
-                    line-height: 33px;
-                    i {
-                        margin-right: 10px;
-                    }
+                i.left {
+                    margin-right: 10px;
+                }
+                i.right{
+                    margin-left:10px;
                 }
                 
             }
