@@ -604,38 +604,46 @@ Vista.prototype.newVistaCompartir=function(){
 	window.plugins.socialsharing.share(t)
 }
 Vista.prototype.newvistaValorar=function(){
-	AppRate.preferences={
-		useLanguage:'es-ES',
-		storeAppURL:{
-		   ios:'XX', //686440023
-		   android:'market://details?id=com.imaidea.aranediciones.hemostrombo'
-		   },
-		simpleMode:true,
-		openStoreInApp:false,
-		callbacks:{
-			onButtonClicked:function(id){
-				if (id==1){
-					// var url='market://details?id=com.imaidea.aranediciones.hemostromboapp'				
-					// if (cordova.platformId=='ios')
-					// 	url='itms-apps://itunes.apple.com/app/idXX'
-					var url='https://bit.ly/hemostrombo'
-					window.open(url, '_system')
-				}
-			},
-		},
-		customLocale: {
-			title:   			"¿Quieres valorar esta App?",
-			message: 			"Solo te llevará unos segundos.",
-			cancelButtonLabel: 	"No, gracias",
-			laterButtonLabel:  	"Más tarde",
-			rateButtonLabel:   	"Sí",
-		}
-	}
+	// AppRate.preferences={
+	// 	useLanguage:'es-ES',
+	// 	storeAppURL:{
+	// 	   ios:'XX', //686440023
+	// 	   android:'market://details?id=com.imaidea.aranediciones.hemostrombo'
+	// 	   },
+	// 	simpleMode:true,
+	// 	openStoreInApp:false,
+	// 	callbacks:{
+	// 		onButtonClicked:function(id){
+	// 			if (id==3){
+	// 				// var url='market://details?id=com.imaidea.aranediciones.hemostromboapp'				
+	// 				// if (cordova.platformId=='ios')
+	// 				// 	url='itms-apps://itunes.apple.com/app/idXX'
+	// 				var url='https://bit.ly/hemostrombo'
+	// 				window.open(url, '_system')
+	// 			}
+	// 		},
+	// 	},
+	// 	customLocale: {
+	// 		title:   			"¿Quieres valorar esta App?",
+	// 		message: 			"Solo te llevará unos segundos.",
+	// 		cancelButtonLabel: 	"No, gracias",
+	// 		laterButtonLabel:  	"Más tarde",
+	// 		rateButtonLabel:   	"Sí",
+	// 	}
+	// }
 	
-	// AppRate.preferences.callbacks.onRateDialogShow = function(callback){  }
-	// AppRate.preferences.useCustomRateDialog = true
+	// // AppRate.preferences.callbacks.onRateDialogShow = function(callback){  }
+	// // AppRate.preferences.useCustomRateDialog = true
 
-	AppRate.promptForRating(true)
+	// AppRate.promptForRating(true)
+
+	var xform=jQuery('.modal#valorar')
+	this.form = M.Modal.init(xform[0], {dismissible:true})
+	this.form.open()
+}
+Vista.prototype.doValorar=function(){
+	var url='https://bit.ly/hemostrombo'
+	window.open(url, '_system')
 }
 Vista.prototype.newVistaNotas=function(){
 	if (app.vistaNotas){
@@ -1030,7 +1038,7 @@ VistaCapitulo.prototype.setCapitulo=function(cap, apartado, searchString){
 	
 	var data=this.cap.apartados[this.apartado]
 
-	jQuery('.brand-logo').text('SECCIÓN '+formato.numRomano( this.buscaIDSeccion(cap.cd) )+'Capítulo '+this.cap.etiquetaNumCapitulo + '.'+data.cd)
+	jQuery('.brand-logo').text('SECCIÓN '+formato.numRomano( this.buscaIDSeccion(cap.cd) )+'Capítulo '+this.cap.etiquetaNumCapitulo /*+ '.'+data.cd*/)
 	
 	var alternativeText='<h3>Cap'+self.cap.cd+'-'+self.apartado+'</h3>'
 	jQuery.get( data.archivo, function(response, status, xhr) {
@@ -1162,7 +1170,7 @@ VistaAutores.prototype.getBody=function(){
 			var cap=capitulosDelAutor[j]
 
 			var sec=this.getSeccionDelCapitulo(cap).cd
-			var ds=formato.numRomano(sec, true)+cap.etiquetaNumCapitulo+'. '+cap.ds
+			var ds=formato.numRomano(sec, true)+'.'+cap.etiquetaNumCapitulo+'. '+cap.ds
 			capitulos.push(
 				creaObjProp('li', {className:'collection-item', onclick:this.fnClickCapitulo(cap), hijos:[
 					creaObjProp('span', {className:'title', texto:ds}), 
@@ -1287,7 +1295,7 @@ VistaPresentacion.prototype.getBody=function(){
 	app.showThrobber()
 	
 	this.contenido=creaObjProp('div', {className:'book'})
-	this.checkbox=creaObjProp('input', {type:'checkbox', className:'filled-in', checked:'checked'})
+	this.checkbox=creaObjProp('input', {type:'checkbox', className:'filled-in', checked:this.shouldShowAtStarUp()?'checked':''})
 
 	return [
 		creaObjProp('div', {className:'vista-header'}),
@@ -1448,9 +1456,9 @@ VistaBuscar.prototype.generateIndex=function(){
 		for (var j=0; j<cap.apartados.length; j++){
 			var ap=cap.apartados[j]
 			var sec=this.getSeccionDelCapitulo(cap)
-			var num=formato.numRomano(sec.cd)+cap.etiquetaNumCapitulo+'. '
+			var num=formato.numRomano(sec.cd, true)+'.'+cap.etiquetaNumCapitulo+'. '
 			
-			this.listFiles.push({archivo:ap.archivo, cap_pos:i, ap:ap.cd, contenido:null, literal_posicion:num+cap.ds, literal_ap:ap.cd+'. '+ap.ds})
+			this.listFiles.push({archivo:ap.archivo, cap_pos:i, ap:ap.cd, contenido:null, literal_posicion:num+cap.ds, literal_ap:ap.ds})
 
 			this.readFile(this.listFiles.length-1)
 		}
@@ -1580,16 +1588,18 @@ VistaNotas.prototype.refresh=function(){
 		var ap=cap.apartados[temp[1]]
 		var sec=this.getSeccionDelCapitulo(cap)
 		
-		var num=formato.numRomano(sec.cd)+cap.etiquetaNumCapitulo+'. '
+		var num=formato.numRomano(sec.cd, true)+'.'+cap.etiquetaNumCapitulo+'. '
 
+		var titulo=num + cap.ds
+		var subtitulo=ap.ds
 		hijos.push( creaObjProp('li', {className:'collection-item nota', hijos:[
-			creaObjProp('span', {className:'title level1', texto:num + cap.ds}),
-			creaObjProp('span', {className:'title level2', texto:ap.cd +'. '+ ap.ds}),
+			creaObjProp('span', {className:'title level1', texto:titulo}),
+			creaObjProp('span', {className:'title level2', texto:subtitulo}),
 			// creaObjProp('span', {className:'material-icons circle'}),
 			creaObjProp('p', {className:'txt nota', texto:nota}), 
 
 			creaObjProp('div', {className:'row acciones', hijos:[
-				creaObjProp('span', {className:'btn send', mi:'mail-send left', texto:'Enviar', onclick:self.fnSendNote(nota) }),
+				creaObjProp('span', {className:'btn send', mi:'mail-send left', texto:'Enviar', onclick:self.fnSendNote(titulo, subtitulo, nota) }),
 				creaObjProp('span', {className:'btn edit', mi:'edit left', texto:'Editar nota', onclick:self.fnShowMyNotes(cap, ap.cd-1) }),
 				creaObjProp('span', {className:'btn navigate', mi:'chevron-right right', texto:'Ver apartado', onclick:self.fnNewVistaCapitulo(cap)}),
 			]})
@@ -1606,10 +1616,10 @@ VistaNotas.prototype.refresh=function(){
 
 	ulNotas.append(hijos)
 }
-VistaNotas.prototype.fnSendNote=function(nota){
+VistaNotas.prototype.fnSendNote=function(titulo, subtitulo, nota){
 	var self=this
 	return function(){
-		window.plugins.socialsharing.share(nota)
+		window.plugins.socialsharing.share(titulo+'\n'+subtitulo+'\nNota: '+nota)
 	}
 }
 VistaNotas.prototype.fnShowMyNotes=function(cap, ap){
@@ -1633,8 +1643,13 @@ VistaNotas.prototype.tareasPostCarga=function(){
 
 
 //--------------------------------------------------------------------------------
+
+document.addEventListener('touchstart', handleTouchStart, false)      
+document.addEventListener('touchmove', handleTouchMove, false)
+
 var xDown = null
 var yDown = null
+var lastTouch=null
 
 function handleTouchStart(evt) {     
     xDown = evt.touches[0].clientX
@@ -1656,15 +1671,21 @@ function handleTouchMove(evt) {
     var xDiff = xDown - xUp
     var yDiff = yDown - yUp
 
-    if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
+	if (lastTouch && (new Date()-lastTouch)<500){
+		return
+	}
+    else if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
 		if ( xDiff > 0 ) {
-			app.vistaActiva.previousChapter()
-		} else {
 			app.vistaActiva.nextChapter()
-		}                
+		} else {
+			app.vistaActiva.previousChapter()
+		}
+		console.log('>> touch processed')
+		lastTouch=new Date()
     } else {
     }
     /* reset values */
     xDown = null
-    yDown = null  
+	yDown = null  
+
 }
