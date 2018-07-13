@@ -14,13 +14,13 @@
         <meta charset="utf-8" />
         <meta name="theme-color" content="#25313e">
         
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="viewport" content="initial-scale=1, width=device-width, height=device-height, viewport-fit=cover"/>
         <meta content="320" name="MobileOptimized">
 
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
 
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:; frame-src *;">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:; frame-src * gap://ready;">
         
         <title>LibroApp</title>
         
@@ -33,7 +33,7 @@
     <body class="device-type">
         <div class="navbar-fixed">
             <ul id="nav-dropdown" class="dropdown-content"></ul>
-            
+            <span class="nav-fixed"></span>
             <nav class="nav-wrapper top">
                 <div class="nav-wrapper main">
                     <a class="brand-logo center page-title"></a>
@@ -77,7 +77,18 @@
             </div>
             <div class="modal-footer">
               <a href="#!" class="modal-close waves-effect waves-red btn-flat">Cancelar</a>
-              <a href="#!" class="modal-close waves-effect waves-green btn-flat" onclick="app.vistaActiva.saveNotes()">Aceptar</a>
+              <a href="#!" class="modal-close waves-effect waves-green btn-flat" onclick="app.vistaActiva.saveNotes()">Guardar</a>
+            </div>
+        </div>
+        
+        <div id="valorar" class="modal">
+            <div class="modal-content">
+                <h4>¿Quieres valorar la APP?</h4>
+                <p>Solo te llevará unos segundos.</p>
+            </div>
+            <div class="modal-footer">
+              <a href="#!" class="modal-close waves-effect waves-red btn-flat">Cancelar</a>
+              <a href="#!" class="modal-close waves-effect waves-green btn-flat" onclick="app.vistaActiva.doValorar()">Valorar</a>
             </div>
         </div>
 
@@ -110,6 +121,8 @@
         </div>
 
         <script type="text/javascript" src="../cordova.js"></script>
+        <!-- <script type="text/javascript" src="cordova.js"></script> -->
+        
         <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 
         <script type="text/javascript" src="js/materialize.js"></script>

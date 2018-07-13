@@ -8,45 +8,42 @@
     },
     "installed_plugins": {
         "cordova-plugin-apprate": {
-            "PACKAGE_NAME": "com.imaidea.aranediciones.hemostrombo"
-        },
-        "cordova-plugin-file": {
-            "PACKAGE_NAME": "com.imaidea.aranediciones.hemostrombo"
-        },
-        "cordova-plugin-file-opener2": {
-            "PACKAGE_NAME": "com.imaidea.aranediciones.hemostrombo"
-        },
-        "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "com.imaidea.aranediciones.hemostrombo"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.imaidea.aranediciones.hemostrombo"
-        },
-        "cordova-plugin-x-socialsharing": {
-            "PACKAGE_NAME": "com.imaidea.aranediciones.hemostrombo"
+            "PACKAGE_NAME": "com.imaidea.aranediciones.ernesto.hemostrombo"
         },
         "cordova-plugin-device": {
-            "PACKAGE_NAME": "com.imaidea.aranediciones.hemostrombo"
+            "PACKAGE_NAME": "com.imaidea.aranediciones.ernesto.hemostrombo"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.imaidea.aranediciones.ernesto.hemostrombo"
+        },
+        "cordova-plugin-file-opener2": {
+            "PACKAGE_NAME": "com.imaidea.aranediciones.ernesto.hemostrombo"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.imaidea.aranediciones.ernesto.hemostrombo"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.imaidea.aranediciones.ernesto.hemostrombo"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.imaidea.aranediciones.ernesto.hemostrombo"
+        },
+        "cordova-plugin-x-socialsharing": {
+            "PACKAGE_NAME": "com.imaidea.aranediciones.ernesto.hemostrombo"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-dialogs": {
-            "PACKAGE_NAME": "com.imaidea.aranediciones.hemostrombo"
+            "PACKAGE_NAME": "com.imaidea.aranediciones.ernesto.hemostrombo"
         },
         "cordova-plugin-globalization": {
-            "PACKAGE_NAME": "com.imaidea.aranediciones.hemostrombo"
-        },
-        "cordova-plugin-inappbrowser": {
-            "PACKAGE_NAME": "com.imaidea.aranediciones.hemostrombo"
+            "PACKAGE_NAME": "com.imaidea.aranediciones.ernesto.hemostrombo"
         },
         "cordova-plugin-nativestorage": {
-            "PACKAGE_NAME": "com.imaidea.aranediciones.hemostrombo"
-        },
-        "cordova-plugin-compat": {
-            "PACKAGE_NAME": "com.imaidea.aranediciones.hemostrombo"
+            "PACKAGE_NAME": "com.imaidea.aranediciones.ernesto.hemostrombo"
         },
         "es6-promise-plugin": {
-            "PACKAGE_NAME": "com.imaidea.aranediciones.hemostrombo"
+            "PACKAGE_NAME": "com.imaidea.aranediciones.ernesto.hemostrombo"
         }
     }
 }

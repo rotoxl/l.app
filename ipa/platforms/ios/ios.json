@@ -29,6 +29,10 @@
                             "count": 1
                         },
                         {
+                            "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
+                            "count": 1
+                        },
+                        {
                             "xml": "<feature name=\"File\"><param name=\"ios-package\" value=\"CDVFile\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         },
@@ -50,10 +54,6 @@
                         },
                         {
                             "xml": "<feature name=\"SocialSharing\"><param name=\"ios-package\" value=\"SocialSharing\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -79,43 +79,40 @@
     },
     "installed_plugins": {
         "cordova-plugin-dialogs": {
-            "PACKAGE_NAME": "com.imaidea.aranediciones.hemostrombo"
+            "PACKAGE_NAME": "com.imaidea.aranediciones.ernesto.hemostrombo"
         },
         "cordova-plugin-globalization": {
-            "PACKAGE_NAME": "com.imaidea.aranediciones.hemostrombo"
+            "PACKAGE_NAME": "com.imaidea.aranediciones.ernesto.hemostrombo"
         },
         "cordova-plugin-inappbrowser": {
-            "PACKAGE_NAME": "com.imaidea.aranediciones.hemostrombo"
+            "PACKAGE_NAME": "com.imaidea.aranediciones.ernesto.hemostrombo"
         },
         "cordova-plugin-nativestorage": {
-            "PACKAGE_NAME": "com.imaidea.aranediciones.hemostrombo"
+            "PACKAGE_NAME": "com.imaidea.aranediciones.ernesto.hemostrombo"
         },
         "cordova-plugin-apprate": {
-            "PACKAGE_NAME": "com.imaidea.aranediciones.hemostrombo"
-        },
-        "cordova-plugin-compat": {
-            "PACKAGE_NAME": "com.imaidea.aranediciones.hemostrombo"
-        },
-        "cordova-plugin-file": {
-            "PACKAGE_NAME": "com.imaidea.aranediciones.hemostrombo"
-        },
-        "cordova-plugin-file-opener2": {
-            "PACKAGE_NAME": "com.imaidea.aranediciones.hemostrombo"
-        },
-        "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "com.imaidea.aranediciones.hemostrombo"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.imaidea.aranediciones.hemostrombo"
-        },
-        "es6-promise-plugin": {
-            "PACKAGE_NAME": "com.imaidea.aranediciones.hemostrombo"
-        },
-        "cordova-plugin-x-socialsharing": {
-            "PACKAGE_NAME": "com.imaidea.aranediciones.hemostrombo"
+            "PACKAGE_NAME": "com.imaidea.aranediciones.ernesto.hemostrombo"
         },
         "cordova-plugin-device": {
-            "PACKAGE_NAME": "com.imaidea.aranediciones.hemostrombo"
+            "PACKAGE_NAME": "com.imaidea.aranediciones.ernesto.hemostrombo"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.imaidea.aranediciones.ernesto.hemostrombo"
+        },
+        "cordova-plugin-file-opener2": {
+            "PACKAGE_NAME": "com.imaidea.aranediciones.ernesto.hemostrombo"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.imaidea.aranediciones.ernesto.hemostrombo"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.imaidea.aranediciones.ernesto.hemostrombo"
+        },
+        "es6-promise-plugin": {
+            "PACKAGE_NAME": "com.imaidea.aranediciones.ernesto.hemostrombo"
+        },
+        "cordova-plugin-x-socialsharing": {
+            "PACKAGE_NAME": "com.imaidea.aranediciones.ernesto.hemostrombo"
         }
     },
     "dependent_plugins": {},
@@ -190,6 +187,14 @@
             "file": "plugins/cordova-plugin-apprate/www/storage.js",
             "pluginId": "cordova-plugin-apprate",
             "runs": true
+        },
+        {
+            "id": "cordova-plugin-device.device",
+            "file": "plugins/cordova-plugin-device/www/device.js",
+            "pluginId": "cordova-plugin-device",
+            "clobbers": [
+                "device"
+            ]
         },
         {
             "id": "cordova-plugin-file.DirectoryEntry",
@@ -393,14 +398,6 @@
             "clobbers": [
                 "window.plugins.socialsharing"
             ]
-        },
-        {
-            "id": "cordova-plugin-device.device",
-            "file": "plugins/cordova-plugin-device/www/device.js",
-            "pluginId": "cordova-plugin-device",
-            "clobbers": [
-                "device"
-            ]
         }
     ],
     "plugin_metadata": {
@@ -409,13 +406,12 @@
         "cordova-plugin-inappbrowser": "3.0.0",
         "cordova-plugin-nativestorage": "2.3.1",
         "cordova-plugin-apprate": "1.4.0",
-        "cordova-plugin-compat": "1.2.0",
-        "cordova-plugin-file": "4.3.3",
+        "cordova-plugin-device": "2.0.2",
+        "cordova-plugin-file": "6.0.1",
         "cordova-plugin-file-opener2": "2.0.19",
         "cordova-plugin-statusbar": "2.4.2",
         "cordova-plugin-whitelist": "1.3.3",
         "es6-promise-plugin": "4.2.2",
-        "cordova-plugin-x-socialsharing": "5.4.1",
-        "cordova-plugin-device": "2.0.2"
+        "cordova-plugin-x-socialsharing": "5.4.1"
     }
 }

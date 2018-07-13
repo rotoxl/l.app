@@ -1,63 +1,44 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.imaidea.aranediciones.hemostrombo" version="0.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.imaidea.aranediciones.ernesto.hemostrombo" version="0.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Hemostrombo</name>
     <description>
         Hemostasia y trombosis. Manual práctico
     </description>
-     <author email="developer@imaidea.com" href="http://www.imaidea.com/">
+    <author email="developer@imaidea.com" href="http://www.imaidea.com/">
         Imaidea Interactiva
     </author>
     <content src="lnk/index.html" />
-    <plugin name="cordova-plugin-whitelist" spec="1" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="mailto:*" />
     
-   <platform name="android">
+    <platform name="android">
         <allow-intent href="market:*" />
-
-        <icon src="res/icon/android/icon-36-ldpi.png" platform="android" width="36" height="36" density="ldpi" />
-        <icon src="res/icon/android/icon-48-mdpi.png" platform="android" width="48" height="48" density="mdpi" />
-        <icon src="res/icon/android/icon-72-hdpi.png" platform="android" width="72" height="72" density="hdpi" />
-        <icon src="res/icon/android/icon-96-xhdpi.png" platform="android" width="96" height="96" density="xhdpi" />
-        
+        <icon density="ldpi" height="36" platform="android" src="res/icon/android/icon-36-ldpi.png" width="36" />
+        <icon density="mdpi" height="48" platform="android" src="res/icon/android/icon-48-mdpi.png" width="48" />
+        <icon density="hdpi" height="72" platform="android" src="res/icon/android/icon-72-hdpi.png" width="72" />
+        <icon density="xhdpi" height="96" platform="android" src="res/icon/android/icon-96-xhdpi.png" width="96" />
     </platform>
     
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
-
-        <icon src="res/icon/ios/icon-57.png" platform="ios" width="57" height="57"/>
-        <icon src="res/icon/ios/icon-72.png" platform="ios" width="72" height="72"/>
-        <icon src="res/icon/ios/icon-57-2x.png" platform="ios" width="114" height="114"/>
-        <icon src="res/icon/ios/icon-72-2x.png" platform="ios" width="144" height="144"/>
-        
+        <icon height="57" platform="ios" src="res/icon/ios/icon-57.png" width="57" />
+        <icon height="72" platform="ios" src="res/icon/ios/icon-72.png" width="72" />
+        <icon height="114" platform="ios" src="res/icon/ios/icon-57-2x.png" width="114" />
+        <icon height="144" platform="ios" src="res/icon/ios/icon-72-2x.png" width="144" />
         <splash src="res/screen/ios/Default@2x~universal~anyany.png" />
     </platform>
+    <preference name="StatusBarBackgroundColor" value="#521112" />
+    <preference name="Fullscreen" value="false" />
+    <preference name="DisallowOverscroll" value="true" />
 
-    <!--
-    <gap:plugin name="cordova-plugin-x-socialsharing" source="npm" />
-    <gap:plugin name="cordova-plugin-apprate" />
-     -->
-
-    <preference name="StatusBarBackgroundColor" value="#8c2333" />
-
-    
+    <plugin name="cordova-plugin-apprate" spec="~1.4.0" />
+    <plugin name="cordova-plugin-x-socialsharing" spec="~5.4.1" />
+    <plugin name="cordova-plugin-whitelist" spec="1" />
+    <plugin name="cordova-plugin-statusbar" spec="~2.4.2" />
+    <plugin name="cordova-plugin-file-opener2" spec="~2.0.19" />
+    <plugin name="cordova-plugin-file" spec="~6.0.1" />
+    <plugin name="cordova-plugin-device" spec="~2.0.2" />
 </widget>
-
-
-<!--    
-dependencies {
-    compile fileTree(dir: 'libs', include: '*.jar')
-    // SUB-PROJECT DEPENDENCIES START
-//    debugCompile(project(path: "CordovaLib", configuration: "debug"))
-//    releaseCompile(project(path: "CordovaLib", configuration: "release"))
-
-// new dependency configurations.
-    implementation project(':CordovaLib')
-
-    compile "com.android.support:support-v4:24.1.1+"
-    // SUB-PROJECT DEPENDENCIES END
-}
- -->
