@@ -9,8 +9,8 @@ body {
     
     &.ios{
         #content .vista{
-            padding-top: env(safe-area-inset-top);
-            padding-bottom: env(safe-area-inset-bottom);
+            // padding-top: env(safe-area-inset-top);
+            // padding-bottom: env(safe-area-inset-bottom);
 
             // margin-top:8px;
         }
@@ -272,10 +272,16 @@ textarea.materialize-textarea:focus:not([readonly]) {
         word-break: break-all;
         hyphens: auto;
     }
-
+    
+    ol{
+        padding-left: 20px;
+    }
     ul{
         padding-left: 20px;
 
+        li {
+            clear:both;
+        }
         li::before {
             content: "▪ ";
             color: #bd273d;
@@ -308,34 +314,34 @@ textarea.materialize-textarea:focus:not([readonly]) {
     }
 }
 
-.flexcontainer{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+// .flexcontainer{
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-around;
 
-    &.row {
-        flex-direction: row;
-    }
-    &.grid{
-        max-width: 40rem;
-        margin-left: auto;
-        margin-right: auto;
+//     &.row {
+//         flex-direction: row;
+//     }
+//     &.grid{
+//         max-width: 40rem;
+//         margin-left: auto;
+//         margin-right: auto;
 
-        justify-content: center;
-        flex-flow: row wrap;
-        align-content: stretch;
-        align-items: center;     
-    }
+//         justify-content: center;
+//         flex-flow: row wrap;
+//         align-content: stretch;
+//         align-items: center;     
+//     }
 
-    div { //contenido
-        flex:1 0 0; //flex or height
-        &.big{
-            flex:2 0 0;
-        }
-    }
+//     div { //contenido
+//         flex:1 0 0; //flex or height
+//         &.big{
+//             flex:2 0 0;
+//         }
+//     }
 
 
-}
+// }
 
 .admonition{
     &.favs .row.img{
@@ -416,15 +422,20 @@ body.VistaHome, body.VistaPresentacion{
     .vista-body{
         height:calc( 100% - 56px - 192px);
         overflow-x: hidden;
+        margin-bottom:0;
     }
     .vista-bottom{
         max-height: 56px;
 
 
         &.navbar-fixed { 
-            position: fixed;
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            
             nav{
-                position: fixed;
+                position: absolute;
+                bottom: 0; left: 0; right: 0;
+                
              
                 // li.bottom-menu a i.zmdi{
                 //     line-height: 54px;
@@ -481,6 +492,10 @@ body.VistaHome, body.VistaPresentacion{
         }
 
         &.doublesize{   
+        }
+
+        &.col.s12{
+            width:100%!important;
         }
 
         &.presentacion{
@@ -686,10 +701,10 @@ body.VistaHome, body.VistaPresentacion{
 
             .title{
                 font-size: 1.6rem;
-                line-height: 1rem;
+                line-height: 1.6rem;
                 float: left;
                 font-weight: 300;
-                padding-top: 14px;
+                padding-top: 10px;
                 
                 white-space: nowrap;
                 
@@ -793,23 +808,30 @@ body.VistaHome, body.VistaPresentacion{
     }
     .vista-body{
         position: fixed;
-        overflow: hidden;
+        overflow: auto;
         width: 100%; 
         height:100%;
     }
     ul{
         border:0;
+
     }
     .title{
         display: block;
     }
     img{
-        max-width: 9rem;
-        float: right!important;
-        margin-right: 30%!important;
-        text-align: center;
+        max-width: 13rem;
+    }
+    figure{
+        margin-top:10px;
+        margin-bottom:5px;
+        padding:0;
     }
 
+    p{
+        -webkit-margin-before: .5em;
+        -webkit-margin-after: .5em;
+    }
     .secondary-content{
         color:silver;
         margin-top: 1rem;
@@ -817,30 +839,28 @@ body.VistaHome, body.VistaPresentacion{
 }
 
 div.modal{
-    &#myNotes{
 
-        border: 5px solid #8C2333;
-        border-radius: 10px;
-
-        h4{
+    border: 5px solid #8C2333;
+    border-radius: 10px;
+    h4{
+        color: $mainbackground;
+        font-size: 1.5rem;
+    }
+    .modal-footer{
+        a{
             color: $mainbackground;
-            font-size: 1.5rem;
-        }
-
-        textarea{
-            min-height: 6rem;
-        }
-        .modal-footer{
-            a{
-                color: $mainbackground;
-            }
-        }
-
-        &:focus{
-            outline: 0px;
         }
     }
 
+    &:focus{
+        outline: 0px;
+    }
+    
+    &#myNotes{
+        textarea{
+            min-height: 6rem;
+        }
+    }
 
     &#buscar{
         position: fixed;
@@ -1021,12 +1041,15 @@ i.letter{
                 background-color: white;
                 box-shadow: 0 0 0;
                 color:$mainbackground;
+                letter-spacing: unset;
+                padding-right:0;
+                line-height: 33px;
 
-                &.edit{
-                    line-height: 33px;
-                    i {
-                        margin-right: 10px;
-                    }
+                i.left {
+                    margin-right: 10px;
+                }
+                i.right{
+                    margin-left:10px;
                 }
                 
             }
