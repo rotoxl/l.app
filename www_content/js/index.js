@@ -1601,7 +1601,7 @@ VistaNotas.prototype.refresh=function(){
 			creaObjProp('div', {className:'row acciones', hijos:[
 				creaObjProp('span', {className:'btn send', mi:'mail-send left', texto:'Enviar', onclick:self.fnSendNote(titulo, subtitulo, nota) }),
 				creaObjProp('span', {className:'btn edit', mi:'edit left', texto:'Editar nota', onclick:self.fnShowMyNotes(cap, ap.cd-1) }),
-				creaObjProp('span', {className:'btn navigate', mi:'chevron-right right', texto:'Ver apartado', onclick:self.fnNewVistaCapitulo(cap)}),
+				creaObjProp('span', {className:'btn navigate', mi:'chevron-right right', texto:'Ver apartado', onclick:self.fnNewVistaCapitulo(cap, ap.cd-1)}),
 			]})
 			
 		]}) )
@@ -1630,10 +1630,10 @@ VistaNotas.prototype.fnShowMyNotes=function(cap, ap){
 		self.showMyNotes()
 	}
 }
-VistaNotas.prototype.fnNewVistaCapitulo=function(cap){
+VistaNotas.prototype.fnNewVistaCapitulo=function(cap, ap){
 	var self=this
 	return function(){
-		self.newVistaCapitulo(cap)
+		self.newVistaCapitulo(cap, ap)
 	}
 }
 VistaNotas.prototype.tareasPostCarga=function(){
